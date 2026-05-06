@@ -26,6 +26,7 @@
 | `itemsPerPageChange` | Event emitted when items per page changes | `CustomEvent<number>` |
 | `pageChange`         | Event emitted when page changes           | `CustomEvent<number>` |
 
+
 ## Dependencies
 
 ### Used by

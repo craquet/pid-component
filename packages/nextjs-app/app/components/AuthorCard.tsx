@@ -16,6 +16,8 @@ export default function AuthorCard({ orcid, name, role, institution }: AuthorCar
       borderRadius: 12,
       padding: 24,
       boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+      overflow: 'hidden',
+      maxWidth: '100%',
     }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
         <div style={{
@@ -29,16 +31,41 @@ export default function AuthorCard({ orcid, name, role, institution }: AuthorCar
           fontSize: 16,
           fontWeight: 700,
           color: '#4f46e5',
+          flexShrink: 0,
         }}>
           {initials}
         </div>
-        <div style={{ flex: 1 }}>
-          <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 4, color: '#111827' }}>{name}</h3>
-          <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 8 }}>{role}</p>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <h3 style={{
+            fontSize: 16,
+            fontWeight: 700,
+            marginBottom: 4,
+            color: '#111827',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}>{name}</h3>
+          <p style={{
+            fontSize: 13,
+            color: '#6b7280',
+            marginBottom: 8,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}>{role}</p>
           {institution && (
-            <p style={{ fontSize: 12, color: '#9ca3af', marginBottom: 8 }}>{institution}</p>
+            <p style={{
+              fontSize: 12,
+              color: '#9ca3af',
+              marginBottom: 8,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}>{institution}</p>
           )}
-          <PidComponent value={orcid} />
+          <div style={{ overflow: 'hidden', maxWidth: '100%' }}>
+            <PidComponent value={orcid} />
+          </div>
         </div>
       </div>
     </div>

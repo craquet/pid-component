@@ -5,44 +5,38 @@ import { PidComponent } from '@kit-data-manager/react-pid-component';
 
 export default function Navbar() {
   return (
-    <nav style={{ backgroundColor: '#1a1a2e', padding: '16px 32px', position: 'sticky', top: 0, zIndex: 50 }}>
-      <div style={{
-        maxWidth: 1400,
-        margin: '0 auto',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <div style={{ backgroundColor: '#6366f1', borderRadius: 8, padding: 8 }}>
+    <nav className="sticky top-0 z-50 bg-[#1a1a2e] px-8 py-4">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="rounded-lg bg-[#6366f1] p-2">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
               <path d="M12 2L2 7l10 5 10-5-10-5z" />
               <path d="M2 17l10 5 10-5" />
               <path d="M2 12l10 5 10-5" />
             </svg>
           </div>
-          <Link href="/" style={{ color: 'white', fontSize: 20, fontWeight: 700, textDecoration: 'none' }}>
+          <Link href="/" className="text-xl font-bold text-white no-underline">
             ResearchDemo
           </Link>
-          <span style={{
-            background: '#fbbf24',
-            color: '#78350f',
-            fontSize: 11,
-            fontWeight: 600,
-            padding: '2px 8px',
-            borderRadius: 12,
-          }}>Demo</span>
+          <span className="rounded-full bg-[#fbbf24] px-2 py-0.5 text-xs font-semibold text-[#78350f]">
+            Demo
+          </span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
-          <Link href="/datasets"
-                style={{ color: '#a0a0a0', fontSize: 14, textDecoration: 'none', hoverColor: 'white' }}>
+        <div className="flex items-center gap-6">
+          <Link
+            href="/datasets"
+            className="text-sm text-gray-400 no-underline transition-colors hover:text-white"
+          >
             Datasets
           </Link>
-          <Link href="/about" style={{ color: '#a0a0a0', fontSize: 14, textDecoration: 'none' }}>
+          <Link
+            href="/about"
+            className="text-sm text-gray-400 no-underline transition-colors hover:text-white"
+          >
             About
           </Link>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ color: '#a0a0a0', fontSize: 14 }}>Powered by</span>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-400">Powered by</span>
             <PidComponent value="https://ror.org/04t3en479" hideSubcomponents={true} />
           </div>
         </div>

@@ -1,3 +1,5 @@
+'use client';
+
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import DatasetCard from './components/DatasetCard';
@@ -64,7 +66,6 @@ export default function HomePage() {
       <Navbar />
 
       <main style={{ maxWidth: 1400, margin: '0 auto', padding: '32px 24px' }}>
-        {/* Hero Section */}
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 24, marginBottom: 32 }}>
           <div
             style={{ backgroundColor: 'white', borderRadius: 12, padding: 32, boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
@@ -135,7 +136,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Dataset Cards */}
         <div style={{ marginBottom: 32 }}>
           <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 20 }}>Featured Datasets</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
@@ -166,31 +166,31 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Author Section */}
         <div style={{ marginBottom: 32 }}>
           <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 20 }}>Developers of the pid-component</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
             <AuthorCard
               orcid="0009-0005-2800-4833"
               name="Maximilian Inckmann"
+              role="Researcher"
               institution="Karlsruhe Institute of Technology"
             />
             <AuthorCard
               orcid="0009-0003-2196-9187"
               name="Christopher Raquet"
+              role="Researcher"
               institution="Karlsruhe Institute of Technology"
             />
             <AuthorCard
               orcid="0000-0001-6575-1022"
               name="Andreas Pfeil"
+              role="Researcher"
               institution="Karlsruhe Institute of Technology"
             />
           </div>
         </div>
 
-        {/* Autodetection Zone */}
         <ArticleSection />
-
 
       </main>
 

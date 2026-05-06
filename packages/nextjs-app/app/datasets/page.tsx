@@ -55,64 +55,31 @@ const datasets = [
 
 export default function DatasetsPage() {
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
 
-      <main style={{ maxWidth: 1400, margin: '0 auto', padding: '32px 24px' }}>
-        <div style={{ marginBottom: 32 }}>
-          <h1 style={{ fontSize: 32, fontWeight: 700, marginBottom: 8 }}>Research Datasets</h1>
-          <p style={{ fontSize: 16, color: '#6b7280' }}>
+      <main className="mx-auto max-w-7xl px-6 py-8">
+        <div className="mb-8">
+          <h1 className="mb-2 text-3xl font-bold text-gray-900">Research Datasets</h1>
+          <p className="text-base text-gray-500">
             Browse and explore the research datasets available in the ResearchDemo portal.
           </p>
         </div>
 
-        {/* Search and Filter Bar */}
-        <div style={{
-          backgroundColor: 'white',
-          borderRadius: 12,
-          padding: 24,
-          marginBottom: 32,
-          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-        }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr auto', gap: 16 }}>
+        <div className="mb-8 rounded-xl bg-white p-6 shadow-sm">
+          <div className="grid grid-cols-4 gap-4">
             <div>
-              <label style={{
-                fontSize: 12,
-                fontWeight: 600,
-                color: '#6b7280',
-                display: 'block',
-                marginBottom: 4,
-              }}>Search</label>
+              <label className="mb-1 block text-xs font-semibold text-gray-500">Search</label>
               <input
                 type="text"
                 placeholder="Search datasets..."
-                style={{
-                  width: '100%',
-                  padding: '10px 12px',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: 8,
-                  fontSize: 14,
-                  boxSizing: 'border-box',
-                }}
+                className="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
               />
             </div>
             <div>
-              <label style={{
-                fontSize: 12,
-                fontWeight: 600,
-                color: '#6b7280',
-                display: 'block',
-                marginBottom: 4,
-              }}>License</label>
-              <select style={{
-                width: '100%',
-                padding: '10px 12px',
-                border: '1px solid #e5e7eb',
-                borderRadius: 8,
-                fontSize: 14,
-                backgroundColor: 'white',
-                cursor: 'pointer',
-              }}>
+              <label className="mb-1 block text-xs font-semibold text-gray-500">License</label>
+              <select
+                className="w-full cursor-pointer rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
                 <option>All Licenses</option>
                 <option>Apache-2.0</option>
                 <option>MIT</option>
@@ -120,125 +87,62 @@ export default function DatasetsPage() {
               </select>
             </div>
             <div>
-              <label style={{ fontSize: 12, fontWeight: 600, color: '#6b7280', display: 'block', marginBottom: 4 }}>Sort
-                By</label>
-              <select style={{
-                width: '100%',
-                padding: '10px 12px',
-                border: '1px solid #e5e7eb',
-                borderRadius: 8,
-                fontSize: 14,
-                backgroundColor: 'white',
-                cursor: 'pointer',
-              }}>
+              <label className="mb-1 block text-xs font-semibold text-gray-500">Sort By</label>
+              <select
+                className="w-full cursor-pointer rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500">
                 <option>Newest First</option>
                 <option>Oldest First</option>
                 <option>Title A-Z</option>
                 <option>Title Z-A</option>
               </select>
             </div>
-            <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-              <button style={{
-                backgroundColor: '#6366f1',
-                color: 'white',
-                padding: '10px 20px',
-                borderRadius: 8,
-                border: 'none',
-                fontWeight: 600,
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-              }}>
+            <div className="flex items-end">
+              <button
+                className="w-full rounded-lg bg-indigo-500 px-5 py-2.5 font-semibold text-white hover:bg-indigo-600 transition-colors">
                 Apply Filters
               </button>
             </div>
           </div>
         </div>
 
-        {/* Results Count */}
-        <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <p style={{ fontSize: 14, color: '#6b7280' }}>Showing {datasets.length} datasets</p>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <button style={{
-              padding: '6px 12px',
-              borderRadius: 6,
-              border: '1px solid #e5e7eb',
-              backgroundColor: 'white',
-              fontSize: 13,
-              cursor: 'pointer',
-            }}>
+        <div className="mb-5 flex items-center justify-between">
+          <p className="text-sm text-gray-500">Showing {datasets.length} datasets</p>
+          <div className="flex gap-2">
+            <button
+              className="rounded-md border border-gray-200 bg-white px-3 py-1.5 text-sm hover:bg-gray-50 transition-colors">
               Grid View
             </button>
-            <button style={{
-              padding: '6px 12px',
-              borderRadius: 6,
-              border: '1px solid #e5e7eb',
-              backgroundColor: '#f3f4f6',
-              fontSize: 13,
-              cursor: 'pointer',
-            }}>
+            <button
+              className="rounded-md border border-gray-200 bg-gray-100 px-3 py-1.5 text-sm hover:bg-gray-200 transition-colors">
               List View
             </button>
           </div>
         </div>
 
-        {/* Dataset Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, marginBottom: 32 }}>
+        <div className="mb-8 grid grid-cols-3 gap-5">
           {datasets.map((dataset) => (
             <DatasetCard key={dataset.id} {...dataset} />
           ))}
         </div>
 
-        {/* Pagination */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 8 }}>
-          <button style={{
-            padding: '8px 16px',
-            borderRadius: 8,
-            border: '1px solid #e5e7eb',
-            backgroundColor: 'white',
-            fontSize: 14,
-            cursor: 'pointer',
-          }}>
+        <div className="flex justify-center gap-2">
+          <button
+            className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm hover:bg-gray-50 transition-colors">
             Previous
           </button>
-          <button style={{
-            padding: '8px 16px',
-            borderRadius: 8,
-            backgroundColor: '#6366f1',
-            color: 'white',
-            border: 'none',
-            fontSize: 14,
-            cursor: 'pointer',
-          }}>
+          <button className="rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white">
             1
           </button>
-          <button style={{
-            padding: '8px 16px',
-            borderRadius: 8,
-            border: '1px solid #e5e7eb',
-            backgroundColor: 'white',
-            fontSize: 14,
-            cursor: 'pointer',
-          }}>
+          <button
+            className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm hover:bg-gray-50 transition-colors">
             2
           </button>
-          <button style={{
-            padding: '8px 16px',
-            borderRadius: 8,
-            border: '1px solid #e5e7eb',
-            backgroundColor: 'white',
-            fontSize: 14,
-            cursor: 'pointer',
-          }}>
+          <button
+            className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm hover:bg-gray-50 transition-colors">
             3
           </button>
-          <button style={{
-            padding: '8px 16px',
-            borderRadius: 8,
-            border: '1px solid #e5e7eb',
-            backgroundColor: 'white',
-            fontSize: 14,
-            cursor: 'pointer',
-          }}>
+          <button
+            className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm hover:bg-gray-50 transition-colors">
             Next
           </button>
         </div>
