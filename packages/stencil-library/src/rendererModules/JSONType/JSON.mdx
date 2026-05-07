@@ -1,0 +1,64 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as JSONStories from './JSON.stories';
+
+<Meta of={JSONStories} />
+
+# JSON
+
+The JSON renderer parses and renders JSON strings or objects. It provides a collapsible tree view with syntax highlighting, making complex data structures readable.
+
+## Settings
+
+- **`darkMode`** (`string`, default: `system`): Sets the theme for the JSON viewer. Options: `light`, `dark`, `system`
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={JSONStories.Default} />
+
+### Simple Object
+
+<Canvas of={JSONStories.Simple} />
+
+### Array
+
+<Canvas of={JSONStories.Array} />
+
+### Dataset
+
+<Canvas of={JSONStories.Dataset} />
+
+### Expanded View
+
+<Canvas of={JSONStories.Expanded} />
+
+### Dark Mode
+
+<Canvas of={JSONStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value='{"name": "pid-component", "version": "1.0.0"}'></pid-component>
+```
+
+### Nested Object
+
+```html
+<pid-component value='{"project": "pid-component", "version": "0.4.0", "renderers": ["DOI", "ORCiD", "Handle"]}'></pid-component>
+```
+
+### With Settings
+
+```html
+<pid-component
+  value='{"name": "test"}'
+  settings='[{"type":"JSONType","values":[{"name":"darkMode","value":"dark"}]}]'>
+</pid-component>
+```

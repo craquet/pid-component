@@ -1,0 +1,101 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as DOIStories from './DOI.stories';
+
+<Meta of={DOIStories} />
+
+# DOI (Digital Object Identifier)
+
+The DOI renderer resolves DOIs (e.g., `10.1000/xyz`) to fetch metadata from providers like DataCite or CrossRef. It renders a formatted citation preview and allows expanding to view detailed metadata (authors, publication dates, licenses, etc.).
+
+DOIs are resolved via `doi.org` which automatically redirects to the appropriate provider (DataCite or CrossRef). The metadata source is determined by the structure of the returned data.
+
+## Settings
+
+- **`citationStyle`** (`string`, default: `APA`): The citation style for the preview. Options: `APA`, `Chicago`, `IEEE`, `Harvard`, `Anglia Ruskin`
+- **`ttl`** (`number`, default: `86400000`): Time-to-live in milliseconds for cached metadata
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={DOIStories.Default} />
+
+### DataCite - Journal Paper
+
+<Canvas of={DOIStories.DataCiteJournalPaper} />
+
+### CrossRef - Journal Paper
+
+<Canvas of={DOIStories.CrossRefJournalPaper} />
+
+### DataCite - Software (Zenodo)
+
+<Canvas of={DOIStories.DataCiteSoftware} />
+
+### DataCite - RFC Document
+
+<Canvas of={DOIStories.DataCiteRFC} />
+
+### CrossRef - Book
+
+<Canvas of={DOIStories.CrossRefBook} />
+
+### DataCite - Slides/Presentation
+
+<Canvas of={DOIStories.DataCiteSlides} />
+
+### DataCite - Preprint (arXiv)
+
+<Canvas of={DOIStories.DataCitePreprint} />
+
+### CrossRef - Funding
+
+<Canvas of={DOIStories.CrossRefFunding} />
+
+## Citation Styles
+
+### APA
+
+<Canvas of={DOIStories.CitationStyleAPA} />
+
+### IEEE
+
+<Canvas of={DOIStories.CitationStyleIEEE} />
+
+### Chicago
+
+<Canvas of={DOIStories.CitationStyleChicago} />
+
+## Additional Examples
+
+### With URL Prefix
+
+<Canvas of={DOIStories.WithURLPrefix} />
+
+### Inline in Text
+
+<Canvas of={DOIStories.InlineInText} />
+
+### Dark Mode
+
+<Canvas of={DOIStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="10.5445/IR/1000188026"></pid-component>
+```
+
+### With Settings
+
+```html
+<pid-component
+  value="10.5445/IR/1000188026"
+  settings='[{"type":"DOIType","values":[{"name":"citationStyle","value":"IEEE"}]}]'>
+</pid-component>
+```

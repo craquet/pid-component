@@ -1,0 +1,51 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as LocaleStories from './Locale.stories';
+
+<Meta of={LocaleStories} />
+
+# Locale
+
+The Locale renderer recognizes locale codes (e.g., `de-DE`, `en-US`) and renders the language name and, if a region is specified, the corresponding country flag.
+
+## Settings
+
+No additional settings are required.
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={LocaleStories.Default} />
+
+### German (de-DE)
+
+<Canvas of={LocaleStories.German} />
+
+### British English (en-GB)
+
+<Canvas of={LocaleStories.British} />
+
+### French (fr-FR)
+
+<Canvas of={LocaleStories.French} />
+
+### Dark Mode
+
+<Canvas of={LocaleStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="en-US"></pid-component>
+```
+
+### With Region Flag
+
+```html
+<pid-component value="de-DE"></pid-component>
+```

@@ -1,0 +1,64 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as ORCiDStories from './ORCiD.stories';
+
+<Meta of={ORCiDStories} />
+
+# ORCiD (Open Researcher and Contributor ID)
+
+The ORCiD renderer identifies researchers and contributors. It validates the ORCiD format and fetches the public profile from the ORCiD API. It displays the person's name, biography, affiliations, and other public information.
+
+## Settings
+
+- **`showAffiliation`** (`boolean`, default: `true`): Whether to display the person's current affiliation in the summary
+- **`affiliationAt`** (`string`, default: current date): A date string. If set, it displays the affiliation valid at that specific date
+- **`ttl`** (`number`, default: `86400000`): Time-to-live for cached profile data
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={ORCiDStories.Default} />
+
+### With HTTPS Prefix
+
+<Canvas of={ORCiDStories.WithHTTPS} />
+
+### With Affiliation at Date
+
+<Canvas of={ORCiDStories.WithAffiliationDate} />
+
+### Show Affiliation Only
+
+<Canvas of={ORCiDStories.ShowAffiliationOnly} />
+
+### Hide Affiliation
+
+<Canvas of={ORCiDStories.HideAffiliation} />
+
+### Inline in Text
+
+<Canvas of={ORCiDStories.InlineInText} />
+
+### Dark Mode
+
+<Canvas of={ORCiDStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="0009-0005-2800-4833"></pid-component>
+```
+
+### With Settings
+
+```html
+<pid-component
+  value="0009-0005-2800-4833"
+  settings='[{"type":"ORCIDType","values":[{"name":"showAffiliation","value":true},{"name":"affiliationAt","value":"2020-01-01"}]}]'>
+</pid-component>
+```

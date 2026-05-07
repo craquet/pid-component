@@ -26,7 +26,6 @@ via [unpkg](https://unpkg.com/):
 </head>
 ```
 
-
 **Please notice that you must use the hyphenated version of an attribute when using the component directly in HTML (e.g. `currentLevelOfSubcomponents` -> `current-level-of-subcomponents`).
 When using inside Stencil or with JSX/TSX syntax, you must use the camelCase version.**
 
@@ -34,20 +33,12 @@ When using inside Stencil or with JSX/TSX syntax, you must use the camelCase ver
 
 - [Default](#default)
 - [Controls](#controls)
+- [Display Mode](#display-mode)
+- [Emphasis](#emphasis)
+- [Pagination](#pagination)
+- [Renderer Selection](#renderer-selection)
 - [Supported Types](#supported-types)
-- [1. Persistent Identifiers (Handles)](#1-persistent-identifiers-handles)
-- [2. Digital Object Identifiers (DOIs)](#2-digital-object-identifiers-dois)
-- [3. ORCiD](#3-orcid-open-researcher-and-contributor-id)
-- [4. ROR](#4-research-organization-registry-ror)
-- [5. SPDX Licenses](#5-spdx-licenses)
-- [6. JSON Data](#6-json-data)
-- [7. Locales & Flags](#7-locales--flags)
-- [8. Dates](#8-dates)
-- [9. URLs & E-Mails](#9-urls--e-mails)
-- [10. Fallback](#10-fallback)
 - [Advanced Configuration](#advanced-configuration)
-- [Using Settings](#using-settings)
-- [Recursive Rendering](#recursive-rendering)
 
 ## Default
 
@@ -59,189 +50,102 @@ When using inside Stencil or with JSX/TSX syntax, you must use the camelCase ver
 
 ---
 
+## Display Mode
+
+### Collapsed by Default
+
+The `openByDefault` property controls the initial state of the component.
+
+<Canvas of={PIDComponentStories.OpenByDefaultCollapsed} />
+
+### Expanded by Default
+
+<Canvas of={PIDComponentStories.OpenByDefaultExpanded} />
+
+---
+
+## Emphasis
+
+### Emphasized (Default)
+
+The `emphasizeComponent` property adds a subtle border and shadow to make the component stand out.
+
+<Canvas of={PIDComponentStories.Emphasized} />
+
+### Unemphasized
+
+Set `emphasizeComponent="false"` for inline use in flowing text.
+
+<Canvas of={PIDComponentStories.Unemphasized} />
+
+---
+
+## Pagination
+
+### Default Page Size (10 items)
+
+The `itemsPerPage` property controls how many entries are shown per page.
+
+<Canvas of={PIDComponentStories.DefaultPageSize} />
+
+### Unlimited Page Size
+
+Set `itemsPerPage` to a high value (e.g., 100) to show all entries on a single page.
+
+<Canvas of={PIDComponentStories.UnlimitedPageSize} />
+
+---
+
+## Renderer Selection
+
+The `renderers` property allows you to specify an ordered list of renderer types to use.
+This is useful when you want to prioritize certain types or restrict detection to specific types.
+
+### Matching Renderer
+
+When a renderer in the list matches the value, it is used to render the component.
+
+<Canvas of={PIDComponentStories.RenderersMatchingDOI} />
+
+### Preselection with Fallback
+
+When `renderers` is set but none match, the component falls back to the full registry (default behavior).
+
+<Canvas of={PIDComponentStories.RenderersPreselectionFallback} />
+
+### Strict Restriction
+
+Set `fallbackToAll="false"` to strictly restrict rendering to only the listed renderers.
+
+<Canvas of={PIDComponentStories.RenderersStrictRestriction} />
+
+### Order Determines Priority
+
+The order in the `renderers` array determines which renderer is used when multiple could match.
+
+<Canvas of={PIDComponentStories.RenderersOrderPriority} />
+
+### Correct Order
+
+<Canvas of={PIDComponentStories.RenderersCorrectOrder} />
+
+---
+
 # Supported Types
 
-The following chapters describe each supported type, the task it solves, available settings, and examples.
-
-## 1. Persistent Identifiers (Handles)
-
-**Task:**
-Resolves Handle-based PIDs (e.g., `21.T11981/...`) using the `handle.net` infrastructure. It retrieves the PID record and displays its data entries (like URL, HS_ADMIN, etc.) in a structured table. It supports recursive resolution if a value inside the record is another recognized identifier.
-
-**Settings (HandleType):**
-- `ttl` (number): Time-to-live in milliseconds for caching the resolved record.
-
-### Examples
-
-**Standard PID:**
-Resolves the handle and displays its values.
-<Canvas of={PIDComponentStories.Handle} />
-
-**Without Subcomponents:**
-Displays only the top-level PID parts without unfolding the resolved record.
-<Canvas of={PIDComponentStories.HandleWithoutSubcomponent} />
-
-**Inline in Text:**
-The component can be used inline within text.
-<Canvas of={PIDComponentStories.HandleInText} />
-
----
-
-## 2. Digital Object Identifiers (DOIs)
-
-**Task:**
-Resolves DOIs (e.g., `10.1000/xyz`) to fetch metadata from providers like DataCite or CrossRef. It renders a formatted citation preview and allows expanding to view detailed metadata (authors, publication dates, licenses, etc.).
-
-**Settings (DOIType):**
-- `citationStyle` (string): The citation style for the preview.
-- Options: `APA`, `Chicago`, `IEEE`, `Harvard`, `Anglia Ruskin`.
-- Default: `APA`.
-- `ttl` (number): Time-to-live for cached metadata.
-
-### Examples
-
-**DOI with DataCite Metadata:**
-<Canvas of={PIDComponentStories.DOI_DataCite_JournalPaper} />
-
-**DOI with CrossRef Metadata:**
-<Canvas of={PIDComponentStories.DOI_CrossRef_JournalPaper} />
-
-**Configurable Citation Style:**
-This example sets the citation style to `APA`.
-<Canvas of={PIDComponentStories.DOI_CitationStyles} />
-
----
-
-## 3. ORCiD (Open Researcher and Contributor ID)
-
-**Task:**
-Identifies researchers and contributors. It validates the ORCiD format and fetches the public profile from the ORCiD API. It displays the person's name, biography, affiliations, and other public information.
-
-**Settings (ORCIDType):**
-- `showAffiliation` (boolean): Whether to display the person's current affiliation in the summary.
-- Default: `true`.
-- `affiliationAt` (string/date): A date string or timestamp. If set, it displays the affiliation valid at that specific date.
-- `ttl` (number): Time-to-live for cached profile data.
-
-### Examples
-
-**Standard ORCiD:**
-<Canvas of={PIDComponentStories.ORCID} />
-
-**ORCiD with Settings:**
-Configured to show specific affiliation details.
-<Canvas of={PIDComponentStories.ORCIDInRecordWithSettings} />
-
-**Inline in Text:**
-<Canvas of={PIDComponentStories.ORCIDInText} />
-
----
-
-## 4. Research Organization Registry (ROR)
-
-**Task:**
-Resolves ROR IDs to identify research organizations. It fetches organization details such as name, acronyms, location, and relationships (parent/child organizations) from the ROR API.
-
-**Settings (RORType):**
-- `ttl` (number): Time-to-live for cached organization data.
-
-### Example
-
-<Canvas of={PIDComponentStories.ROR} />
-
----
-
-## 5. SPDX Licenses
-
-**Task:**
-Recognizes SPDX license identifiers (e.g., `Apache-2.0`) or URLs. It validates the license against the SPDX database/API and provides links to the full license text and details.
-
-**Settings (SPDXType):**
-- `ttl` (number): Time-to-live for cached license data.
-
-### Examples
-
-**SPDX Short Identifier:**
-<Canvas of={PIDComponentStories.SPDXShort} />
-
-**SPDX License URL:**
-<Canvas of={PIDComponentStories.SPDXLong} />
-
----
-
-## 6. JSON Data
-
-**Task:**
-Parses and renders JSON strings or objects. It provides a collapsible tree view with syntax highlighting, making complex data structures readable.
-
-**Settings (JSONType):**
-- `darkMode` (string): Sets the theme for the JSON viewer.
-- Options: `light`, `dark`, `system`.
-
-### Example
-
-<Canvas of={PIDComponentStories.JSON_Object} />
-
----
-
-## 7. Locales & Flags
-
-**Task:**
-Recognizes locale codes (e.g., `de-DE`, `en-US`). It renders the language name and, if a region is specified, the corresponding country flag.
-
-**Settings (LocaleType):**
-- None specific.
-
-### Example
-
-<Canvas of={PIDComponentStories.Locale} />
-
----
-
-## 8. Dates
-
-**Task:**
-Detects ISO 8601 date strings. It renders them in a user-friendly, locale-aware format.
-
-**Settings (DateType):**
-- Uses browser locale defaults.
-
-### Example
-
-<Canvas of={PIDComponentStories.Date} />
-
----
-
-## 9. URLs & E-Mails
-
-**Task:**
-- **URL**: Renders clickable external links.
-- **E-Mail**: Renders clickable `mailto` links. Supports single addresses or comma-separated lists.
-
-**Settings:**
-- None specific.
-
-### Examples
-
-**URL:**
-<Canvas of={PIDComponentStories.URL} />
-
-**Single E-Mail:**
-<Canvas of={PIDComponentStories.Email} />
-
-**Multiple E-Mails:**
-<Canvas of={PIDComponentStories.CommaSeperatedMails} />
-
----
-
-## 10. Fallback
-
-**Task:**
-If no other specific type matches the input value, the component renders the value as a simple text string.
-
-### Example
-
-<Canvas of={PIDComponentStories.Fallback} />
+The following types are supported, ordered by their detection priority (lower = higher priority) as defined in `utils.ts`:
+
+- [Date](./?path=/docs/renderer-date--docs) (priority 0)
+- [ORCiD](./?path=/docs/renderer-orcid--docs) (priority 1)
+- [DOI](./?path=/docs/renderer-doi--docs) (priority 2)
+- [Handle](./?path=/docs/renderer-handle--docs) (priority 3)
+- [ROR](./?path=/docs/renderer-ror--docs) (priority 4)
+- [SPDX](./?path=/docs/renderer-spdx--docs) (priority 5)
+- [Email](./?path=/docs/renderer-email--docs) (priority 6)
+- [URL](./?path=/docs/renderer-url--docs) (priority 7)
+- [Locale](./?path=/docs/renderer-locale--docs) (priority 8)
+- [JSON](./?path=/docs/renderer-json--docs) (priority 9)
+- [Fallback](./?path=/docs/renderer-fallback--docs) (priority 99)
 
 ---
 
@@ -269,4 +173,4 @@ The component supports recursive rendering for complex data structures (like a P
 - `current-level-of-subcomponents`: Used internally to track depth. Set it equal to `level-of-subcomponents` to prevent initial unfolding.
 - `hide-subcomponents`: Boolean attribute to completely disable sub-component rendering.
 
-<Canvas of={PIDComponentStories.ORCIDInRecord} />
+<Canvas of={PIDComponentStories.TypedPIDMakerExampleText} />

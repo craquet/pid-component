@@ -97,71 +97,21 @@ Use `initPidDetection()` to scan a block of HTML for identifiers and replace the
 
 ## Supported Identifier Types
 
-The component recognizes and renders the following identifier types out of the box:
+The component recognizes and renders the following identifier types out of the box.
+Click any type to see detailed documentation and examples:
 
-<table>
-  <thead>
-  <tr>
-    <th style={{ textAlign: 'left' }}>Type</th>
-    <th style={{ textAlign: 'left' }}>Example</th>
-    <th style={{ textAlign: 'left' }}>Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td><strong>Handle PID</strong></td>
-    <td><code>21.T11981/be908bd1-...</code></td>
-    <td>FAIR Digital Object handles resolved via the Handle System</td>
-  </tr>
-  <tr>
-    <td><strong>DOI</strong></td>
-    <td><code>10.5445/IR/1000185135</code></td>
-    <td>Digital Object Identifiers with metadata from DataCite or CrossRef</td>
-  </tr>
-  <tr>
-    <td><strong>ORCiD</strong></td>
-    <td><code>0009-0005-2800-4833</code></td>
-    <td>Researcher identifiers with profile data from the ORCID API</td>
-  </tr>
-  <tr>
-    <td><strong>ROR</strong></td>
-    <td><code>https://ror.org/04t3en479</code></td>
-    <td>Research organizations from the ROR registry</td>
-  </tr>
-  <tr>
-    <td><strong>SPDX License</strong></td>
-    <td><code>Apache-2.0</code></td>
-    <td>Software licenses validated against the SPDX database</td>
-  </tr>
-  <tr>
-    <td><strong>URL</strong></td>
-    <td><code>https://scc.kit.edu</code></td>
-    <td>Clickable external links</td>
-  </tr>
-  <tr>
-    <td><strong>Email</strong></td>
-    <td><code>someone@example.com</code></td>
-    <td>Clickable mailto links (single or comma-separated)</td>
-  </tr>
-  <tr>
-    <td><strong>Date</strong></td>
-    <td><code>2022-11-11T08:01:20Z</code></td>
-    <td>ISO 8601 dates rendered in a locale-aware format</td>
-  </tr>
-  <tr>
-    <td><strong>JSON</strong></td>
-    <td><code>{'{"key": "value"}'}</code></td>
-    <td>Parsed JSON shown in an interactive tree/code viewer</td>
-  </tr>
-  <tr>
-    <td><strong>Locale</strong></td>
-    <td><code>de-DE</code></td>
-    <td>Language codes with country flag and name</td>
-  </tr>
-  </tbody>
-</table>
+- [Date](?path=/docs/renderer-date--docs) -- ISO 8601 dates rendered in a locale-aware format
+- [ORCiD](?path=/docs/renderer-orcid--docs) -- Researcher identifiers with profile data from the ORCID API
+- [DOI](?path=/docs/renderer-doi--docs) -- Digital Object Identifiers with metadata from DataCite or CrossRef
+- [Handle PID](?path=/docs/renderer-handle--docs) -- FAIR Digital Object handles resolved via the Handle System
+- [ROR](?path=/docs/renderer-ror--docs) -- Research organizations from the ROR registry
+- [SPDX License](?path=/docs/renderer-spdx--docs) -- Software licenses validated against the SPDX database
+- [Email](?path=/docs/renderer-email--docs) -- Clickable mailto links (single or comma-separated)
+- [URL](?path=/docs/renderer-url--docs) -- Clickable external links
+- [Locale](?path=/docs/renderer-locale--docs) -- Language codes with country flag and name
+- [JSON](?path=/docs/renderer-json--docs) -- Parsed JSON shown in an interactive tree/code viewer
 
-Any value that does not match a known type is rendered as plain text (fallback).
+Any value that does not match a known type is rendered as plain text ([Fallback](?path=/docs/renderer-fallback--docs)).
 
 ---
 

@@ -1,0 +1,68 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as SPDXStories from './SPDX.stories';
+
+<Meta of={SPDXStories} />
+
+# SPDX License
+
+The SPDX renderer recognizes SPDX license identifiers (e.g., `Apache-2.0`) or URLs. It validates the license against the SPDX database/API and provides links to the full license text and details.
+
+## Settings
+
+- **`ttl`** (`number`, default: `86400000`): Time-to-live for cached license data
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={SPDXStories.Default} />
+
+### Apache-2.0 (Bare)
+
+<Canvas of={SPDXStories.ApacheBare} />
+
+### MIT License
+
+<Canvas of={SPDXStories.MIT} />
+
+### MIT License (Bare)
+
+<Canvas of={SPDXStories.MITBare} />
+
+### CC BY 4.0
+
+<Canvas of={SPDXStories.CCBY} />
+
+### CC BY 4.0 (Bare)
+
+<Canvas of={SPDXStories.CCBYBare} />
+
+### Dark Mode
+
+<Canvas of={SPDXStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="https://spdx.org/licenses/Apache-2.0"></pid-component>
+```
+
+### Bare Identifier
+
+```html
+<pid-component value="Apache-2.0"></pid-component>
+```
+
+### With Settings
+
+```html
+<pid-component
+  value="Apache-2.0"
+  settings='[{"type":"SPDXType","values":[{"name":"ttl","value":3600000}]}]'>
+</pid-component>
+```

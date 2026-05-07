@@ -1,0 +1,45 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as FallbackStories from './Fallback.stories';
+
+<Meta of={FallbackStories} />
+
+# Fallback
+
+The Fallback renderer is used when the input value does not match any known identifier type. It renders the value as plain text. This is the catch-all fallback behavior.
+
+## Settings
+
+No additional settings are required.
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={FallbackStories.Default} />
+
+### Empty Value
+
+<Canvas of={FallbackStories.Empty} />
+
+### Arbitrary Text
+
+<Canvas of={FallbackStories.ArbitraryText} />
+
+### Number
+
+<Canvas of={FallbackStories.Number} />
+
+### Dark Mode
+
+<Canvas of={FallbackStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="This is a fallback text"></pid-component>
+```

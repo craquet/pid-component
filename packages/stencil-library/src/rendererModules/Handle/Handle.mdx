@@ -1,0 +1,58 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as HandleStories from './Handle.stories';
+
+<Meta of={HandleStories} />
+
+# Handle
+
+The `Handle` renderer resolves Handle-based PIDs (e.g., `21.T11981/...`) using the `handle.net` infrastructure. It retrieves the PID record and displays its data entries (like URL, HS_ADMIN, etc.) in a structured table. It supports recursive resolution if a value inside the record is another recognized identifier.
+
+## Settings
+
+- **`ttl`** (`number`, default: `86400000`): Time-to-live in milliseconds for caching the resolved record
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={HandleStories.Default} />
+
+### Full PID (Typed)
+
+<Canvas of={HandleStories.FullPID} />
+
+### With HTTPS Prefix
+
+<Canvas of={HandleStories.WithHTTPS} />
+
+### Without Subcomponents
+
+<Canvas of={HandleStories.WithoutSubcomponents} />
+
+### Inline in Text
+
+<Canvas of={HandleStories.InlineInText} />
+
+### Dark Mode
+
+<Canvas of={HandleStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6"></pid-component>
+```
+
+### With Settings
+
+```html
+<pid-component
+  value="21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6"
+  settings='[{"type":"HandleType","values":[{"name":"ttl","value":3600000}]}]'>
+</pid-component>
+```
