@@ -1,101 +1,57 @@
-import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
-
+import { Meta } from '@storybook/addon-docs/blocks';
 import * as DOIStories from './DOI.stories';
 
 <Meta of={DOIStories} />
 
-# DOI (Digital Object Identifier)
+# DOI Renderer Module
 
-The DOI renderer resolves DOIs (e.g., `10.1000/xyz`) to fetch metadata from providers like DataCite or CrossRef. It renders a formatted citation preview and allows expanding to view detailed metadata (authors, publication dates, licenses, etc.).
+The DOI (Digital Object Identifier) renderer module provides two separate renderers for resolving DOIs from different metadata providers:
 
-DOIs are resolved via `doi.org` which automatically redirects to the appropriate provider (DataCite or CrossRef). The metadata source is determined by the structure of the returned data.
+## Available Renderers
 
-## Settings
+### [DataCite DOI Renderer](./DataCite/DataCite.mdx)
 
-- **`citationStyle`** (`string`, default: `APA`): The citation style for the preview. Options: `APA`, `Chicago`, `IEEE`, `Harvard`, `Anglia Ruskin`
-- **`ttl`** (`number`, default: `86400000`): Time-to-live in milliseconds for cached metadata
+Fetches metadata directly from the [DataCite API](https://api.datacite.org/). Use this renderer for DOIs registered with DataCite, including:
 
-## Controls
+- Journal articles
+- Software (e.g., Zenodo)
+- RFC documents
+- Preprints
+- Presentations
 
-<Controls />
+### [CrossRef DOI Renderer](./CrossRef/CrossRef.mdx)
 
-## Examples
+Fetches metadata from the [CrossRef API](https://api.crossref.org/). This renderer automatically detects whether a DOI refers to:
 
-### Default
+- **Works**: Publications like journal articles, books, conference papers
+- **Funders**: Research funding organizations (via the CrossRef funders endpoint)
 
-<Canvas of={DOIStories.Default} />
+## Key Features
 
-### DataCite - Journal Paper
+- **ORCID Extraction**: Both renderers automatically extract ORCID identifiers from creator/author metadata
+- **ROR Extraction**: DataCite renderer also extracts ROR identifiers from affiliation data
+- **Citation Styles**: Supports APA, Chicago, IEEE, Harvard, and Anglia Ruskin citation styles
+- **Metadata Caching**: Uses cached API responses for improved performance
 
-<Canvas of={DOIStories.DataCiteJournalPaper} />
+## Choosing a Renderer
 
-### CrossRef - Journal Paper
-
-<Canvas of={DOIStories.CrossRefJournalPaper} />
-
-### DataCite - Software (Zenodo)
-
-<Canvas of={DOIStories.DataCiteSoftware} />
-
-### DataCite - RFC Document
-
-<Canvas of={DOIStories.DataCiteRFC} />
-
-### CrossRef - Book
-
-<Canvas of={DOIStories.CrossRefBook} />
-
-### DataCite - Slides/Presentation
-
-<Canvas of={DOIStories.DataCiteSlides} />
-
-### DataCite - Preprint (arXiv)
-
-<Canvas of={DOIStories.DataCitePreprint} />
-
-### CrossRef - Funding
-
-<Canvas of={DOIStories.CrossRefFunding} />
-
-## Citation Styles
-
-### APA
-
-<Canvas of={DOIStories.CitationStyleAPA} />
-
-### IEEE
-
-<Canvas of={DOIStories.CitationStyleIEEE} />
-
-### Chicago
-
-<Canvas of={DOIStories.CitationStyleChicago} />
-
-## Additional Examples
-
-### With URL Prefix
-
-<Canvas of={DOIStories.WithURLPrefix} />
-
-### Inline in Text
-
-<Canvas of={DOIStories.InlineInText} />
-
-### Dark Mode
-
-<Canvas of={DOIStories.DarkMode} />
-
-## Usage
+By default, both renderers are registered and will be tried in order. You can explicitly specify which renderer to use:
 
 ```html
-<pid-component value="10.5445/IR/1000188026"></pid-component>
+<!-- DataCite DOI -->
+<pid-component value="10.5445/IR/1000188026" renderers='["DataCiteDOIType"]'></pid-component>
+
+<!-- CrossRef DOI -->
+<pid-component value="10.1109/eScience65000.2025.00022" renderers='["CrossRefDOIType"]'></pid-component>
+
+<!-- Funder DOI (CrossRef only) -->
+<pid-component value="10.13039/501100001659" renderers='["CrossRefDOIType"]'></pid-component>
 ```
 
-### With Settings
+## Technical Details
 
-```html
-<pid-component
-  value="10.5445/IR/1000188026"
-  settings='[{"type":"DOIType","values":[{"name":"citationStyle","value":"IEEE"}]}]'>
-</pid-component>
-```
+- **DataCite API**: `https://api.datacite.org/dois/{doi}`
+- **CrossRef Works API**: `https://api.crossref.org/works/{doi}`
+- **CrossRef Funders API**: `https://api.crossref.org/funders/{doi}`
+
+Both renderers use the `cachedFetch` utility for efficient API request handling and caching.

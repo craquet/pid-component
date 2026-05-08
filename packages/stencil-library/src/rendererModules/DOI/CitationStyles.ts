@@ -1,4 +1,4 @@
-import { Creator } from './DataCiteInfo';
+import { Creator } from './DataCite/DataCiteInfo';
 
 /**
  * Supported citation styles

@@ -294,24 +294,24 @@ export const SystemMode: Story = {
 
 
 /**
- * Restricts detection to only the DOIType renderer.
- * Since the value is a DOI, it matches and renders normally.
+ * Restricts detection to only the DataCiteDOIType renderer.
+ * Since the value is a DataCite DOI, it matches and renders normally.
  */
 export const RenderersMatchingDOI: Story = {
   id: 'pid-component-renderers-matching-doi',
   args: {
     value: DOI_examples.DATACITE_JOURNAL_PAPER,
-    renderers: '["DOIType"]',
+    renderers: '["DataCiteDOIType"]',
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Uses the `renderers` prop to restrict detection to only DOIType. The DOI value matches, so it renders as expected.',
+          'Uses the `renderers` prop to restrict detection to only DataCiteDOIType. The DOI value matches, so it renders as expected.',
       },
       source: {
         code: `
-<pid-component value='${DOI_examples.DATACITE_JOURNAL_PAPER}' renderers='["DOIType"]'></pid-component>
+<pid-component value='${DOI_examples.DATACITE_JOURNAL_PAPER}' renderers='["DataCiteDOIType"]'></pid-component>
         `,
       },
     },
@@ -321,7 +321,7 @@ export const RenderersMatchingDOI: Story = {
     await waitFor(() => {
       const pidComponent = canvasElement.querySelector('pid-component');
       expect(pidComponent).toBeTruthy();
-      expect((pidComponent as HTMLPidComponentElement).renderers).toEqual('["DOIType"]');
+      expect((pidComponent as HTMLPidComponentElement).renderers).toEqual('["DataCiteDOIType"]');
     }, { timeout: 5000 });
   },
 };
@@ -387,25 +387,25 @@ export const RenderersStrictRestriction: Story = {
 };
 
 /**
- * Demonstrates ordering priority: HandleType is listed before DOIType.
+ * Demonstrates ordering priority: HandleType is listed before DataCiteDOIType.
  * Since DOIs also match HandleType's regex, the Handle renderer is used
- * instead of the DOI renderer because it appears first in the ordered list.
+ * instead of the DataCite DOI renderer because it appears first in the ordered list.
  */
 export const RenderersOrderPriority: Story = {
   id: 'pid-component-renderers-order-priority',
   args: {
     value: DOI_examples.DATACITE_JOURNAL_PAPER,
-    renderers: '["HandleType", "DOIType"]',
+    renderers: '["HandleType", "DataCiteDOIType"]',
   },
   parameters: {
     docs: {
       description: {
         story:
-          'The ordered list puts HandleType before DOIType. Since a DOI like `10.5445/IR/1000185135` also matches the Handle PID regex, the Handle renderer is used first because it appears earlier in the list.',
+          'The ordered list puts HandleType before DataCiteDOIType. Since a DOI like `10.5445/IR/1000185135` also matches the Handle PID regex, the Handle renderer is used first because it appears earlier in the list.',
       },
       source: {
         code: `
-<pid-component value='${DOI_examples.DATACITE_JOURNAL_PAPER}' renderers='["HandleType", "DOIType"]'></pid-component>
+<pid-component value='${DOI_examples.DATACITE_JOURNAL_PAPER}' renderers='["HandleType", "DataCiteDOIType"]'></pid-component>
         `,
       },
     },
@@ -413,24 +413,24 @@ export const RenderersOrderPriority: Story = {
 };
 
 /**
- * Multiple renderers in the preferred order: DOIType first, then HandleType.
- * The DOI value matches DOIType first, so the DOI renderer is used.
+ * Multiple renderers in the preferred order: DataCiteDOIType first, then HandleType.
+ * The DOI value matches DataCiteDOIType first, so the DataCite DOI renderer is used.
  */
 export const RenderersCorrectOrder: Story = {
   id: 'pid-component-renderers-correct-order',
   args: {
     value: DOI_examples.DATACITE_JOURNAL_PAPER,
-    renderers: '["DOIType", "HandleType"]',
+    renderers: '["DataCiteDOIType", "HandleType"]',
   },
   parameters: {
     docs: {
       description: {
         story:
-          'The ordered list puts DOIType before HandleType. The DOI matches DOIType first, so the DOI renderer is used as expected.',
+          'The ordered list puts DataCiteDOIType before HandleType. The DOI matches DataCiteDOIType first, so the DOI renderer is used as expected.',
       },
       source: {
         code: `
-<pid-component value='${DOI_examples.DATACITE_JOURNAL_PAPER}' renderers='["DOIType", "HandleType"]'></pid-component>
+<pid-component value='${DOI_examples.DATACITE_JOURNAL_PAPER}' renderers='["DataCiteDOIType", "HandleType"]'></pid-component>
         `,
       },
     },

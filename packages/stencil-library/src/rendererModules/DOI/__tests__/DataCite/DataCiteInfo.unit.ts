@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { DataCiteInfo } from '../DataCiteInfo';
-import { DOI } from '../DOI';
-import * as DataCache from '../../../utils/DataCache';
+import { DataCiteInfo } from '../../DataCite/DataCiteInfo';
+import { DOI } from '../../DOI';
+import * as DataCache from '../../../../utils/DataCache';
 
 const dataCiteFixture = {
   data: {

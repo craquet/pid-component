@@ -1,0 +1,103 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as CrossRefStories from './CrossRef.stories';
+
+<Meta of={CrossRefStories} />
+
+# CrossRef DOI Renderer
+
+The CrossRef DOI renderer resolves DOIs by fetching metadata from the [CrossRef API](https://api.crossref.org/). It automatically detects whether the DOI refers to a work (publication) or a funder and extracts the appropriate metadata.
+
+## API Endpoints
+
+The renderer first tries the **works endpoint** (`/works/{doi}`) for publication metadata. If no data is found, it falls back to the **funders endpoint** (`/funders/{doi}`) for funder metadata.
+
+## Settings
+
+- **`citationStyle`** (`string`, default: `APA`): The citation style for the preview. Options: `APA`, `Chicago`, `IEEE`, `Harvard`, `Anglia Ruskin`
+- **`ttl`** (`number`, default: `86400000`): Time-to-live in milliseconds for cached metadata
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={CrossRefStories.Default} />
+
+### Journal Paper
+
+<Canvas of={CrossRefStories.CrossRefJournalPaper} />
+
+### Book
+
+<Canvas of={CrossRefStories.CrossRefBook} />
+
+### Funding (Funder)
+
+<Canvas of={CrossRefStories.CrossRefFunding} />
+
+## Citation Styles
+
+### APA
+
+<Canvas of={CrossRefStories.CitationStyleAPA} />
+
+### IEEE
+
+<Canvas of={CrossRefStories.CitationStyleIEEE} />
+
+### Chicago
+
+<Canvas of={CrossRefStories.CitationStyleChicago} />
+
+## Additional Examples
+
+### Inline in Text
+
+<Canvas of={CrossRefStories.InlineInText} />
+
+### Dark Mode
+
+<Canvas of={CrossRefStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="10.1109/eScience65000.2025.00022" renderers='["CrossRefDOIType"]'></pid-component>
+```
+
+### Funder DOI
+
+```html
+<pid-component value="10.13039/501100001659" renderers='["CrossRefDOIType"]'></pid-component>
+```
+
+### With Settings
+
+```html
+<pid-component
+  value="10.1109/eScience65000.2025.00022"
+  renderers='["CrossRefDOIType"]'
+  settings='[{"type":"CrossRefDOIType","values":[{"name":"citationStyle","value":"IEEE"}]}]'>
+</pid-component>
+```
+
+## Features
+
+- **Dual Endpoint Support**: Automatically detects works vs. funders and queries the appropriate endpoint
+- **ORCID Extraction**: Extracts ORCID identifiers from author metadata
+- **JATS Parsing**: Parses CrossRef's JATS-formatted abstracts
+- **Metadata Caching**: Uses cached API responses to improve performance
+
+## FoldableItems Generated
+
+### For Works
+
+- DOI, Metadata Source, Title, Corresponding Author, Authors, Publisher, Publication Date, Resource Type, Abstract, Subjects
+
+### For Funders
+
+- DOI, Metadata Source, Name, Location, Established, CrossRef Funder ID, Website, Alternate Names, Hierarchy, Replaced By, Replaces, Descendants

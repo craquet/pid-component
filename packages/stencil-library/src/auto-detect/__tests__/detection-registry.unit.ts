@@ -167,11 +167,11 @@ describe('detection-registry', () => {
 
   describe('detectBestFit() — default mode', () => {
     it('returns DOIType for a bare DOI', () => {
-      expect(detectBestFit(DOI_examples.VALID_BARE)).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.VALID_BARE)).toBe('DataCiteDOIType');
     });
 
     it('returns DOIType for a DOI with doi: prefix', () => {
-      expect(detectBestFit(DOI_examples.DATACITE_RFC)).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.DATACITE_RFC)).toBe('DataCiteDOIType');
     });
 
     it('returns ORCIDType for a bare ORCID', () => {
@@ -223,11 +223,11 @@ describe('detection-registry', () => {
     });
 
     it('returns DOIType for a DOI with https://doi.org/ prefix', () => {
-      expect(detectBestFit(DOI_examples.VALID_WITH_PREFIX)).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.VALID_WITH_PREFIX)).toBe('DataCiteDOIType');
     });
 
     it('returns DOIType for a DOI with https://dx.doi.org/ prefix', () => {
-      expect(detectBestFit('https://dx.doi.org/10.5281/zenodo.1234567')).toBe('DOIType');
+      expect(detectBestFit('https://dx.doi.org/10.5281/zenodo.1234567')).toBe('DataCiteDOIType');
     });
 
     it('returns DateType for a datetime with Z timezone', () => {
@@ -247,24 +247,24 @@ describe('detection-registry', () => {
 
   describe('detectBestFit() — ordered mode', () => {
     it('matches DOI value when DOIType is in the list', () => {
-      expect(detectBestFit(DOI_examples.VALID_BARE, ['DOIType'])).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.VALID_BARE, ['DataCiteDOIType'])).toBe('DataCiteDOIType');
     });
 
     it('does NOT match DOI value when only ORCIDType is in the list (strict mode)', () => {
       expect(detectBestFit(DOI_examples.VALID_BARE, ['ORCIDType'], false)).toBeNull();
     });
 
-    it('HandleType wins for a DOI when HandleType is listed before DOIType', () => {
+    it('HandleType wins for a DOI when HandleType is listed before DataCiteDOIType', () => {
       // DOIs also match the Handle regex (prefix/suffix format)
-      expect(detectBestFit(DOI_examples.VALID_BARE, ['HandleType', 'DOIType'])).toBe('HandleType');
+      expect(detectBestFit(DOI_examples.VALID_BARE, ['HandleType', 'DataCiteDOIType'])).toBe('HandleType');
     });
 
-    it('DOIType wins when it is listed before HandleType', () => {
-      expect(detectBestFit(DOI_examples.VALID_BARE, ['DOIType', 'HandleType'])).toBe('DOIType');
+    it('DataCiteDOIType wins when it is listed before HandleType', () => {
+      expect(detectBestFit(DOI_examples.VALID_BARE, ['DataCiteDOIType', 'HandleType'])).toBe('DataCiteDOIType');
     });
 
     it('skips unknown keys gracefully and still matches known ones', () => {
-      expect(detectBestFit(DOI_examples.VALID_BARE, ['UnknownType', 'DOIType'])).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.VALID_BARE, ['UnknownType', 'DataCiteDOIType'])).toBe('DataCiteDOIType');
     });
 
     it('returns null when all keys in the list are unknown (strict mode)', () => {
@@ -273,7 +273,7 @@ describe('detection-registry', () => {
 
     it('returns null when the ordered list is empty', () => {
       // Empty array falls through to default mode because of the length check
-      expect(detectBestFit(DOI_examples.VALID_BARE, [])).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.VALID_BARE, [])).toBe('DataCiteDOIType');
     });
 
     it('returns null when the ordered list has no match', () => {
@@ -283,7 +283,7 @@ describe('detection-registry', () => {
 
     it('skips unknown keys and falls back to default when fallbackToAll is true', () => {
       // Unknown key first, then DOI-like value — should fall back to default registry
-      expect(detectBestFit(DOI_examples.VALID_BARE, ['UnknownType'], true)).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.VALID_BARE, ['UnknownType'], true)).toBe('DataCiteDOIType');
     });
 
     it('skips unknown keys and returns null when fallbackToAll is false', () => {
@@ -293,7 +293,7 @@ describe('detection-registry', () => {
 
     it('duplicate keys in ordered list — first match wins', () => {
       // DOI matches DOIType, which comes first even with duplicates
-      expect(detectBestFit(DOI_examples.VALID_BARE, ['DOIType', 'DOIType', 'HandleType'])).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.VALID_BARE, ['DataCiteDOIType', 'DataCiteDOIType', 'HandleType'])).toBe('DataCiteDOIType');
     });
   });
 
@@ -347,7 +347,7 @@ describe('detection-registry', () => {
   describe('detectBestFit() — fallbackToAll', () => {
     it('falls back to default registry when ordered list has no match (fallbackToAll=true)', () => {
       // ORCIDType listed but DOI value doesn't match ORCID — falls back to DOIType
-      expect(detectBestFit(DOI_examples.VALID_BARE, ['ORCIDType'], true)).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.VALID_BARE, ['ORCIDType'], true)).toBe('DataCiteDOIType');
     });
 
     it('returns null when ordered list has no match and fallbackToAll=false', () => {
@@ -357,16 +357,16 @@ describe('detection-registry', () => {
 
     it('fallbackToAll defaults to true when not specified', () => {
       // Even without explicit fallbackToAll, the default should fall back
-      expect(detectBestFit(DOI_examples.VALID_BARE, ['ORCIDType'])).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.VALID_BARE, ['ORCIDType'])).toBe('DataCiteDOIType');
     });
 
     it('empty ordered list with fallbackToAll=true falls back to default', () => {
-      expect(detectBestFit(DOI_examples.VALID_BARE, [], true)).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.VALID_BARE, [], true)).toBe('DataCiteDOIType');
     });
 
     it('empty ordered list with fallbackToAll=false falls back to default', () => {
       // Empty list is treated as "no explicit list" so fallbackToAll doesn't apply
-      expect(detectBestFit(DOI_examples.VALID_BARE, [], false)).toBe('DOIType');
+      expect(detectBestFit(DOI_examples.VALID_BARE, [], false)).toBe('DataCiteDOIType');
     });
   });
 
@@ -377,7 +377,7 @@ describe('detection-registry', () => {
       // A DOI like "10.5281/zenodo.1234567" matches both DOIType and HandleType.
       // DOIType appears before HandleType in the registry, so it should win.
       const result = detectBestFit(DOI_examples.VALID_BARE);
-      expect(result).toBe('DOIType');
+      expect(result).toBe('DataCiteDOIType');
     });
 
     it('ORCID beats Handle in default mode for an ORCID value', () => {
@@ -387,14 +387,14 @@ describe('detection-registry', () => {
       expect(result).toBe('ORCIDType');
     });
 
-    it('ORCIDType appears before DOIType in the registry', () => {
+    it('ORCIDType appears before DataCiteDOIType in the registry', () => {
       const orcidIndex = detectionRegistry.findIndex(e => e.key === 'ORCIDType');
-      const doiIndex = detectionRegistry.findIndex(e => e.key === 'DOIType');
+      const doiIndex = detectionRegistry.findIndex(e => e.key === 'DataCiteDOIType');
       expect(orcidIndex).toBeLessThan(doiIndex);
     });
 
-    it('DOIType appears before HandleType in the registry', () => {
-      const doiIndex = detectionRegistry.findIndex(e => e.key === 'DOIType');
+    it('DataCiteDOIType appears before HandleType in the registry', () => {
+      const doiIndex = detectionRegistry.findIndex(e => e.key === 'DataCiteDOIType');
       const handleIndex = detectionRegistry.findIndex(e => e.key === 'HandleType');
       expect(doiIndex).toBeLessThan(handleIndex);
     });

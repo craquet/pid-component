@@ -1,0 +1,92 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as DataCiteStories from './DataCite.stories';
+
+<Meta of={DataCiteStories} />
+
+# DataCite DOI Renderer
+
+The DataCite DOI renderer resolves DOIs by fetching metadata directly from the [DataCite API](https://api.datacite.org/). It is designed to work exclusively with DataCite DOIs and provides detailed metadata extraction.
+
+## Settings
+
+- **`citationStyle`** (`string`, default: `APA`): The citation style for the preview. Options: `APA`, `Chicago`, `IEEE`, `Harvard`, `Anglia Ruskin`
+- **`ttl`** (`number`, default: `86400000`): Time-to-live in milliseconds for cached metadata
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={DataCiteStories.Default} />
+
+### Journal Paper
+
+<Canvas of={DataCiteStories.DataCiteJournalPaper} />
+
+### Software (Zenodo)
+
+<Canvas of={DataCiteStories.DataCiteSoftware} />
+
+
+### Slides/Presentation
+
+<Canvas of={DataCiteStories.DataCiteSlides} />
+
+### Preprint (arXiv)
+
+<Canvas of={DataCiteStories.DataCitePreprint} />
+
+## Citation Styles
+
+### APA
+
+<Canvas of={DataCiteStories.CitationStyleAPA} />
+
+### IEEE
+
+<Canvas of={DataCiteStories.CitationStyleIEEE} />
+
+### Chicago
+
+<Canvas of={DataCiteStories.CitationStyleChicago} />
+
+## Additional Examples
+
+### With URL Prefix
+
+<Canvas of={DataCiteStories.WithURLPrefix} />
+
+### Inline in Text
+
+<Canvas of={DataCiteStories.InlineInText} />
+
+### Dark Mode
+
+<Canvas of={DataCiteStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="10.5445/IR/1000188026" renderers='["DataCiteDOIType"]'></pid-component>
+```
+
+### With Settings
+
+```html
+<pid-component
+  value="10.5445/IR/1000188026"
+  renderers='["DataCiteDOIType"]'
+  settings='[{"type":"DataCiteDOIType","values":[{"name":"citationStyle","value":"IEEE"}]}]'>
+</pid-component>
+```
+
+## Features
+
+- **ORCID Extraction**: Automatically extracts ORCID identifiers from creator metadata
+- **ROR Extraction**: Extracts ROR (Research Organization Registry) identifiers from affiliation data
+- **Metadata Caching**: Uses cached API responses to improve performance
+- **Multiple Resource Types**: Supports journal articles, software, RFCs, preprints, and more

@@ -4,7 +4,8 @@ import { PIDRecord } from '../rendererModules/Handle/PIDRecord';
 import { GenericIdentifierType } from './GenericIdentifierType';
 import { ORCIDType } from '../rendererModules/ORCiD/ORCIDType';
 import { HandleType } from '../rendererModules/Handle/HandleType';
-import { DOIType } from '../rendererModules/DOI/DOIType';
+import { DataCiteDOIType } from '../rendererModules/DOI/DataCite/DataCiteDOIType';
+import { CrossRefDOIType } from '../rendererModules/DOI/CrossRef/CrossRefDOIType';
 import { DateType } from '../rendererModules/DateType/DateType';
 import { RORType } from '../rendererModules/RORType/RORType';
 import { SPDXType } from '../rendererModules/SPDXType/SPDXType';
@@ -46,8 +47,14 @@ export const renderers: {
   },
   {
     priority: 2,
-    key: 'DOIType',
-    constructor: DOIType,
+    key: 'DataCiteDOIType',
+    constructor: DataCiteDOIType,
+    autoDiscoverableByDefault: true,
+  },
+  {
+    priority: 2.1,
+    key: 'CrossRefDOIType',
+    constructor: CrossRefDOIType,
     autoDiscoverableByDefault: true,
   },
   {

@@ -1,7 +1,7 @@
-import { cachedFetch } from '../../utils/DataCache';
-import { DOI } from './DOI';
-import { FoldableItem } from '../../utils/FoldableItem';
-import { beautifyResourceType } from './ResourceTypeIcons';
+import { cachedFetch } from '../../../utils/DataCache';
+import { DOI } from '../DOI';
+import { FoldableItem } from '../../../utils/FoldableItem';
+import { beautifyResourceType } from '../ResourceTypeIcons';
 
 /** DataCite API response shape */
 interface DataCiteResponse {

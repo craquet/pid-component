@@ -1,7 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { CrossRefInfo } from '../CrossRefInfo';
-import { DOI } from '../DOI';
-import * as DataCache from '../../../utils/DataCache';
+import { CrossRefInfo } from '../../CrossRef/CrossRefInfo';
+import { DOI } from '../../DOI';
 
 const crossRefFixture = {
   status: 'ok',
@@ -23,7 +22,7 @@ const crossRefFixture = {
   },
 };
 
-let cachedFetchSpy: any;
+let originalFetch: typeof global.fetch;
 
 describe('CrossRefInfo', () => {
   const testDOI = new DOI('10.1109/escience65000.2025.00022');
@@ -31,15 +30,18 @@ describe('CrossRefInfo', () => {
   describe('fetch()', () => {
 
     beforeEach(() => {
-      cachedFetchSpy = vi.spyOn(DataCache, 'cachedFetch');
+      originalFetch = global.fetch;
     });
 
     afterEach(() => {
-      cachedFetchSpy.mockRestore();
+      global.fetch = originalFetch;
     });
 
     it('parses a CrossRef API response from fixture data', async () => {
-      cachedFetchSpy.mockResolvedValue(crossRefFixture);
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue(crossRefFixture),
+      });
 
       const info = await CrossRefInfo.fetch(testDOI);
 
@@ -51,7 +53,10 @@ describe('CrossRefInfo', () => {
     });
 
     it('extracts creators correctly', async () => {
-      cachedFetchSpy.mockResolvedValue(crossRefFixture);
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue(crossRefFixture),
+      });
 
       const info = await CrossRefInfo.fetch(testDOI);
 
@@ -64,7 +69,10 @@ describe('CrossRefInfo', () => {
     });
 
     it('extracts publication date correctly', async () => {
-      cachedFetchSpy.mockResolvedValue(crossRefFixture);
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue(crossRefFixture),
+      });
 
       const info = await CrossRefInfo.fetch(testDOI);
 
@@ -72,7 +80,10 @@ describe('CrossRefInfo', () => {
     });
 
     it('extracts subjects correctly', async () => {
-      cachedFetchSpy.mockResolvedValue(crossRefFixture);
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue(crossRefFixture),
+      });
 
       const info = await CrossRefInfo.fetch(testDOI);
 
@@ -80,7 +91,10 @@ describe('CrossRefInfo', () => {
     });
 
     it('parses JATS abstract', async () => {
-      cachedFetchSpy.mockResolvedValue(crossRefFixture);
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue(crossRefFixture),
+      });
 
       const info = await CrossRefInfo.fetch(testDOI);
 
@@ -91,7 +105,11 @@ describe('CrossRefInfo', () => {
     });
 
     it('returns null when API returns no data', async () => {
-      cachedFetchSpy.mockResolvedValue(null);
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: false,
+        status: 404,
+        json: vi.fn().mockRejectedValue(new Error('Not found')),
+      });
 
       const info = await CrossRefInfo.fetch(testDOI);
 
@@ -99,7 +117,10 @@ describe('CrossRefInfo', () => {
     });
 
     it('returns null when API returns empty message', async () => {
-      cachedFetchSpy.mockResolvedValue({ status: 'ok' });
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: vi.fn().mockResolvedValue({ status: 'ok' }),
+      });
 
       const info = await CrossRefInfo.fetch(testDOI);
 
@@ -107,7 +128,7 @@ describe('CrossRefInfo', () => {
     });
 
     it('returns null on network error', async () => {
-      cachedFetchSpy.mockRejectedValue(new Error('Network error'));
+      global.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
 
       const info = await CrossRefInfo.fetch(testDOI);
 
@@ -244,6 +265,187 @@ describe('CrossRefInfo', () => {
       };
       const info = new CrossRefInfo(testDOI, yearMonthResponse as any);
       expect(info.publicationDate).toBe('2025-03');
+    });
+  });
+
+  describe('funder type', () => {
+    const funderFixture = {
+      status: 'ok',
+      'message-type': 'funder',
+      message: {
+        name: 'Deutsche Forschungsgemeinschaft',
+        location: 'Germany',
+        established: 1951,
+        'alternate-name': ['DFG', 'German Research Foundation'],
+        url: 'https://www.dfg.de',
+        id: '501100001659',
+        'hierarchy-names': {
+          '501100001659': 'Deutsche Forschungsgemeinschaft',
+        },
+        hierarchy: {
+          '501100001659': {},
+        },
+        'replaced-by': [],
+        replaces: [],
+        descendants: [
+          { name: 'DFG Projekt', id: 'abc123' },
+        ],
+      },
+    };
+
+    it('creates CrossRefInfo with funder type', () => {
+      const info = new CrossRefInfo(testDOI, funderFixture as any, 'funder');
+
+      expect(info.type).toBe('funder');
+      expect(info.title).toBe('Deutsche Forschungsgemeinschaft');
+      expect(info.resourceType).toBe('Funder');
+      expect(info.url).toBe('https://www.dfg.de');
+    });
+
+    it('returns empty arrays for work-specific fields on funder', () => {
+      const info = new CrossRefInfo(testDOI, funderFixture as any, 'funder');
+
+      expect(info.creators).toEqual([]);
+      expect(info.publishers).toBeUndefined();
+      expect(info.description).toBeUndefined();
+    });
+
+    it('generates funder items correctly', () => {
+      const info = new CrossRefInfo(testDOI, funderFixture as any, 'funder');
+      const items = info.generateItems();
+
+      const nameItem = items.find(i => i.keyTitle === 'Name');
+      expect(nameItem?.value).toBe('Deutsche Forschungsgemeinschaft');
+
+      const locationItem = items.find(i => i.keyTitle === 'Location');
+      expect(locationItem?.value).toBe('Germany');
+
+      const establishedItem = items.find(i => i.keyTitle === 'Established');
+      expect(establishedItem?.value).toBe('1951');
+
+      const idItem = items.find(i => i.keyTitle === 'CrossRef Funder ID');
+      expect(idItem?.value).toBe('501100001659');
+
+      const websiteItem = items.find(i => i.keyTitle === 'Website');
+      expect(websiteItem?.value).toBe('https://www.dfg.de');
+
+      const altNamesItem = items.find(i => i.keyTitle === 'Alternate Names');
+      expect(altNamesItem?.value).toBe('DFG, German Research Foundation');
+
+      const hierarchyItem = items.find(i => i.keyTitle === 'Hierarchy');
+      expect(hierarchyItem?.value).toContain('Deutsche Forschungsgemeinschaft');
+
+      const descendantsItem = items.find(i => i.keyTitle === 'Descendants');
+      expect(descendantsItem?.value).toContain('DFG Projekt');
+
+      expect(items.find(i => i.keyTitle === 'DOI URI')).toBeUndefined();
+      expect(items.find(i => i.keyTitle === 'Work Count')).toBeUndefined();
+      expect(items.find(i => i.keyTitle === 'Descendant Work Count')).toBeUndefined();
+    });
+
+    it('handles funder with hierarchy names', () => {
+      const info = new CrossRefInfo(testDOI, funderFixture as any, 'funder');
+      const items = info.generateItems();
+
+      const hierarchyItem = items.find(i => i.keyTitle === 'Hierarchy');
+      expect(hierarchyItem?.value).toContain('501100001659');
+    });
+
+    it('handles funder with descendants', () => {
+      const info = new CrossRefInfo(testDOI, funderFixture as any, 'funder');
+      const items = info.generateItems();
+
+      const descendantsItem = items.find(i => i.keyTitle === 'Descendants');
+      expect(descendantsItem?.value).toContain('DFG Projekt');
+      expect(descendantsItem?.value).not.toContain('abc123');
+    });
+
+    it('omits empty optional fields', () => {
+      const minimalFixture = {
+        status: 'ok',
+        'message-type': 'funder',
+        message: {
+          name: 'Minimal Funder',
+          id: '12345',
+        },
+      };
+      const info = new CrossRefInfo(testDOI, minimalFixture as any, 'funder');
+      const items = info.generateItems();
+
+      expect(items.find(i => i.keyTitle === 'Location')).toBeUndefined();
+      expect(items.find(i => i.keyTitle === 'Established')).toBeUndefined();
+    });
+  });
+
+  describe('ORCID and ROR extraction', () => {
+    it('extracts ORCID from author', () => {
+      const response = {
+        message: {
+          title: ['Test'],
+          author: [
+            {
+              given: 'John',
+              family: 'Doe',
+              ORCID: 'https://orcid.org/0000-0002-1825-0097',
+            },
+          ],
+        },
+      };
+      const info = new CrossRefInfo(testDOI, response as any);
+
+      expect(info.creators[0].orcid).toBe('0000-0002-1825-0097');
+    });
+
+    it('handles author with no ORCID', () => {
+      const response = {
+        message: {
+          title: ['Test'],
+          author: [
+            {
+              given: 'John',
+              family: 'Doe',
+            },
+          ],
+        },
+      };
+      const info = new CrossRefInfo(testDOI, response as any);
+
+      expect(info.creators[0].orcid).toBeUndefined();
+      expect(info.creators[0].name).toBe('John Doe');
+    });
+
+    it('extracts affiliation name', () => {
+      const response = {
+        message: {
+          title: ['Test'],
+          author: [
+            {
+              name: 'Jane Doe',
+              affiliation: [{ name: 'Karlsruhe Institute of Technology' }],
+            },
+          ],
+        },
+      };
+      const info = new CrossRefInfo(testDOI, response as any);
+
+      expect(info.creators[0].affiliation).toBe('Karlsruhe Institute of Technology');
+    });
+
+    it('CrossRef does not provide ROR directly', () => {
+      const response = {
+        message: {
+          title: ['Test'],
+          author: [
+            {
+              name: 'Jane Doe',
+              affiliation: [{ name: 'KIT' }],
+            },
+          ],
+        },
+      };
+      const info = new CrossRefInfo(testDOI, response as any);
+
+      expect(info.creators[0].ror).toBeUndefined();
     });
   });
 });
