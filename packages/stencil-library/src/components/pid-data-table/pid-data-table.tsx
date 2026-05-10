@@ -149,13 +149,13 @@ export class PidDataTable {
             key={`item-${value.keyTitle}-${index}`}
             class={
               isDarkMode
-                ? `odd:bg-gray-700 even:bg-gray-800 ${index !== this.filteredItems.length - 1 ? 'border-b border-gray-700' : ''}`
-                : `odd:bg-slate-200 even:bg-gray-50 ${index !== this.filteredItems.length - 1 ? 'border-b border-gray-200' : ''}`
+                ? `odd:bg-gray-700 even:bg-gray-800 border-b border-gray-700 flex-col`
+                : `odd:bg-slate-200 even:bg-gray-50 border-b border-gray-200 flex-col`
             }
             aria-label={`Row for ${value.keyTitle} with value ${value.value}`}
             role="row"
           >
-            <td class={'w-auto p-1 align-top font-mono'} role="cell">
+            <td class={'w-auto p-1 align-top font-mono flex-2 resize-x'} role="cell">
               <pid-tooltip text={value.keyTooltip || `Details for ${value.keyTitle}`} position="top" maxHeight="200px"
                            aria-label={`Information about ${value.keyTitle}`}>
                 <div slot="trigger" class="flex min-h-7 w-full items-center overflow-hidden">
@@ -172,7 +172,7 @@ export class PidDataTable {
                 </div>
               </pid-tooltip>
             </td>
-            <td class={'relative w-full p-1 align-top text-sm select-text'} role="cell">
+            <td class={'relative w-full p-1 align-top text-sm select-text flex-6 resize-x'} role="cell">
               <div class="grid w-full grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
                 <div class="min-w-0 overflow-x-auto whitespace-normal">
                   {
