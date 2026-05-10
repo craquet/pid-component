@@ -43,13 +43,17 @@ export function DoiCard({ value, license }: { value: string; license?: string })
       <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
         Digital Object Identifier
       </h3>
-      <PidComponent value={value} openByDefault={true} width="100%" />
+      <div className="min-h-[120px] max-h-[300px] overflow-hidden">
+        <PidComponent value={value} width="100%" />
+      </div>
       {license && (
         <div className="mt-4 pt-4 border-t border-slate-100">
           <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
             License
           </h3>
-          <PidComponent value={license} width="100%" />
+          <div className="min-h-[24px] max-h-[60px] overflow-hidden">
+            <PidComponent value={license} width="100%" />
+          </div>
         </div>
       )}
     </div>

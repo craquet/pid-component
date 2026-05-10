@@ -34,8 +34,8 @@ export function AuthorCard({ author, className }: AuthorCardProps) {
           {author.institution && (
             <p className="text-xs text-slate-400 mt-1">{author.institution}</p>
           )}
-          <div className="mt-3">
-            <PidComponent value={author.orcid} emphasizeComponent={false} />
+          <div className="mt-3 relative overflow-hidden">
+            <PidComponent value={author.orcid} emphasizeComponent={false} width="100%" />
           </div>
         </div>
       </div>

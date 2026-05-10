@@ -32,8 +32,10 @@ const openDialog = () => {
         <p class="text-body-2 text-grey mb-4">
           This dataset is published under the Apache 2.0 license, allowing free reuse with appropriate attribution.
         </p>
-        <pid-component open-by-default="true" style="display: block;" value="https://spdx.org/licenses/Apache-2.0"
-                       width="100%" />
+        <div style="min-height: 150px; max-height: 400px; overflow: hidden;">
+          <pid-component style="display: block;" value="https://spdx.org/licenses/Apache-2.0"
+                         width="100%" />
+        </div>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>

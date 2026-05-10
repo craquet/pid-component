@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { PidComponent } from '../../lib';
 
 const props = defineProps<{
   activePage?: string;
@@ -52,12 +51,6 @@ const handleNavigate = (page: string) => {
       >
         About
       </v-btn>
-      <span class="text-grey">|</span>
-      <div class="d-flex align-center ga-1">
-        <span class="text-body-2 text-grey">Powered by</span>
-        <pid-component :emphasize-component="false" :hide-subcomponents="true" style="display: inline-block;"
-                       value="https://ror.org/04t3en479" />
-      </div>
     </div>
   </v-app-bar>
 </template>

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import ResearchDemoPage from '../app/research-nexus/page';
+import ResearchDemoPage from '../app/demo/page';
 
 const meta: Meta = {
   title: 'ResearchDemo',
@@ -24,19 +24,19 @@ This story showcases:
 
 **Folder structure:**
 \`\`\`
-app/research-nexus/
+app/demo/
 ├── page.tsx           # Main portal page
 ├── layout.tsx         # Layout with metadata
 ├── about/page.tsx     # About page with PID showcase
 ├── datasets/page.tsx  # Datasets page
 └── components/
-    ├── Navigation.tsx     # Sticky nav with ROR pid-component
+    ├── Navigation.tsx     # Sticky nav (ROR in footer)
     ├── HeroCard.tsx       # Hero card
     ├── DatasetTable.tsx   # Table with DOI and license pid-components
     ├── AuthorCard.tsx     # Author cards with ORCID pid-component
     ├── ArticleSection.tsx # Autodetection (initPidDetection) zone
     ├── LicenseDialog.tsx  # Dialog with SPDX pid-component
-    └── Footer.tsx
+    └── Footer.tsx         # Footer with ROR pid-component
 \`\`\`
         `,
       },

@@ -30,7 +30,7 @@ src/app/
 ├── research-demo.component.ts   # Main application component
 ├── index.ts                      # Exports
 └── components/
-    ├── navigation.component.ts   # Sticky nav with ROR pid-component
+    ├── navigation.component.ts   # Sticky nav (ROR in footer)
     ├── hero-card.component.ts    # Hero card
     ├── dataset-table.component.ts # Table with DOI and license pid-components
     ├── author-card.component.ts  # Author cards with ORCID pid-component

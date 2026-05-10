@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
-import { Container, Grid } from '@mantine/core';
+import { Container, Grid, Stack } from '@mantine/core';
 import {
   AboutPage,
   ArticleSection,
@@ -98,7 +98,7 @@ export function ResearchDemoApp({ activePage = 'home', onNavigate }: AppProps) {
 
         <Container size="xl" py="xl">
           {currentPage === 'home' && (
-            <>
+            <Stack gap="xl">
               <Grid gutter="lg">
                 <Grid.Col span={{ base: 12, md: 8 }}>
                   <HeroCard
@@ -114,16 +114,14 @@ export function ResearchDemoApp({ activePage = 'home', onNavigate }: AppProps) {
                 </Grid.Col>
               </Grid>
 
-              <div style={{ marginTop: 32 }}>
-                <DatasetTable datasets={datasets} />
-              </div>
+              <DatasetTable datasets={datasets} />
 
               <AuthorGrid authors={authors} />
 
               <div ref={articleRef}>
                 <ArticleSection />
               </div>
-            </>
+            </Stack>
           )}
 
           {currentPage === 'datasets' && <DatasetsPage />}

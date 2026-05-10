@@ -37,7 +37,9 @@ export default function Navbar() {
           </Link>
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-400">Powered by</span>
-            <PidComponent value="https://ror.org/04t3en479" hideSubcomponents={true} />
+            <div className="w-32">
+              <PidComponent value="https://ror.org/04t3en479" hideSubcomponents={true} width="100%" />
+            </div>
           </div>
         </div>
       </div>

@@ -18,19 +18,25 @@ export function AuthorCard({ author }: AuthorCardProps) {
   const initials = author.name.split(' ').map(n => n[0]).join('');
 
   return (
-    <Paper shadow="sm" padding="lg" radius="md" withBorder>
+    <Paper shadow="sm" padding="lg" radius="md" withBorder style={{ overflow: 'hidden' }}>
       <Group gap="md" align="flex-start">
         <Avatar size={48} radius="xl" color="indigo">
           {initials}
         </Avatar>
-        <Stack gap={4} style={{ flex: 1 }}>
-          <Text fw={600} size="sm">{author.name}</Text>
+        <Stack gap={4} style={{ flex: 1, minWidth: 0 }}>
+          <Text fw={600} size="sm"
+                style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{author.name}</Text>
           <Text size="xs" c="dimmed">{author.role}</Text>
           {author.institution && (
-            <Text size="xs" c="dimmed" style={{ color: '#9ca3af' }}>{author.institution}</Text>
+            <Text size="xs" c="dimmed" style={{
+              color: '#9ca3af',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}>{author.institution}</Text>
           )}
-          <div style={{ marginTop: 8 }}>
-            <PidComponent value={author.orcid} emphasizeComponent={false} />
+          <div style={{ marginTop: 8, minHeight: 24, maxHeight: 80, overflow: 'hidden' }}>
+            <PidComponent value={author.orcid} emphasizeComponent={false} width="100%" />
           </div>
         </Stack>
       </Group>

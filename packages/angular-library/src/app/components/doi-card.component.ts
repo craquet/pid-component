@@ -17,11 +17,15 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
     <mat-card class="doi-card">
       <mat-card-content>
         <h3 class="label">Digital Object Identifier</h3>
-        <pid-component [value]="value" [openByDefault]="true" width="100%" />
+        <div style="min-height: 120px; max-height: 300px; overflow: hidden;">
+          <pid-component [value]="value" [openByDefault]="true" width="100%" />
+        </div>
         @if (license) {
           <mat-divider></mat-divider>
           <h3 class="label" style="margin-top: 16px">License</h3>
-          <pid-component [value]="license" width="100%" />
+          <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
+            <pid-component [value]="license" width="100%" />
+          </div>
         }
       </mat-card-content>
     </mat-card>
@@ -30,6 +34,7 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
     .doi-card {
       padding: 24px;
       height: 100%;
+      overflow: hidden;
     }
 
     .label {

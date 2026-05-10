@@ -38,28 +38,48 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
         <mat-tab-group>
           <mat-tab label="DOIs">
             <div class="tab-content">
-              <pid-component value="10.1109/eScience65000.2025.00022" class="mb-2" />
-              <pid-component value="10.5445/IR/1000185135" class="mb-2" />
-              <pid-component value="10.1007/978-3-642-15582-6" class="mb-2" />
+              <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
+                <pid-component value="10.1109/eScience65000.2025.00022" width="100%" />
+              </div>
+              <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
+                <pid-component value="10.5445/IR/1000185135" width="100%" />
+              </div>
+              <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
+                <pid-component value="10.1007/978-3-642-15582-6" width="100%" />
+              </div>
             </div>
           </mat-tab>
           <mat-tab label="ORCIDs">
             <div class="tab-content">
-              <pid-component value="0009-0005-2800-4833" class="mb-2" />
-              <pid-component value="0009-0003-2196-9187" class="mb-2" />
-              <pid-component value="0000-0001-6575-1022" class="mb-2" />
+              <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
+                <pid-component value="0009-0005-2800-4833" width="100%" />
+              </div>
+              <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
+                <pid-component value="0009-0003-2196-9187" width="100%" />
+              </div>
+              <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
+                <pid-component value="0000-0001-6575-1022" width="100%" />
+              </div>
             </div>
           </mat-tab>
           <mat-tab label="Handles">
             <div class="tab-content">
-              <pid-component value="21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6" class="mb-2" />
-              <pid-component value="20.1000/100.123456" class="mb-2" />
+              <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
+                <pid-component value="21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6" width="100%" />
+              </div>
+              <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
+                <pid-component value="20.1000/100.123456" width="100%" />
+              </div>
             </div>
           </mat-tab>
           <mat-tab label="RORs">
             <div class="tab-content">
-              <pid-component value="https://ror.org/04t3en479" class="mb-2" />
-              <pid-component value="https://ror.org/02aj13c28" class="mb-2" />
+              <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
+                <pid-component value="https://ror.org/04t3en479" width="100%" />
+              </div>
+              <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
+                <pid-component value="https://ror.org/02aj13c28" width="100%" />
+              </div>
             </div>
           </mat-tab>
         </mat-tab-group>

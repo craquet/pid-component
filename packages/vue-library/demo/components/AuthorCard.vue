@@ -23,12 +23,17 @@ const getInitials = (name: string): string => {
         <v-avatar class="flex-shrink-0" color="indigo-lighten-5" size="48">
           <span class="text-indigo-darken-2 font-weight-bold">{{ getInitials(author.name) }}</span>
         </v-avatar>
-        <div class="flex-grow-1">
-          <div class="text-body-1 font-weight-bold">{{ author.name }}</div>
-          <div v-if="author.institution" class="text-caption text-grey-lighten-1 mb-2">
+        <div class="flex-grow-1" style="min-width: 0;">
+          <div class="text-body-1 font-weight-bold"
+               style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ author.name }}
+          </div>
+          <div v-if="author.institution" class="text-caption text-grey-lighten-1 mb-2"
+               style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
             {{ author.institution }}
           </div>
-          <pid-component :emphasize-component="false" :value="author.orcid" style="display: block;" />
+          <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
+            <pid-component :emphasize-component="false" :value="author.orcid" style="display: block;" width="100%" />
+          </div>
         </div>
       </div>
     </v-card-text>

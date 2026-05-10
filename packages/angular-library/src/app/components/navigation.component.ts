@@ -38,13 +38,6 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
           <button mat-button [color]="activePage === 'about' ? 'primary' : undefined" (click)="navigate.emit('about')">
             About
           </button>
-
-          <span class="nav-divider">|</span>
-
-          <div class="powered-by">
-            <span class="powered-text">Powered by</span>
-            <pid-component value="https://ror.org/04t3en479" [emphasizeComponent]="false" [hideSubcomponents]="true" />
-          </div>
         </div>
       </div>
     </mat-toolbar>

@@ -48,18 +48,22 @@ interface DoiCardProps {
 
 export function DoiCard({ value, license }: DoiCardProps) {
   return (
-    <Paper shadow="sm" padding="lg" radius="md" withBorder>
+    <Paper shadow="sm" padding="lg" radius="md" withBorder style={{ overflow: 'hidden' }}>
       <Text size="xs" fw={600} c="dimmed" mb="xs" tt="uppercase" style={{ letterSpacing: 1 }}>
         Digital Object Identifier
       </Text>
-      <PidComponent value={value} openByDefault={true} width="100%" />
+      <div style={{ minHeight: 120, maxHeight: 300, overflow: 'hidden' }}>
+        <PidComponent value={value} width="100%" />
+      </div>
       {license && (
         <>
           <div style={{ borderTop: '1px solid #e0e0e0', marginTop: 16, paddingTop: 16 }}>
             <Text size="xs" fw={600} c="dimmed" mb="xs" tt="uppercase" style={{ letterSpacing: 1 }}>
               License
             </Text>
-            <PidComponent value={license} width="100%" />
+            <div style={{ minHeight: 80, maxHeight: 200, overflow: 'hidden' }}>
+              <PidComponent value={license} width="100%" />
+            </div>
           </div>
         </>
       )}

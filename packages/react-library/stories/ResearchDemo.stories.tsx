@@ -31,7 +31,7 @@ demo/
 ├── DemoProvider.tsx       # Mantine provider wrapper
 ├── index.ts               # Exports
 └── components/
-    ├── Navigation.tsx     # Sticky nav with ROR pid-component
+    ├── Navigation.tsx     # Sticky nav (ROR in footer)
     ├── HeroCard.tsx       # Hero + DOI card with pid-component
     ├── DatasetTable.tsx   # Table with DOI and license pid-components
     ├── AuthorCard.tsx     # Author cards with ORCID pid-component

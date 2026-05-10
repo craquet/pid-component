@@ -31,7 +31,9 @@ export function LicenseDialog() {
           This dataset is published under the Apache 2.0 license, allowing free reuse
           with appropriate attribution.
         </Text>
-        <PidComponent value="https://spdx.org/licenses/Apache-2.0" openByDefault={true} width="100%" />
+        <div style={{ minHeight: 150, maxHeight: 400, overflow: 'hidden' }}>
+          <PidComponent value="https://spdx.org/licenses/Apache-2.0" width="100%" />
+        </div>
         <Group justify="flex-end" mt="xl">
           <Button variant="outline" color="gray" onClick={close}>
             Close

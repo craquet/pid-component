@@ -62,16 +62,12 @@ export default function DatasetCard({ id, title, doi, license, authorOrcid, desc
           marginBottom: 4,
         }}>DOI</span>
         <div style={{
-          marginTop: 4,
-          width: '100%',
-          maxWidth: '100%',
-          overflow: 'hidden',
-          boxSizing: 'border-box',
           position: 'relative',
+          minHeight: 24,
+          maxHeight: 24,
+          overflow: 'hidden',
         }}>
-          <div style={{ width: '100%', maxWidth: '100%', overflow: 'hidden', position: 'relative' }}>
-            <PidComponent value={doi} />
-          </div>
+          <PidComponent value={doi} width="100%" />
         </div>
       </div>
       <div style={{ marginBottom: 16 }}>
@@ -84,16 +80,12 @@ export default function DatasetCard({ id, title, doi, license, authorOrcid, desc
           marginBottom: 4,
         }}>Author</span>
         <div style={{
-          marginTop: 4,
-          width: '100%',
-          maxWidth: '100%',
-          overflow: 'hidden',
-          boxSizing: 'border-box',
           position: 'relative',
+          minHeight: 24,
+          maxHeight: 24,
+          overflow: 'hidden',
         }}>
-          <div style={{ width: '100%', maxWidth: '100%', overflow: 'hidden', position: 'relative' }}>
-            <PidComponent value={authorOrcid} />
-          </div>
+          <PidComponent value={authorOrcid} width="100%" />
         </div>
       </div>
       <div style={{ paddingTop: 16, borderTop: '1px solid #e5e7eb' }}>
@@ -106,16 +98,12 @@ export default function DatasetCard({ id, title, doi, license, authorOrcid, desc
           marginBottom: 4,
         }}>License</span>
         <div style={{
-          marginTop: 4,
-          width: '100%',
-          maxWidth: '100%',
-          overflow: 'hidden',
-          boxSizing: 'border-box',
           position: 'relative',
+          minHeight: 24,
+          maxHeight: 24,
+          overflow: 'hidden',
         }}>
-          <div style={{ width: '100%', maxWidth: '100%', overflow: 'hidden', position: 'relative' }}>
-            <PidComponent value={license} />
-          </div>
+          <PidComponent value={license} width="100%" />
         </div>
       </div>
     </div>

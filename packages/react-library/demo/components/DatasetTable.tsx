@@ -103,9 +103,16 @@ export function DatasetTable({ datasets }: DatasetTableProps) {
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
                 }}>{dataset.title}</Table.Td>
-                <Table.Td style={{ overflow: 'hidden' }}><PidComponent value={dataset.doi} emphasizeComponent={false} /></Table.Td>
-                <Table.Td style={{ overflow: 'hidden' }}><PidComponent value={dataset.license}
-                                                                       emphasizeComponent={false} /></Table.Td>
+                <Table.Td style={{ overflow: 'hidden', minWidth: 0 }}>
+                  <div style={{ minHeight: 24, maxHeight: 80, overflow: 'hidden' }}>
+                    <PidComponent value={dataset.doi} emphasizeComponent={false} width="100%" />
+                  </div>
+                </Table.Td>
+                <Table.Td style={{ overflow: 'hidden', minWidth: 0 }}>
+                  <div style={{ minHeight: 24, maxHeight: 80, overflow: 'hidden' }}>
+                    <PidComponent value={dataset.license} emphasizeComponent={false} width="100%" />
+                  </div>
+                </Table.Td>
                 <Table.Td>
                   <Button variant="subtle" color="gray" size="xs">View</Button>
                 </Table.Td>

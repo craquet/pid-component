@@ -63,11 +63,6 @@ export function Navigation({ activePage = 'home', onNavigate }: NavigationProps)
             >
               About
             </Anchor>
-            <Text size="sm" c="dimmed">|</Text>
-            <Group gap={4}>
-              <Text size="sm" c="dimmed">Powered by</Text>
-              <PidComponent value="https://ror.org/04t3en479" emphasizeComponent={false} hideSubcomponents={true} />
-            </Group>
           </Group>
         </Group>
       </Container>

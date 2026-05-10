@@ -63,8 +63,13 @@ export default function AuthorCard({ orcid, name, role, institution }: AuthorCar
               whiteSpace: 'nowrap',
             }}>{institution}</p>
           )}
-          <div style={{ overflow: 'hidden', maxWidth: '100%' }}>
-            <PidComponent value={orcid} />
+          <div style={{
+            position: 'relative',
+            minHeight: 24,
+            maxHeight: 24,
+            overflow: 'hidden',
+          }}>
+            <PidComponent value={orcid} width="100%" />
           </div>
         </div>
       </div>

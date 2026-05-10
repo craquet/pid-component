@@ -28,7 +28,9 @@ export interface Author {
           @if (author.institution) {
             <p class="author-institution">{{ author.institution }}</p>
           }
-          <pid-component [value]="author.orcid" [emphasizeComponent]="false" width="100%" />
+          <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
+            <pid-component [value]="author.orcid" [emphasizeComponent]="false" width="100%" />
+          </div>
         </div>
       </div>
     </mat-card>
@@ -36,6 +38,7 @@ export interface Author {
   styles: [`
     .author-card {
       padding: 20px;
+      overflow: hidden;
     }
 
     .author-content {
@@ -55,10 +58,12 @@ export interface Author {
       font-size: 16px;
       font-weight: 600;
       color: #3f51b5;
+      flex-shrink: 0;
     }
 
     .author-info {
       flex: 1;
+      min-width: 0;
     }
 
     .author-name {
@@ -66,6 +71,9 @@ export interface Author {
       font-weight: 600;
       color: #212121;
       margin: 0 0 4px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .author-role {
@@ -78,6 +86,9 @@ export interface Author {
       font-size: 12px;
       color: #bdbdbd;
       margin: 0 0 12px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   `],
 })

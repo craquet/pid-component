@@ -32,7 +32,7 @@ export function LicenseDialog() {
               with appropriate attribution.
             </Dialog.Description>
             <div className="mb-4">
-              <PidComponent value="https://spdx.org/licenses/Apache-2.0" openByDefault={true} width="100%" />
+              <PidComponent value="https://spdx.org/licenses/Apache-2.0" width="100%" />
             </div>
             <div className="flex justify-end">
               <Dialog.Close asChild>

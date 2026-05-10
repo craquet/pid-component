@@ -77,11 +77,15 @@ function onResizeEnd() {
         <tbody>
         <tr v-for="item in datasets" :key="item.id">
           <td style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ item.title }}</td>
-          <td style="overflow: hidden">
-            <pid-component :emphasize-component="false" :value="item.doi" style="display: inline-block;" />
+          <td style="overflow: hidden; min-width: 0;">
+            <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
+              <pid-component :emphasize-component="false" :value="item.doi" style="display: block;" width="100%" />
+            </div>
           </td>
-          <td style="overflow: hidden">
-            <pid-component :emphasize-component="false" :value="item.license" style="display: inline-block;" />
+          <td style="overflow: hidden; min-width: 0;">
+            <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
+              <pid-component :emphasize-component="false" :value="item.license" style="display: block;" width="100%" />
+            </div>
           </td>
           <td style="overflow: hidden">
             <v-btn color="primary" size="small" variant="text">View</v-btn>

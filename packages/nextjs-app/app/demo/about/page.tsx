@@ -25,7 +25,9 @@ export default function AboutPage() {
             <h2 className="text-lg font-semibold text-slate-900 mb-3">Institution</h2>
             <div className="flex items-center gap-3">
               <span className="text-slate-700">Hosted by</span>
-              <PidComponent value="https://ror.org/04t3en479" />
+              <div className="w-44">
+                <PidComponent value="https://ror.org/04t3en479" width="100%" />
+              </div>
             </div>
           </div>
         </div>
@@ -36,7 +38,8 @@ export default function AboutPage() {
             For questions or inquiries, please contact the corresponding author:
           </p>
           <p className="text-slate-700">
-            <strong>Email:</strong> <PidComponent value="mailto:someone@example.com" />
+            <strong>Email:</strong>
+            <div className="inline-block w-56"><PidComponent value="mailto:someone@example.com" width="100%" /></div>
           </p>
         </div>
       </main>

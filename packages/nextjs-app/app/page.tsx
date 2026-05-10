@@ -132,7 +132,13 @@ export default function HomePage() {
             }}>
               Digital Object Identifier
             </h3>
-            <PidComponent value="10.1109/eScience65000.2025.00022" openByDefault={true} />
+            <div style={{
+              minHeight: 200,
+              maxHeight: 400,
+              overflow: 'hidden',
+            }}>
+              <PidComponent value="10.1109/eScience65000.2025.00022" width="100%" />
+            </div>
           </div>
         </div>
 

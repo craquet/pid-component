@@ -47,7 +47,9 @@ export interface Dataset {
                 <span class="resize-handle" (mousedown)="onResizeStart($event, 'doi')"></span>
               </th>
               <td mat-cell *matCellDef="let dataset" class="cell-overflow">
-                <pid-component [value]="dataset.doi" [emphasizeComponent]="false" width="100%" />
+                <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
+                  <pid-component [value]="dataset.doi" [emphasizeComponent]="false" width="100%" />
+                </div>
               </td>
             </ng-container>
 
@@ -57,7 +59,9 @@ export interface Dataset {
                 <span class="resize-handle" (mousedown)="onResizeStart($event, 'license')"></span>
               </th>
               <td mat-cell *matCellDef="let dataset" class="cell-overflow">
-                <pid-component [value]="dataset.license" [emphasizeComponent]="false" width="100%" />
+                <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
+                  <pid-component [value]="dataset.license" [emphasizeComponent]="false" width="100%" />
+                </div>
               </td>
             </ng-container>
 

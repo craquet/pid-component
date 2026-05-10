@@ -93,11 +93,15 @@ export function DatasetTable({ datasets, className }: DatasetTableProps) {
             <tr key={dataset.id} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
               <td
                 className="px-6 py-4 text-sm text-slate-700 overflow-hidden text-ellipsis whitespace-nowrap">{dataset.title}</td>
-              <td className="px-6 py-4 overflow-hidden">
-                <PidComponent value={dataset.doi} emphasizeComponent={false} />
+              <td className="px-6 py-4">
+                <div className="overflow-hidden">
+                  <PidComponent value={dataset.doi} emphasizeComponent={false} width="100%" />
+                </div>
               </td>
-              <td className="px-6 py-4 overflow-hidden">
-                <PidComponent value={dataset.license} emphasizeComponent={false} />
+              <td className="px-6 py-4">
+                <div className="overflow-hidden">
+                  <PidComponent value={dataset.license} emphasizeComponent={false} width="100%" />
+                </div>
               </td>
               <td className="px-6 py-4 overflow-hidden">
                 <button
