@@ -24,7 +24,7 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
           <button mat-mini-fab color="primary" disabled>
             <mat-icon>storage</mat-icon>
           </button>
-          <span class="brand-text">ResearchDemo</span>
+          <span class="brand-text">Lorem ipsum</span>
           <mat-chip color="warn" size="small">Demo</mat-chip>
         </div>
 

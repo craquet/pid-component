@@ -10,7 +10,7 @@ import { PidComponent } from '../../lib';
           <v-btn icon size="small" variant="text">
             <v-icon color="white">mdi-database</v-icon>
           </v-btn>
-          <span class="text-body-1 font-weight-bold text-white">ResearchDemo</span>
+          <span class="text-body-1 font-weight-bold text-white">Lorem ipsum</span>
         </div>
         <div style="display: flex; align-items: center; gap: 8px;">
           <span class="text-body-2 text-grey" style="white-space: nowrap;">Powered by</span>

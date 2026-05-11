@@ -26,26 +26,29 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
       </h2>
       <mat-card class="article-card">
         <p class="article-paragraph">
-          This is a demonstration application showcasing the
-          <strong>PID Component</strong> library. This component enables
-          seamless detection and rendering of Persistent Identifiers (PIDs)
-          including DOIs, ORCIDs, Handles, RORs, and more.
+          Lorem ipsum dolor sit amet consectetur adipiscing elit. Click the "View License" button below to see how a
+          license can be rendered. Demo showcases pid-component integration with Next.js App Router, demonstrating
+          seamless display of persistent identifiers including DOIs (e.g. 10.5281/zenodo.13629109), ORCIDs (e.g.
+          0009-0005-2800-4833), ROR IDs (e.g. https://ror.org/04t3en479), Handle PIDs (e.g.
+          21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6), and SPDX license references.
         </p>
         <p class="article-paragraph">
-          Explore the tabs below to see different PID types in action:
+          Lorem ipsum dolor sit amet consectetur adipiscing elit. Portal uses
+          <strong> pid-component</strong> to render various PID types with automatic detection
+          and resolution from respective registries.
         </p>
 
         <mat-tab-group>
           <mat-tab label="DOIs">
             <div class="tab-content">
               <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
-                <pid-component value="10.1109/eScience65000.2025.00022" width="100%" />
+                <pid-component value="10.5281/zenodo.13629109" width="100%" />
               </div>
               <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
-                <pid-component value="10.5445/IR/1000185135" width="100%" />
+                <pid-component value="doi:10.5445/IR/1000178054" width="100%" />
               </div>
               <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
-                <pid-component value="10.1007/978-3-642-15582-6" width="100%" />
+                <pid-component value="10.52825/ocp.v5i.1411" width="100%" />
               </div>
             </div>
           </mat-tab>
@@ -55,10 +58,10 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
                 <pid-component value="0009-0005-2800-4833" width="100%" />
               </div>
               <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
-                <pid-component value="0009-0003-2196-9187" width="100%" />
+                <pid-component value="0000-0001-6575-1022" width="100%" />
               </div>
               <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
-                <pid-component value="0000-0001-6575-1022" width="100%" />
+                <pid-component value="0009-0003-2196-9187" width="100%" />
               </div>
             </div>
           </mat-tab>
@@ -68,7 +71,7 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
                 <pid-component value="21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6" width="100%" />
               </div>
               <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
-                <pid-component value="20.1000/100.123456" width="100%" />
+                <pid-component value="20.1000/100" width="100%" />
               </div>
             </div>
           </mat-tab>
@@ -78,7 +81,7 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
                 <pid-component value="https://ror.org/04t3en479" width="100%" />
               </div>
               <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
-                <pid-component value="https://ror.org/02aj13c28" width="100%" />
+                <pid-component value="https://spdx.org/licenses/MIT" width="100%" />
               </div>
             </div>
           </mat-tab>

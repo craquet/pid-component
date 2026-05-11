@@ -53,28 +53,34 @@ onUnmounted(() => {
 const datasets = [
   {
     id: '1',
-    title: 'KIT Data Metadata Analysis',
-    doi: '10.5445/IR/1000185135',
+    title: 'Lorem ipsum dolor sit amet consectetur adipiscing elit',
+    doi: 'doi:10.5445/IR/1000178054',
     license: 'https://spdx.org/licenses/MIT',
   },
   {
     id: '2',
-    title: 'Research Output Repository Schema',
-    doi: '10.5445/IR/1000178054',
-    license: 'https://spdx.org/licenses/Apache-2.0',
+    title: 'Sed do eiusmod tempor incididunt ut labore et dolore',
+    doi: '10.52825/ocp.v5i.1411',
+    license: 'CC-BY4.0',
   },
   {
     id: '3',
-    title: 'FDO Implementation Guidelines',
-    doi: '10.5445/IR/1000151234',
-    license: 'https://spdx.org/licenses/CC-BY-4.0',
+    title: 'Ut enim ad minim veniam quis nostrud exercitation',
+    doi: 'https://doi.org/10.5281/zenodo.13629109',
+    license: 'Apache-2.0',
+  },
+  {
+    id: '4',
+    title: 'An example Handle FDO with some nice contents',
+    doi: '21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6',
+    license: 'CC-BY4.0',
   },
 ];
 
 const authors = [
   { orcid: '0009-0005-2800-4833', name: 'Maximilian Inckmann', institution: 'Karlsruhe Institute of Technology' },
-  { orcid: '0009-0003-2196-9187', name: 'Christopher Raquet', institution: 'Karlsruhe Institute of Technology' },
   { orcid: '0000-0001-6575-1022', name: 'Andreas Pfeil', institution: 'Karlsruhe Institute of Technology' },
+  { orcid: '0009-0003-2196-9187', name: 'Christopher Raquet', institution: 'Karlsruhe Institute of Technology' },
 ];
 </script>
 
@@ -89,14 +95,14 @@ const authors = [
           <v-row class="mb-6">
             <v-col cols="8">
               <HeroCard
-                description="This dataset contains the complete analysis of PID systems including Handle, DOI, and ORCID integrations across major research institutions. Published in IEEE eScience 2025."
-                title="Comprehensive Analysis of Persistent Identifier Systems in FAIR Digital Objects"
+                title="This is an example webpage"
+                description="This is an example of how the pid-component can be used within a Next.js app. Demo showcases DOIs (e.g. 10.5281/zenodo.13629109), ORCIDs (e.g. 0009-0005-2800-4833), RORs (e.g. https://ror.org/04t3en479), SPDX licenses (e.g. Apache-2.0), and more."
               />
             </v-col>
             <v-col cols="4">
               <DoiCard
                 license="https://spdx.org/licenses/Apache-2.0"
-                value="10.1109/eScience65000.2025.00022"
+                value="https://doi.org/10.5281/zenodo.13629109"
               />
             </v-col>
           </v-row>

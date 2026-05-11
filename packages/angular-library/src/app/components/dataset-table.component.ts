@@ -28,7 +28,7 @@ export interface Dataset {
     <mat-card class="dataset-table-card">
       <mat-card-header class="table-header">
         <mat-icon mat-card-avatar>description</mat-icon>
-        <mat-card-title>Related Datasets</mat-card-title>
+        <mat-card-title>Lorem ipsum dolor</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="table-scroll-wrapper">

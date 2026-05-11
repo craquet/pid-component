@@ -25,7 +25,7 @@ const handleNavigate = (page: string) => {
       </v-btn>
     </template>
     <v-app-bar-title class="text-grey-darken-3 font-weight-bold">
-      ResearchDemo
+      Lorem ipsum
       <v-chip class="ml-2" color="warning" size="x-small">Demo</v-chip>
     </v-app-bar-title>
     <v-spacer></v-spacer>

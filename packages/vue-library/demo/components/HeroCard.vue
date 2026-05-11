@@ -19,10 +19,10 @@ defineProps<{
     </v-card-item>
     <v-card-text>
       <h1 class="text-h5 font-weight-bold mb-2 text-grey-darken-3">
-        {{ title || 'Comprehensive Analysis of Persistent Identifier Systems in FAIR Digital Objects' }}
+        {{ title || 'This is an example webpage' }}
       </h1>
       <p class="text-body-2 text-grey mb-6">
-        {{ description || 'This dataset contains the complete analysis of PID systems including Handle, DOI, and ORCID integrations across major research institutions. Published in IEEE eScience 2025.'
+        {{ description || 'This is an example of how the pid-component can be used within a Next.js app. Demo showcases DOIs (e.g. 10.5281/zenodo.13629109), ORCIDs (e.g. 0009-0005-2800-4833), RORs (e.g. https://ror.org/04t3en479), SPDX licenses (e.g. Apache-2.0), and more.'
         }}
       </p>
     </v-card-text>

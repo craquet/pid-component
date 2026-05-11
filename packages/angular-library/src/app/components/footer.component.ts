@@ -21,7 +21,7 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
         <button mat-mini-fab color="accent" disabled style="width: 40px; height: 40px;">
           <mat-icon>storage</mat-icon>
         </button>
-        <span style="font-size: 14px; font-weight: 600; color: white;">ResearchDemo</span>
+        <span style="font-size: 14px; font-weight: 600; color: white;">Lorem ipsum</span>
       </div>
       <div style="display: flex; align-items: center; gap: 8px;">
         <span style="font-size: 14px; color: #9e9e9e; white-space: nowrap;">Powered by</span>
