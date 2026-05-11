@@ -1,10 +1,11 @@
 import { h, render } from '@stencil/vitest';
 import { describe, expect, it } from 'vitest';
+import { JSON_examples } from '../../../../../examples';
 // h is the JSX factory required at runtime by TSX – do not remove
 void h;
 
 describe('json-viewer e2e', () => {
-  const sampleJson = JSON.stringify({ name: 'test', value: 42, active: true });
+  const sampleJson = JSON_examples.VALID_OBJECT;
 
   it('renders and gets hydrated class', async () => {
     const { root } = await render(<json-viewer data={sampleJson} />);

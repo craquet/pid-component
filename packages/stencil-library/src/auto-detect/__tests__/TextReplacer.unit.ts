@@ -1,11 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { replaceMatches, restoreOriginalText } from '../../auto-detect/TextReplacer';
 import type { DetectionMatch, PidDetectionConfig } from '../../auto-detect/types';
-
-const DOI_examples = {
-  VALID_BARE: '10.52825/ocp.v5i.1411',
-  VALID_WITH_PREFIX: 'https://dx.doi.org/10.52825/ocp.v5i.1411',
-};
+import { DOI_examples } from '../../../../../examples';
 
 vi.mock('../../components/json-viewer/json-viewer', () => ({
   default: { render: vi.fn() },

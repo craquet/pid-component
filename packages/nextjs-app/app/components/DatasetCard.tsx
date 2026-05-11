@@ -9,6 +9,9 @@ interface DatasetCardProps {
   description: string;
 }
 
+/**
+ * Card component displaying dataset information with DOI, author ORCID, and license.
+ */
 export default function DatasetCard({ id, title, doi, license, authorOrcid, description }: DatasetCardProps) {
   return (
     <div style={{

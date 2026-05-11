@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import ResearchDemoPage from '../app/demo/page';
+import ResearchDemoPage from '../app/page';
 
 const meta: Meta = {
   title: 'ResearchDemo',
@@ -8,11 +8,11 @@ const meta: Meta = {
     docs: {
       description: {
         component: `
-**ResearchDemo** - A comprehensive demonstration of @kit-data-manager/pid-component
+**ResearchDemo** - A demonstration of @kit-data-manager/pid-component
 integrated with Next.js App Router and ShadCN/UI (Radix + Tailwind).
 
 This story showcases:
-- A realistic multi-page Next.js application structure with proper routing
+- A multi-page Next.js application structure with proper routing
 - Multiple UI contexts using ShadCN-style Radix UI components with Tailwind CSS
 - Explicit PID component usage alongside design system components
 - Autodetection scanning (initPidDetection) on article content
@@ -24,20 +24,34 @@ This story showcases:
 
 **Folder structure:**
 \`\`\`
-app/demo/
+app/
 ├── page.tsx           # Main portal page
 ├── layout.tsx         # Layout with metadata
 ├── about/page.tsx     # About page with PID showcase
 ├── datasets/page.tsx  # Datasets page
+├── lib/
+│   └── utils.ts       # Utility functions (cn)
 └── components/
-    ├── Navigation.tsx     # Sticky nav (ROR in footer)
+    ├── Navigation.tsx     # Sticky nav
     ├── HeroCard.tsx       # Hero card
+    ├── DoiCard.tsx        # DOI card component (extracted)
     ├── DatasetTable.tsx   # Table with DOI and license pid-components
-    ├── AuthorCard.tsx     # Author cards with ORCID pid-component
+    ├── AuthorCard.tsx     # Author card component with ORCID
+    ├── AuthorGrid.tsx     # Grid layout for author cards
     ├── ArticleSection.tsx # Autodetection (initPidDetection) zone
     ├── LicenseDialog.tsx  # Dialog with SPDX pid-component
     └── Footer.tsx         # Footer with ROR pid-component
 \`\`\`
+
+**Preserved identifiers (DOIs, ORCIDs, RORs, SPDX, Handles, ISBN, ISSN, email) embedded in demo:**
+- DOIs: doi:10.5445/IR/1000178054, 10.52825/ocp.v5i.1411, https://doi.org/10.5281/zenodo.13629109
+- ORCIDs: 0009-0005-2800-4833, 0000-0001-6575-1022, 0009-0003-2196-9187
+- RORs: https://ror.org/04t3en479
+- SPDX: https://spdx.org/licenses/MIT, CC-BY4.0, Apache-2.0, https://spdx.org/licenses/Apache-2.0
+- Handles: 21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6, 20.1000/100
+- ISBN: 978-3-642-54441-6
+- ISSN: 2041-1723
+- Email: someone@example.com
         `,
       },
     },

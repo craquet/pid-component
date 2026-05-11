@@ -1,4 +1,6 @@
 export const LOCALE_examples = {
+  VALID: 'en-US',
+  VALID_ALT: 'de-DE',
   EN_US: 'en-US',
   DE_DE: 'de-DE',
   EN_GB: 'en-GB',

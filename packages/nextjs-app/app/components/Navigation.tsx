@@ -7,6 +7,10 @@ interface NavigationProps {
   onNavigate?: (page: string) => void;
 }
 
+/**
+ * Navigation component with active page state.
+ * Allows switching between home, datasets, and about pages.
+ */
 export function Navigation({ activePage = 'home', onNavigate }: NavigationProps) {
   const links = [
     { href: '/', label: 'Home' },
@@ -23,7 +27,7 @@ export function Navigation({ activePage = 'home', onNavigate }: NavigationProps)
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600">
               <Database className="h-5 w-5 text-white" />
             </div>
-            <span className="text-lg font-semibold text-slate-900">ResearchDemo</span>
+            <span className="text-lg font-semibold text-slate-900">Lorem ipsum</span>
             <span
               className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">Demo</span>
           </div>

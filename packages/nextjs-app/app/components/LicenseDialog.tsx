@@ -4,6 +4,10 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { Scale } from 'lucide-react';
 import { PidComponent } from '@kit-data-manager/react-pid-component';
 
+/**
+ * Dialog component for displaying license information.
+ * Uses SPDX license identifier for the Apache 2.0 license.
+ */
 export function LicenseDialog() {
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -16,7 +20,7 @@ export function LicenseDialog() {
           <button
             className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-700 disabled:pointer-events-none disabled:opacity-50">
             <Scale className="h-4 w-4" />
-            View License Details
+            View License
           </button>
         </Dialog.Trigger>
         <Dialog.Portal>
@@ -25,11 +29,10 @@ export function LicenseDialog() {
           <Dialog.Content
             className="fixed left-1/2 top-1/2 max-h-85vh w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-6 shadow-lg focus:outline-none">
             <Dialog.Title className="text-lg font-semibold text-slate-900 mb-2">
-              Apache License 2.0
+              Apache 2.0 License
             </Dialog.Title>
             <Dialog.Description className="text-sm text-slate-600 mb-4">
-              This dataset is published under the Apache 2.0 license, allowing free reuse
-              with appropriate attribution.
+              Dataset published under Apache 2.0 license, allowing free reuse with appropriate attribution.
             </Dialog.Description>
             <div className="mb-4">
               <PidComponent value="https://spdx.org/licenses/Apache-2.0" width="100%" />

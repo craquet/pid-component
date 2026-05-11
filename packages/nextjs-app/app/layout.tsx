@@ -1,8 +1,8 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'PID Component - Next.js Demo',
-  description: 'Demo application for PID Component in Next.js',
+  title: 'ResearchDemo - Lorem ipsum',
+  description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit',
 };
 
 export default function RootLayout({

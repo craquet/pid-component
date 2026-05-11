@@ -40,13 +40,6 @@ describe('RORType', () => {
     });
   });
 
-  describe('hasMeaningfulInformation()', () => {
-    it('matches quickCheck() result', async () => {
-      const rt = new RORType(VALID);
-      expect(await rt.hasMeaningfulInformation()).toBe(rt.quickCheck());
-    });
-  });
-
   describe('getSettingsKey()', () => {
     it('returns "RORType"', () => {
       const rt = new RORType(VALID);
@@ -88,6 +81,11 @@ describe('RORType', () => {
 
     afterEach(() => {
       delete (global as any).fetch;
+    });
+
+    it('hasMeaningfulInformation() matches quickCheck() result', async () => {
+      const rt = new RORType(VALID);
+      expect(await rt.hasMeaningfulInformation()).toBe(rt.quickCheck());
     });
 
     it('fetches ROR data and populates items', async () => {

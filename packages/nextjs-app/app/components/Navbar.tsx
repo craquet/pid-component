@@ -3,6 +3,9 @@
 import Link from 'next/link';
 import { PidComponent } from '@kit-data-manager/react-pid-component';
 
+/**
+ * Navigation bar with portal branding and ROR identifier.
+ */
 export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-[#1a1a2e] px-8 py-4">
@@ -16,7 +19,7 @@ export default function Navbar() {
             </svg>
           </div>
           <Link href="/" className="text-xl font-bold text-white no-underline">
-            ResearchDemo
+            Lorem ipsum
           </Link>
           <span className="rounded-full bg-[#fbbf24] px-2 py-0.5 text-xs font-semibold text-[#78350f]">
             Demo
@@ -27,7 +30,7 @@ export default function Navbar() {
             href="/datasets"
             className="text-sm text-gray-400 no-underline transition-colors hover:text-white"
           >
-            Datasets
+            Lorem ipsum
           </Link>
           <Link
             href="/about"

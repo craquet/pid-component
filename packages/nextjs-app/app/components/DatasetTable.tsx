@@ -5,7 +5,7 @@ import { PidComponent } from '@kit-data-manager/react-pid-component';
 import { cn } from '../lib/utils';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-interface Dataset {
+export interface Dataset {
   id: string;
   title: string;
   doi: string;
@@ -24,6 +24,10 @@ const columns = [
   { key: 'actions', label: 'Actions', initialWidth: 15 },
 ] as const;
 
+/**
+ * Interactive data table with resizable columns.
+ * Displays datasets with DOI and license PID components.
+ */
 export function DatasetTable({ datasets, className }: DatasetTableProps) {
   const [columnWidths, setColumnWidths] = useState<Record<string, number>>(() =>
     Object.fromEntries(columns.map((c) => [c.key, c.initialWidth])),
@@ -67,12 +71,12 @@ export function DatasetTable({ datasets, className }: DatasetTableProps) {
     <div className={cn('rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden', className)}>
       <div className="flex items-center gap-3 p-6 border-b border-slate-100">
         <FileText className="h-5 w-5 text-slate-700" />
-        <h2 className="text-lg font-semibold text-slate-900">Related Datasets</h2>
+        <h2 className="text-lg font-semibold text-slate-900">Lorem ipsum dolor</h2>
       </div>
       <div style={{ overflowX: 'auto' }}>
         <table ref={tableRef} className="w-full" style={{ tableLayout: 'fixed', width: '100%' }}>
           <thead>
-          <tr className="border-b border-slate-100 bg-slate-50/50">
+          <tr className="border-b border-slate-100 bg-slate-50/0">
             {columns.map((col) => (
               <th
                 key={col.key}

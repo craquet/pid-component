@@ -1,63 +1,17 @@
 import { describe, expect, it, vi } from 'vitest';
 import { detectBestFit, detectionRegistry, sanitizeToken } from '../../auto-detect/detection-registry';
-
-const DOI_examples = {
-  VALID_BARE: '10.52825/ocp.v5i.1411',
-  VALID_WITH_PREFIX: 'https://dx.doi.org/10.52825/ocp.v5i.1411',
-  DATACITE_RFC: 'doi:10.17487/rfc3650',
-  INVALID_NOT_A_DOI: 'not-a-doi',
-};
-
-const ORCID_examples = {
-  VALID: '0009-0005-2800-4833',
-  VALID_ALT: '0009-0003-2196-9187',
-  VALID_WITH_HTTPS: 'https://orcid.org/0009-0005-2800-4833',
-};
-
-const HANDLE_examples = {
-  FDO_TYPED: '21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6',
-};
-
-const ROR_examples = {
-  VALID: 'https://ror.org/04t3en479',
-};
-
-const SPDX_examples = {
-  APACHE_2_0: 'https://spdx.org/licenses/Apache-2.0',
-  APACHE_2_0_BARE: 'Apache-2.0',
-  MIT: 'https://spdx.org/licenses/MIT',
-  MIT_BARE: 'MIT',
-  CC_BY_4_0: 'https://spdx.org/licenses/CC-BY-4.0',
-};
-
-const EMAIL_examples = {
-  VALID: 'someone@example.com',
-  INVALID_EMPTY: '',
-};
-
-const URL_examples = {
-  KIT_WEBSITE: 'https://scc.kit.edu',
-  GITHUB: 'https://github.com/kit-data-manager/pid-component',
-};
-
-const DATE_examples = {
-  ISO_8601: '2022-11-11T08:01:20.557+00:00',
-  ISO_8601_ALT: '2024-06-15T09:30:00.000+02:00',
-};
-
-const LOCALE_examples = {
-  VALID: 'en-US',
-  VALID_ALT: 'de-DE',
-  EN_US: 'en-US',
-  DE_DE: 'de-DE',
-};
-
-const JSON_examples = {
-  VALID_MINIMAL: '{"test": "value"}',
-  SIMPLE: '{"name": "pid-component", "version": "1.0.0"}',
-  ARRAY: '{"features": ["PIDs", "ORCiDs", "DOIs"]}',
-  INVALID_EMPTY: '',
-};
+import {
+  DOI_examples,
+  ORCID_examples,
+  HANDLE_examples,
+  ROR_examples,
+  SPDX_examples,
+  EMAIL_examples,
+  URL_examples,
+  DATE_examples,
+  LOCALE_examples,
+  JSON_examples,
+} from '../../../../../examples';
 
 vi.mock('../../components/json-viewer/json-viewer', () => ({}));
 

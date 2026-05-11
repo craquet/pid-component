@@ -8,7 +8,11 @@ interface HeroCardProps {
   className?: string;
 }
 
-export function HeroCard({ title, description, doi, className }: HeroCardProps) {
+/**
+ * Primary hero card component for the demo portal.
+ * Displays a featured dataset or article with call-to-action buttons.
+ */
+export function HeroCard({ title, description, className }: HeroCardProps) {
   return (
     <div className={cn('rounded-xl border border-slate-200 bg-white p-6 shadow-sm', className)}>
       <div className="flex gap-2 mb-4">
@@ -33,29 +37,6 @@ export function HeroCard({ title, description, doi, className }: HeroCardProps) 
           View Source
         </button>
       </div>
-    </div>
-  );
-}
-
-export function DoiCard({ value, license }: { value: string; license?: string }) {
-  return (
-    <div className={cn('rounded-xl border border-slate-200 bg-white p-6 shadow-sm', !license && 'flex-1')}>
-      <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
-        Digital Object Identifier
-      </h3>
-      <div className="min-h-[120px] max-h-[300px] overflow-hidden">
-        <PidComponent value={value} width="100%" />
-      </div>
-      {license && (
-        <div className="mt-4 pt-4 border-t border-slate-100">
-          <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
-            License
-          </h3>
-          <div className="min-h-[24px] max-h-[60px] overflow-hidden">
-            <PidComponent value={license} width="100%" />
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,75 +1,44 @@
-import { PidComponent } from '@kit-data-manager/react-pid-component';
+'use client';
 
-interface AuthorCardProps {
+import * as Avatar from '@radix-ui/react-avatar';
+import { PidComponent } from '@kit-data-manager/react-pid-component';
+import { cn } from '../lib/utils';
+
+export interface Author {
   orcid: string;
   name: string;
-  role: string;
   institution?: string;
 }
 
-export default function AuthorCard({ orcid, name, role, institution }: AuthorCardProps) {
-  const initials = name.split(' ').map(n => n[0]).join('');
+interface AuthorCardProps {
+  author: Author;
+  className?: string;
+}
+
+/**
+ * Displays a single author with avatar, name, institution, and ORCID.
+ */
+export function AuthorCard({ author, className }: AuthorCardProps) {
+  const initials = author.name.split(' ').map(n => n[0]).join('');
 
   return (
-    <div style={{
-      backgroundColor: 'white',
-      borderRadius: 12,
-      padding: 24,
-      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-      overflow: 'hidden',
-      maxWidth: '100%',
-    }}>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-        <div style={{
-          width: 48,
-          height: 48,
-          borderRadius: '50%',
-          backgroundColor: '#e0e7ff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 16,
-          fontWeight: 700,
-          color: '#4f46e5',
-          flexShrink: 0,
-        }}>
-          {initials}
-        </div>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <h3 style={{
-            fontSize: 16,
-            fontWeight: 700,
-            marginBottom: 4,
-            color: '#111827',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}>{name}</h3>
-          <p style={{
-            fontSize: 13,
-            color: '#6b7280',
-            marginBottom: 8,
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}>{role}</p>
-          {institution && (
-            <p style={{
-              fontSize: 12,
-              color: '#9ca3af',
-              marginBottom: 8,
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-            }}>{institution}</p>
+    <div className={cn('rounded-xl border border-slate-200 bg-white p-5 shadow-sm', className)}>
+      <div className="flex items-start gap-4">
+        <Avatar.Root
+          className="inline-flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full border border-slate-200">
+          <Avatar.Image src={`https://api.dicebear.com/7.x/initials/svg?seed=${author.name}`} alt={author.name} />
+          <Avatar.Fallback
+            className="flex h-full w-full items-center justify-center bg-slate-100 text-sm font-medium text-slate-600">
+            {initials}
+          </Avatar.Fallback>
+        </Avatar.Root>
+        <div className="flex-1 min-w-0">
+          <h3 className="text-sm font-semibold text-slate-900 truncate">{author.name}</h3>
+          {author.institution && (
+            <p className="text-xs text-slate-400 mt-1">{author.institution}</p>
           )}
-          <div style={{
-            position: 'relative',
-            minHeight: 24,
-            maxHeight: 24,
-            overflow: 'hidden',
-          }}>
-            <PidComponent value={orcid} width="100%" />
+          <div className="mt-3 relative overflow-hidden">
+            <PidComponent value={author.orcid} emphasizeComponent={false} width="100%" />
           </div>
         </div>
       </div>

@@ -1,15 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { LocaleType } from '../LocaleType';
-
-const LOCALE_examples = {
-  EN_US: 'en-US',
-  DE_DE: 'de-DE',
-  EN_GB: 'en-GB',
-  FR_FR: 'fr-FR',
-  INVALID_FREE_TEXT: 'english',
-  INVALID_NUMERIC: '123',
-  INVALID_EMPTY: '',
-} as const;
+import { LOCALE_examples } from '../../../../../../examples';
 
 describe('LocaleType', () => {
   describe('quickCheck()', () => {

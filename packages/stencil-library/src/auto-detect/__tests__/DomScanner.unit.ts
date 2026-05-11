@@ -1,9 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { scanDom } from '../../auto-detect/DomScanner';
-
-const DOI_examples = {
-  VALID_BARE: '10.52825/ocp.v5i.1411',
-};
+import { DOI_examples } from '../../../../../examples';
 
 describe('DomScanner', () => {
   beforeEach(() => {

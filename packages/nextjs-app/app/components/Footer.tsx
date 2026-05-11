@@ -1,25 +1,35 @@
+import { Database } from 'lucide-react';
 import { PidComponent } from '@kit-data-manager/react-pid-component';
 
-export default function Footer() {
+/**
+ * Footer component displaying the portal branding and ROR identifier.
+ */
+export function Footer() {
   return (
-    <footer className="mt-12 bg-gray-900 px-8 py-8">
-      <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="rounded-lg bg-indigo-500 p-2">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
+    <footer className="border-t border-slate-200 bg-white mt-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              display: 'flex',
+              height: '32px',
+              width: '32px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '8px',
+              backgroundColor: '#4f46e5',
+            }}>
+              <Database className="h-4 w-4 text-white" />
+            </div>
+            <span style={{ fontSize: '14px', fontWeight: 600, color: '#0f172a' }}>Lorem ipsum</span>
           </div>
-          <span className="text-sm font-bold text-white">ResearchDemo</span>
-        </div>
-        <p className="text-sm text-gray-400">
-          Research Data Portal powered by KIT Data Manager
-        </p>
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-400">License:</span>
-          <PidComponent value="https://spdx.org/licenses/Apache-2.0" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '14px', color: '#64748b', whiteSpace: 'nowrap' }}>Powered by</span>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <PidComponent value="https://ror.org/04t3en479" emphasizeComponent={false} hideSubcomponents={true}
+                            width="100%" />
+            </div>
+          </div>
         </div>
       </div>
     </footer>
