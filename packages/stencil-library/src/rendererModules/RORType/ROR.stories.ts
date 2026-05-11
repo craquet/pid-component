@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { _html } from 'lit';
 import { Meta, StoryObj } from '@storybook/web-components-vite';
 import { ROR_examples } from '../../../../../examples';
 
