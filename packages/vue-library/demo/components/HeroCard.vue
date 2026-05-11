@@ -18,7 +18,7 @@ defineProps<{
       </template>
     </v-card-item>
     <v-card-text>
-      <h1 class="text-h5 font-weight-bold mb-2 text-grey-darken-3">
+      <h1 class="text-h5 font-weight-bold mb-2 text-grey-darken-3 dark:text-white">
         {{ title || 'This is an example webpage' }}
       </h1>
       <p class="text-body-2 text-grey mb-6">

@@ -15,13 +15,17 @@ export function AboutPage({}: AboutPageProps) {
       </Title>
       <Card shadow="sm" padding="xl" radius="md" withBorder>
         <Text size="sm" style={{ lineHeight: 1.8, marginBottom: 16, color: '#374151' }}>
-          This is a demonstration application showcasing the
-          <strong> PID Component</strong> library. This component enables
-          seamless detection and rendering of Persistent Identifiers (PIDs)
-          including DOIs, ORCIDs, Handles, RORs, and more.
+          Lorem ipsum dolor sit amet consectetur adipiscing elit. Click the &quot;View License&quot; button below to see
+          how a
+          license can be rendered. Demo showcases pid-component integration with Next.js App Router, demonstrating
+          seamless display of persistent identifiers including DOIs (e.g. 10.5281/zenodo.13629109), ORCIDs (e.g.
+          0009-0005-2800-4833), ROR IDs (e.g. https://ror.org/04t3en479), Handle PIDs (e.g.
+          21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6), and SPDX license references.
         </Text>
         <Text size="sm" style={{ lineHeight: 1.8, marginBottom: 16, color: '#374151' }}>
-          Explore the tabs below to see different PID types in action:
+          Lorem ipsum dolor sit amet consectetur adipiscing elit. Portal uses
+          <strong> pid-component</strong> to render various PID types with automatic detection
+          and resolution from respective registries.
         </Text>
 
         <Tabs defaultValue="dois">
@@ -34,31 +38,31 @@ export function AboutPage({}: AboutPageProps) {
 
           <Tabs.Panel value="dois" pt="md">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: '16px 0' }}>
-              <PidComponent value="10.1109/eScience65000.2025.00022" />
-              <PidComponent value="10.5445/IR/1000185135" />
-              <PidComponent value="10.1007/978-3-642-15582-6" />
+              <PidComponent value="10.5281/zenodo.13629109" />
+              <PidComponent value="doi:10.5445/IR/1000178054" />
+              <PidComponent value="10.52825/ocp.v5i.1411" />
             </div>
           </Tabs.Panel>
 
           <Tabs.Panel value="orcids" pt="md">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: '16px 0' }}>
               <PidComponent value="0009-0005-2800-4833" />
-              <PidComponent value="0009-0003-2196-9187" />
               <PidComponent value="0000-0001-6575-1022" />
+              <PidComponent value="0009-0003-2196-9187" />
             </div>
           </Tabs.Panel>
 
           <Tabs.Panel value="handles" pt="md">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: '16px 0' }}>
               <PidComponent value="21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6" />
-              <PidComponent value="20.1000/100.123456" />
+              <PidComponent value="20.1000/100" />
             </div>
           </Tabs.Panel>
 
           <Tabs.Panel value="rors" pt="md">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: '16px 0' }}>
               <PidComponent value="https://ror.org/04t3en479" />
-              <PidComponent value="https://ror.org/02aj13c28" />
+              <PidComponent value="https://spdx.org/licenses/MIT" />
             </div>
           </Tabs.Panel>
         </Tabs>

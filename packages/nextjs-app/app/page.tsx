@@ -35,6 +35,12 @@ const datasets = [
     doi: '21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6',
     license: 'CC-BY4.0',
   },
+  {
+    id: '5',
+    title: 'An example of a very large record',
+    doi: '21.T11981/5760c10e-6e64-41ea-824e-8dd4d3d2145d',
+    license: 'CC-BY4.0',
+  },
 ];
 
 const authors = [
