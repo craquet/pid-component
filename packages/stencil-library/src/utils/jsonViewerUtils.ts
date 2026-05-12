@@ -144,3 +144,4 @@ export const DEFAULT_MAX_HEIGHT = 500;
 export const DEFAULT_LINE_HEIGHT = 24;
 export const DEFAULT_VIEW_MODE = 'tree' as const;
 export type ViewMode = 'tree' | 'code';
+

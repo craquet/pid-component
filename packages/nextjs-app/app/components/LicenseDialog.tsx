@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -13,24 +14,15 @@ import {
 } from '@/components/ui/dialog';
 import { PidComponent } from '@kit-data-manager/react-pid-component';
 
-interface LicenseDialogProps {
-  darkMode?: boolean;
-}
-
-/**
- * Dialog component for displaying license information.
- * Uses shadcn/ui dialog and card components.
- * Uses SPDX license identifier for the Apache 2.0 license.
- */
-export function LicenseDialog({ darkMode = false }: LicenseDialogProps) {
+export function LicenseDialog() {
   return (
-    <Card className={darkMode ? 'bg-slate-800 border-slate-700' : 'bg-white'}>
+    <Card>
       <CardHeader>
-        <CardTitle className={darkMode ? 'text-white' : ''}>
-          <Scale className={`inline h-5 w-5 mr-2 ${darkMode ? 'text-slate-300' : 'text-slate-700'}`} />
+        <CardTitle className="flex items-center gap-2">
+          <Scale className="h-5 w-5 text-muted-foreground" />
           License Information
         </CardTitle>
-        <CardDescription className={darkMode ? 'text-slate-400' : ''}>
+        <CardDescription>
           This dataset is published under the Apache 2.0 license.
         </CardDescription>
       </CardHeader>
@@ -42,23 +34,20 @@ export function LicenseDialog({ darkMode = false }: LicenseDialogProps) {
               View License
             </Button>
           </DialogTrigger>
-          <DialogContent className={darkMode ? 'bg-slate-800 border-slate-700' : ''}>
+          <DialogContent>
             <DialogHeader>
-              <DialogTitle className={darkMode ? 'text-white' : ''}>Apache 2.0 License</DialogTitle>
-              <DialogDescription className={darkMode ? 'text-slate-400' : ''}>
+              <DialogTitle>Apache 2.0 License</DialogTitle>
+              <DialogDescription>
                 Dataset published under Apache 2.0 license, allowing free reuse with appropriate attribution.
               </DialogDescription>
             </DialogHeader>
             <div className="mb-4">
-              <PidComponent value="https://spdx.org/licenses/Apache-2.0" darkMode={darkMode ? 'dark' : 'light'}
-                            width="100%" />
+              <PidComponent value="https://spdx.org/licenses/Apache-2.0" darkMode="light" width="100%" />
             </div>
             <div className="flex justify-end">
-              <Dialog.Close asChild>
-                <Button variant="outline" className={darkMode ? 'border-slate-600 bg-slate-700 text-slate-200' : ''}>
-                  Close
-                </Button>
-              </Dialog.Close>
+              <DialogClose asChild>
+                <Button variant="outline">Close</Button>
+              </DialogClose>
             </div>
           </DialogContent>
         </Dialog>

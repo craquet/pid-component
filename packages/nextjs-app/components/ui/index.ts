@@ -14,3 +14,4 @@ export {
 } from './dialog';
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './tabs';
 export { Badge, badgeVariants } from './badge';
+export { Avatar, AvatarImage, AvatarFallback } from './avatar';

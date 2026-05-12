@@ -19,7 +19,7 @@ const config: StorybookConfig = {
       ...config.resolve.alias,
       '@kit-data-manager/pid-component/dist': path.join(stencilRoot, 'dist'),
       '@kit-data-manager/pid-component': stencilRoot,
-      '@/lib/utils': path.resolve(__dirname, '../app/lib/utils'),
+      '@/lib/utils': path.resolve(__dirname, '../lib/utils'),
       '@/components/ui': path.resolve(__dirname, '../components/ui'),
       '@/components/ui/*': path.resolve(__dirname, '../components/ui'),
       '@/*': path.resolve(__dirname, '../app'),

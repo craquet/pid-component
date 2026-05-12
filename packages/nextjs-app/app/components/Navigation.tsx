@@ -11,10 +11,6 @@ interface NavigationProps {
   onDarkModeChange?: (darkMode: boolean) => void;
 }
 
-/**
- * Navigation component with active page state.
- * Uses shadcn/ui components for button and badge.
- */
 export function Navigation({ activePage = 'home', onNavigate, darkMode = false, onDarkModeChange }: NavigationProps) {
   const links = [
     { href: '/', label: 'Home' },
@@ -24,17 +20,15 @@ export function Navigation({ activePage = 'home', onNavigate, darkMode = false, 
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full border-b backdrop-blur supports-[backdrop-filter]:bg-white/60 ${
-        darkMode ? 'border-slate-700 bg-slate-900/95' : 'border-slate-200 bg-white/95'
-      }`}>
+      className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-3">
             <Button variant="default" size="icon" className="h-9 w-9">
               <Database className="h-5 w-5" />
             </Button>
-            <span className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Lorem ipsum</span>
-            <Badge variant={darkMode ? 'warning' : 'secondary'}>
+            <span className="text-lg font-semibold text-foreground">Lorem ipsum</span>
+            <Badge variant="secondary">
               Demo
             </Badge>
           </div>
@@ -47,9 +41,7 @@ export function Navigation({ activePage = 'home', onNavigate, darkMode = false, 
                   key={link.href}
                   variant={isActive ? 'default' : 'ghost'}
                   onClick={() => onNavigate?.(pageName)}
-                  className={`text-sm relative z-10 ${
-                    isActive ? '' : darkMode ? 'text-slate-300' : 'text-slate-600'
-                  }`}
+                  className="text-sm relative z-10"
                 >
                   {link.label}
                 </Button>
@@ -59,7 +51,6 @@ export function Navigation({ activePage = 'home', onNavigate, darkMode = false, 
               variant="ghost"
               size="icon"
               onClick={() => onDarkModeChange?.(!darkMode)}
-              className={darkMode ? 'text-yellow-400' : 'text-slate-600'}
             >
               {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>

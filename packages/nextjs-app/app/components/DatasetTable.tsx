@@ -3,7 +3,7 @@
 import { FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PidComponent } from '@kit-data-manager/react-pid-component';
-import { cn } from '../lib/utils';
+import { cn } from '@/lib/utils';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export interface Dataset {
@@ -16,7 +16,6 @@ export interface Dataset {
 interface DatasetTableProps {
   datasets: Dataset[];
   className?: string;
-  darkMode?: boolean;
 }
 
 const columns = [
@@ -26,11 +25,7 @@ const columns = [
   { key: 'actions', label: 'Actions', initialWidth: 15 },
 ] as const;
 
-/**
- * Interactive data table with resizable columns.
- * Uses shadcn/ui button component.
- */
-export function DatasetTable({ datasets, className, darkMode = false }: DatasetTableProps) {
+export function DatasetTable({ datasets, className }: DatasetTableProps) {
   const [columnWidths, setColumnWidths] = useState<Record<string, number>>(() =>
     Object.fromEntries(columns.map((c) => [c.key, c.initialWidth])),
   );
@@ -70,30 +65,25 @@ export function DatasetTable({ datasets, className, darkMode = false }: DatasetT
   }, [onMouseMove, onMouseUp]);
 
   return (
-    <div
-      className={cn('rounded-xl border shadow-sm overflow-hidden', darkMode ? 'border-slate-700 bg-slate-800' : 'border-slate-200 bg-white', className)}>
-      <div className={cn('flex items-center gap-3 p-6 border-b', darkMode ? 'border-slate-700' : 'border-slate-100')}>
-        <FileText className={`h-5 w-5 ${darkMode ? 'text-slate-300' : 'text-slate-700'}`} />
-        <h2 className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Lorem ipsum dolor</h2>
+    <div className={cn('rounded-xl border bg-card shadow overflow-hidden', className)}>
+      <div className="flex items-center gap-3 p-6 border-b">
+        <FileText className="h-5 w-5 text-muted-foreground" />
+        <h2 className="text-lg font-semibold text-foreground">Lorem ipsum dolor</h2>
       </div>
       <div style={{ overflowX: 'auto' }}>
         <table ref={tableRef} className="w-full" style={{ tableLayout: 'fixed', width: '100%' }}>
           <thead>
-          <tr className={cn('border-b', darkMode ? 'border-slate-700' : 'border-slate-100')}>
+          <tr className="border-b">
             {columns.map((col) => (
               <th
                 key={col.key}
-                className={`text-left text-xs font-semibold uppercase tracking-wider px-6 py-3 relative select-none ${
-                  darkMode ? 'text-slate-400 bg-slate-800' : 'text-slate-500'
-                }`}
+                className="text-left text-xs font-semibold uppercase tracking-wider px-6 py-3 relative select-none text-muted-foreground bg-card"
                 style={{ width: `${columnWidths[col.key]}%` }}
               >
                 {col.label}
                 <span
                   onMouseDown={(e) => onResizeStart(e, col.key)}
-                  className={`absolute right-0 top-0 bottom-0 w-1 cursor-col-resize ${
-                    darkMode ? 'hover:bg-slate-600' : 'hover:bg-blue-300'
-                  }`}
+                  className="absolute right-0 top-0 bottom-0 w-1 cursor-col-resize hover:bg-primary/20"
                 />
               </th>
             ))}
@@ -101,20 +91,17 @@ export function DatasetTable({ datasets, className, darkMode = false }: DatasetT
           </thead>
           <tbody>
           {datasets.map((dataset) => (
-            <tr key={dataset.id}
-                className={cn('border-b transition-colors', darkMode ? 'border-slate-700 hover:bg-slate-700' : 'border-slate-100 hover:bg-slate-50')}>
+            <tr key={dataset.id} className="border-b transition-colors hover:bg-muted/50">
               <td
-                className={`px-6 py-4 text-sm overflow-hidden text-ellipsis whitespace-nowrap ${darkMode ? 'text-slate-200' : 'text-slate-700'}`}>{dataset.title}</td>
+                className="px-6 py-4 text-sm overflow-hidden text-ellipsis whitespace-nowrap text-foreground">{dataset.title}</td>
               <td className="px-6 py-4">
                 <div className="overflow-hidden">
-                  <PidComponent value={dataset.doi} emphasizeComponent={false} darkMode={darkMode ? 'dark' : 'light'}
-                                width="100%" />
+                  <PidComponent value={dataset.doi} emphasizeComponent={false} darkMode="light" width="100%" />
                 </div>
               </td>
               <td className="px-6 py-4">
                 <div className="overflow-hidden">
-                  <PidComponent value={dataset.license} emphasizeComponent={false}
-                                darkMode={darkMode ? 'dark' : 'light'} width="100%" />
+                  <PidComponent value={dataset.license} emphasizeComponent={false} darkMode="light" width="100%" />
                 </div>
               </td>
               <td className="px-6 py-4 overflow-hidden">

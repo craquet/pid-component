@@ -1,16 +1,9 @@
 import { Database } from 'lucide-react';
 import { PidComponent } from '@kit-data-manager/react-pid-component';
 
-interface FooterProps {
-  darkMode?: boolean;
-}
-
-/**
- * Footer component displaying the portal branding and ROR identifier.
- */
-export function Footer({ darkMode = false }: FooterProps) {
+export function Footer() {
   return (
-    <footer className={`border-t mt-12 ${darkMode ? 'border-slate-700 bg-slate-900' : 'border-slate-200 bg-white'}`}>
+    <footer className="border-t mt-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -21,22 +14,21 @@ export function Footer({ darkMode = false }: FooterProps) {
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: '8px',
-              backgroundColor: '#4f46e5',
+              backgroundColor: 'hsl(var(--primary))',
             }}>
-              <Database className="h-4 w-4 text-white" />
+              <Database className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span
-              style={{ fontSize: '14px', fontWeight: 600, color: darkMode ? '#f1f5f9' : '#0f172a' }}>Lorem ipsum</span>
+            <span style={{ fontSize: '14px', fontWeight: 600, color: 'hsl(var(--foreground))' }}>Lorem ipsum</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{
               fontSize: '14px',
-              color: darkMode ? '#94a3b8' : '#64748b',
+              color: 'hsl(var(--muted-foreground))',
               whiteSpace: 'nowrap',
             }}>Powered by</span>
             <div style={{ flex: 1, minWidth: 0 }}>
               <PidComponent value="https://ror.org/04t3en479" emphasizeComponent={false} hideSubcomponents={true}
-                            darkMode={darkMode ? 'dark' : 'light'} width="100%" />
+                            darkMode="light" width="100%" />
             </div>
           </div>
         </div>
