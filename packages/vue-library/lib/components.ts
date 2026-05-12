@@ -16,7 +16,8 @@ export const ColorHighlight: StencilVueComponent<JSX.ColorHighlight> = /*@__PURE
 
 export const CopyButton: StencilVueComponent<JSX.CopyButton> = /*@__PURE__*/ defineContainer<JSX.CopyButton>('copy-button', undefined, [
   'value',
-  'label'
+  'label',
+  'darkMode',
 ]);
 
 
@@ -120,6 +121,7 @@ export const PidTooltip: StencilVueComponent<JSX.PidTooltip> = /*@__PURE__*/ def
   'maxWidth',
   'maxHeight',
   'fitContent',
+  'darkMode',
   'tooltipExpansionChange'
 ], [
   'tooltipExpansionChange'

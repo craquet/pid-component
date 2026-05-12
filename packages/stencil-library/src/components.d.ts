@@ -19,6 +19,13 @@ export namespace Components {
     }
     interface CopyButton {
         /**
+         * Dark mode setting for the button. When provided, this takes precedence over DOM-based dark mode detection.
+         * @type {'light' | 'dark' | 'system'}
+         * @public
+         * @default 'light'
+         */
+        'darkMode': 'light' | 'dark' | 'system';
+        /**
           * Optional custom label for the button. If not provided, a default label will be used.
           * @type {string}
           * @public
@@ -332,6 +339,11 @@ export namespace Components {
     }
     interface PidTooltip {
         /**
+         * Dark mode setting for the tooltip. When provided, this takes precedence over DOM-based dark mode detection.
+         * @default 'light'
+         */
+        'darkMode': 'light' | 'dark' | 'system';
+        /**
           * Whether the tooltip should fit its content height exactly
           * @default true
          */
@@ -509,6 +521,13 @@ declare namespace LocalJSX {
         "text": string;
     }
     interface CopyButton {
+        /**
+         * Dark mode setting for the button. When provided, this takes precedence over DOM-based dark mode detection.
+         * @type {'light' | 'dark' | 'system'}
+         * @public
+         * @default 'light'
+         */
+        'darkMode'?: 'light' | 'dark' | 'system';
         /**
           * Optional custom label for the button. If not provided, a default label will be used.
           * @type {string}
@@ -830,6 +849,11 @@ declare namespace LocalJSX {
     }
     interface PidTooltip {
         /**
+         * Dark mode setting for the tooltip. When provided, this takes precedence over DOM-based dark mode detection.
+         * @default 'light'
+         */
+        'darkMode'?: 'light' | 'dark' | 'system';
+        /**
           * Whether the tooltip should fit its content height exactly
           * @default true
          */
@@ -865,6 +889,7 @@ declare namespace LocalJSX {
     interface CopyButtonAttributes {
         "value": string;
         "label": string;
+        'darkMode': 'light' | 'dark' | 'system';
     }
     interface JsonViewerAttributes {
         "data": string | object;
@@ -933,6 +958,7 @@ declare namespace LocalJSX {
         "maxWidth": string;
         "maxHeight": string;
         "fitContent": boolean;
+        'darkMode': 'light' | 'dark' | 'system';
     }
 
     interface IntrinsicElements {

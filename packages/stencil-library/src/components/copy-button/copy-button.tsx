@@ -26,6 +26,31 @@ export class CopyButton {
    */
   @Prop() label?: string;
 
+  /**
+   * Dark mode setting for the button.
+   * When provided, this takes precedence over DOM-based dark mode detection.
+   * @type {'light' | 'dark' | 'system'}
+   * @public
+   */
+  @Prop() darkMode: 'light' | 'dark' | 'system' = 'light';
+
+  private getIsDarkMode(): boolean {
+    if (this.darkMode === 'dark') {
+      return true;
+    }
+    if (this.darkMode === 'light') {
+      return false;
+    }
+    const parentComponent = this.el.closest('pid-component');
+    if (parentComponent?.classList.contains('bg-gray-800')) {
+      return true;
+    }
+    if (this.darkMode === 'system') {
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  }
+
   render() {
     // Determine button text based on state
     const buttonText = this.copied ? '✓ Copied!' : 'Copy';
@@ -33,9 +58,8 @@ export class CopyButton {
     // Get appropriate aria-label
     const ariaLabel = this.getAriaLabel();
 
-    // Check if dark mode is active by looking at the closest pid-component
-    const parentComponent = this.el.closest('pid-component');
-    const isDarkMode = parentComponent?.classList.contains('bg-gray-800');
+    // Check if dark mode is active
+    const isDarkMode = this.getIsDarkMode();
 
     return (
       <Host class={'inline-block align-baseline text-xs'}>

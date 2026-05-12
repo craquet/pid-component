@@ -13,9 +13,10 @@ export interface Author {
 interface AuthorCardProps {
   author: Author;
   className?: string;
+  darkMode?: boolean;
 }
 
-export function AuthorCard({ author, className }: AuthorCardProps) {
+export function AuthorCard({ author, className, darkMode = false }: AuthorCardProps) {
   const initials = author.name.split(' ').map(n => n[0]).join('');
 
   return (
@@ -31,7 +32,8 @@ export function AuthorCard({ author, className }: AuthorCardProps) {
             <p className="text-xs mt-1 text-muted-foreground">{author.institution}</p>
           )}
           <div className="mt-3 relative overflow-hidden">
-            <PidComponent value={author.orcid} emphasizeComponent={false} darkMode="light" width="100%" />
+            <PidComponent value={author.orcid} emphasizeComponent={false} darkMode={darkMode ? 'dark' : 'light'}
+                          width="100%" />
           </div>
         </div>
       </CardContent>

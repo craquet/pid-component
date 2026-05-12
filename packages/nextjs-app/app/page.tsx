@@ -79,12 +79,13 @@ export default function ResearchDemoPage() {
               <DoiCard
                 value="https://doi.org/10.5281/zenodo.13629109"
                 license="https://spdx.org/licenses/Apache-2.0"
+                darkMode={darkMode}
               />
             </div>
 
-            <DatasetTable datasets={datasets} className="mb-8" />
+            <DatasetTable datasets={datasets} className="mb-8" darkMode={darkMode} />
 
-            <AuthorGrid authors={authors} />
+            <AuthorGrid authors={authors} darkMode={darkMode} />
 
             <ArticleSection darkMode={darkMode} />
           </>
@@ -103,14 +104,14 @@ export default function ResearchDemoPage() {
                 integrated with Next.js, featuring DOIs, ORCIDs, RORs, Handles, SPDX licenses, and more.
               </p>
             </div>
-            <AuthorGrid authors={authors} />
+            <AuthorGrid authors={authors} darkMode={darkMode} />
           </div>
         )}
 
-        <LicenseDialog />
+        <LicenseDialog darkMode={darkMode} />
       </main>
 
-      <Footer />
+      <Footer darkMode={darkMode} />
     </div>
   );
 }

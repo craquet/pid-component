@@ -16,7 +16,7 @@ defineProps<{
         Digital Object Identifier
       </div>
       <div style="min-height: 120px; max-height: 300px; overflow: hidden;">
-        <pid-component :value="value" style="display: block;" width="100%" />
+        <pid-component :value="value" :dark-mode="darkMode ? 'dark' : 'light'" style="display: block;" width="100%" />
       </div>
       <v-divider v-if="license" class="my-4"></v-divider>
       <template v-if="license">
@@ -25,7 +25,8 @@ defineProps<{
           License
         </div>
         <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
-          <pid-component :value="license" style="display: block;" width="100%" />
+          <pid-component :value="license" :dark-mode="darkMode ? 'dark' : 'light'" style="display: block;"
+                         width="100%" />
         </div>
       </template>
     </v-card-text>

@@ -83,12 +83,14 @@ function onResizeEnd() {
           </td>
           <td style="overflow: hidden; min-width: 0;">
             <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
-              <pid-component :emphasize-component="false" :value="item.doi" style="display: block;" width="100%" />
+              <pid-component :emphasize-component="false" :dark-mode="darkMode ? 'dark' : 'light'" :value="item.doi"
+                             style="display: block;" width="100%" />
             </div>
           </td>
           <td style="overflow: hidden; min-width: 0;">
             <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
-              <pid-component :emphasize-component="false" :value="item.license" style="display: block;" width="100%" />
+              <pid-component :emphasize-component="false" :dark-mode="darkMode ? 'dark' : 'light'" :value="item.license"
+                             style="display: block;" width="100%" />
             </div>
           </td>
           <td style="overflow: hidden">

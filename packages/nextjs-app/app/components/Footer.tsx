@@ -1,7 +1,11 @@
 import { Database } from 'lucide-react';
 import { PidComponent } from '@kit-data-manager/react-pid-component';
 
-export function Footer() {
+interface FooterProps {
+  darkMode?: boolean;
+}
+
+export function Footer({ darkMode = false }: FooterProps) {
   return (
     <footer className="border-t mt-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
@@ -28,7 +32,7 @@ export function Footer() {
             }}>Powered by</span>
             <div style={{ flex: 1, minWidth: 0 }}>
               <PidComponent value="https://ror.org/04t3en479" emphasizeComponent={false} hideSubcomponents={true}
-                            darkMode="light" width="100%" />
+                            darkMode={darkMode ? 'dark' : 'light'} width="100%" />
             </div>
           </div>
         </div>

@@ -42,7 +42,8 @@ const getInitials = (name: string): string => {
             {{ author.institution }}
           </div>
           <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
-            <pid-component :emphasize-component="false" :value="author.orcid" style="display: block;" width="100%" />
+            <pid-component :emphasize-component="false" :dark-mode="darkMode ? 'dark' : 'light'" :value="author.orcid"
+                           style="display: block;" width="100%" />
           </div>
         </div>
       </div>

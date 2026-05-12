@@ -26,7 +26,8 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
       <div style="display: flex; align-items: center; gap: 8px;">
         <span [class]="darkMode ? 'text-gray-400' : 'text-gray-500'" style="font-size: 14px; white-space: nowrap;">Powered by</span>
         <div style="flex: 1; min-width: 0;">
-          <pid-component value="https://ror.org/04t3en479" [emphasizeComponent]="false" [hideSubcomponents]="true" />
+          <pid-component value="https://ror.org/04t3en479" [emphasizeComponent]="false" [hideSubcomponents]="true"
+                         [darkMode]="darkMode ? 'dark' : 'light'" />
         </div>
       </div>
     </footer>

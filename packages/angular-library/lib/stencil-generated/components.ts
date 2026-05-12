@@ -41,14 +41,14 @@ export declare interface ColorHighlight extends Components.ColorHighlight {}
 
 @ProxyCmp({
   defineCustomElementFn: defineCopyButton,
-  inputs: ['label', 'value']
+  inputs: ['darkMode', 'label', 'value'],
 })
 @Component({
   selector: 'copy-button',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['label', { name: 'value', required: true }],
+  inputs: ['darkMode', 'label', { name: 'value', required: true }],
 })
 export class CopyButton {
   protected el: HTMLCopyButtonElement;
@@ -264,14 +264,14 @@ export declare interface PidPagination extends Components.PidPagination {
 
 @ProxyCmp({
   defineCustomElementFn: definePidTooltip,
-  inputs: ['fitContent', 'maxHeight', 'maxWidth', 'position', 'text']
+  inputs: ['darkMode', 'fitContent', 'maxHeight', 'maxWidth', 'position', 'text'],
 })
 @Component({
   selector: 'pid-tooltip',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['fitContent', 'maxHeight', 'maxWidth', 'position', { name: 'text', required: true }],
+  inputs: ['darkMode', 'fitContent', 'maxHeight', 'maxWidth', 'position', { name: 'text', required: true }],
   outputs: ['tooltipExpansionChange'],
 })
 export class PidTooltip {

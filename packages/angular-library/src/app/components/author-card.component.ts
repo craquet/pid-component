@@ -29,7 +29,8 @@ export interface Author {
             <p [class]="darkMode ? 'text-gray-400' : 'text-gray-500'" class="author-institution">{{ author.institution }}</p>
           }
           <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
-            <pid-component [value]="author.orcid" [emphasizeComponent]="false" width="100%" />
+            <pid-component [value]="author.orcid" [emphasizeComponent]="false" [darkMode]="darkMode ? 'dark' : 'light'"
+                           width="100%" />
           </div>
         </div>
       </div>

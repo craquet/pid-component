@@ -5,9 +5,10 @@ interface DoiCardProps {
   value: string;
   license?: string;
   className?: string;
+  darkMode?: boolean;
 }
 
-export function DoiCard({ value, license, className }: DoiCardProps) {
+export function DoiCard({ value, license, className, darkMode = false }: DoiCardProps) {
   return (
     <Card className={className}>
       <CardHeader>
@@ -17,7 +18,7 @@ export function DoiCard({ value, license, className }: DoiCardProps) {
       </CardHeader>
       <CardContent>
         <div className="min-h-[120px] max-h-[300px] overflow-hidden">
-          <PidComponent value={value} darkMode="light" width="100%" />
+          <PidComponent value={value} darkMode={darkMode ? 'dark' : 'light'} width="100%" />
         </div>
         {license && (
           <div className="mt-4 pt-4 border-t">
@@ -25,7 +26,7 @@ export function DoiCard({ value, license, className }: DoiCardProps) {
               License
             </CardTitle>
             <div className="min-h-[24px] max-h-[60px] overflow-hidden">
-              <PidComponent value={license} darkMode="light" width="100%" />
+              <PidComponent value={license} darkMode={darkMode ? 'dark' : 'light'} width="100%" />
             </div>
           </div>
         )}

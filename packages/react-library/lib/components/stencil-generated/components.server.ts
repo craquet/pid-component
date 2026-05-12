@@ -43,7 +43,8 @@ export const CopyButton: StencilReactComponent<CopyButtonElement, CopyButtonEven
     tagName: 'copy-button',
     properties: {
         value: 'value',
-        label: 'label'
+        label: 'label',
+        darkMode: 'dark-mode',
     },
     hydrateModule: import('@kit-data-manager/pid-component/hydrate') as Promise<HydrateModule>,
     clientModule: clientComponents.CopyButton as StencilReactComponent<CopyButtonElement, CopyButtonEvents, Components.CopyButton>,
@@ -192,7 +193,8 @@ export const PidTooltip: StencilReactComponent<PidTooltipElement, PidTooltipEven
         position: 'position',
         maxWidth: 'max-width',
         maxHeight: 'max-height',
-        fitContent: 'fit-content'
+        fitContent: 'fit-content',
+        darkMode: 'dark-mode',
     },
     hydrateModule: import('@kit-data-manager/pid-component/hydrate') as Promise<HydrateModule>,
     clientModule: clientComponents.PidTooltip as StencilReactComponent<PidTooltipElement, PidTooltipEvents, Components.PidTooltip>,

@@ -690,6 +690,7 @@ export class PidComponent {
             class="ml-auto shrink-0"
             aria-label={`Copy value: ${this.identifierObject.value}`}
             onClick={this.blockEventPropagation}
+            dark-mode={this.darkMode}
           />
         ) : null}
       </span>
@@ -747,6 +748,7 @@ export class PidComponent {
               class="ml-auto pl-2 shrink-0"
               aria-label={`Copy value: ${this.value}`}
               onClick={this.blockEventPropagation}
+              dark-mode={this.darkMode}
             />
           ) : null}
 

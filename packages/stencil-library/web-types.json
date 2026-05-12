@@ -51,6 +51,14 @@
               "required": false,
               "default": "",
               "priority": "high"
+            },
+            {
+              "name": "dark-mode",
+              "deprecated": false,
+              "description": "Dark mode setting for the button.\nWhen provided, this takes precedence over DOM-based dark mode detection.",
+              "required": false,
+              "default": "'light'",
+              "priority": "high"
             }
           ],
           "slots": [],
@@ -576,6 +584,14 @@
               "required": false,
               "default": "true",
               "priority": "high"
+            },
+            {
+              "name": "dark-mode",
+              "deprecated": false,
+              "description": "Dark mode setting for the tooltip.\nWhen provided, this takes precedence over DOM-based dark mode detection.",
+              "required": false,
+              "default": "'light'",
+              "priority": "high"
             }
           ],
           "slots": [],
@@ -663,6 +679,9 @@
             },
             {
               "name": "label"
+            },
+            {
+              "name": "darkMode"
             }
           ]
         },
@@ -863,6 +882,9 @@
             },
             {
               "name": "fitContent"
+            },
+            {
+              "name": "darkMode"
             }
           ]
         }

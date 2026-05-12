@@ -18,13 +18,13 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
       <mat-card-content>
         <h3 [class]="darkMode ? 'text-gray-300' : 'text-gray-500'" class="label">Digital Object Identifier</h3>
         <div style="min-height: 120px; max-height: 300px; overflow: hidden;">
-          <pid-component [value]="value" [openByDefault]="true" width="100%" />
+          <pid-component [value]="value" [openByDefault]="true" [darkMode]="darkMode ? 'dark' : 'light'" width="100%" />
         </div>
         @if (license) {
           <mat-divider></mat-divider>
           <h3 [class]="darkMode ? 'text-gray-300' : 'text-gray-500'" class="label" style="margin-top: 16px">License</h3>
           <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
-            <pid-component [value]="license" width="100%" />
+            <pid-component [value]="license" [darkMode]="darkMode ? 'dark' : 'light'" width="100%" />
           </div>
         }
       </mat-card-content>

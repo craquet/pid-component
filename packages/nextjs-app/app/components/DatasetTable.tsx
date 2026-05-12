@@ -16,16 +16,17 @@ export interface Dataset {
 interface DatasetTableProps {
   datasets: Dataset[];
   className?: string;
+  darkMode?: boolean;
 }
 
 const columns = [
-  { key: 'title', label: 'Title', initialWidth: 30 },
+  { key: 'title', label: 'Title', initialWidth: 40 },
   { key: 'doi', label: 'DOI', initialWidth: 30 },
-  { key: 'license', label: 'License', initialWidth: 25 },
-  { key: 'actions', label: 'Actions', initialWidth: 15 },
-] as const;
+  { key: 'license', label: 'License', initialWidth: 20 },
+  { key: 'actions', label: 'Actions', initialWidth: 10 },
+];
 
-export function DatasetTable({ datasets, className }: DatasetTableProps) {
+export function DatasetTable({ datasets, className, darkMode = false }: DatasetTableProps) {
   const [columnWidths, setColumnWidths] = useState<Record<string, number>>(() =>
     Object.fromEntries(columns.map((c) => [c.key, c.initialWidth])),
   );
@@ -96,12 +97,14 @@ export function DatasetTable({ datasets, className }: DatasetTableProps) {
                 className="px-6 py-4 text-sm overflow-hidden text-ellipsis whitespace-nowrap text-foreground">{dataset.title}</td>
               <td className="px-6 py-4">
                 <div className="overflow-hidden">
-                  <PidComponent value={dataset.doi} emphasizeComponent={false} darkMode="light" width="100%" />
+                  <PidComponent value={dataset.doi} emphasizeComponent={false} darkMode={darkMode ? 'dark' : 'light'}
+                                width="100%" />
                 </div>
               </td>
               <td className="px-6 py-4">
                 <div className="overflow-hidden">
-                  <PidComponent value={dataset.license} emphasizeComponent={false} darkMode="light" width="100%" />
+                  <PidComponent value={dataset.license} emphasizeComponent={false}
+                                darkMode={darkMode ? 'dark' : 'light'} width="100%" />
                 </div>
               </td>
               <td className="px-6 py-4 overflow-hidden">

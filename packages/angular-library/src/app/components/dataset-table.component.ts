@@ -48,7 +48,8 @@ export interface Dataset {
               </th>
               <td mat-cell *matCellDef="let dataset" class="cell-overflow">
                 <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
-                  <pid-component [value]="dataset.doi" [emphasizeComponent]="false" width="100%" />
+                  <pid-component [value]="dataset.doi" [emphasizeComponent]="false"
+                                 [darkMode]="darkMode ? 'dark' : 'light'" width="100%" />
                 </div>
               </td>
             </ng-container>
@@ -60,7 +61,8 @@ export interface Dataset {
               </th>
               <td mat-cell *matCellDef="let dataset" class="cell-overflow">
                 <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
-                  <pid-component [value]="dataset.license" [emphasizeComponent]="false" width="100%" />
+                  <pid-component [value]="dataset.license" [emphasizeComponent]="false"
+                                 [darkMode]="darkMode ? 'dark' : 'light'" width="100%" />
                 </div>
               </td>
             </ng-container>

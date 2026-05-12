@@ -14,7 +14,11 @@ import {
 } from '@/components/ui/dialog';
 import { PidComponent } from '@kit-data-manager/react-pid-component';
 
-export function LicenseDialog() {
+interface LicenseDialogProps {
+  darkMode?: boolean;
+}
+
+export function LicenseDialog({ darkMode = false }: LicenseDialogProps) {
   return (
     <Card>
       <CardHeader>
@@ -42,7 +46,8 @@ export function LicenseDialog() {
               </DialogDescription>
             </DialogHeader>
             <div className="mb-4">
-              <PidComponent value="https://spdx.org/licenses/Apache-2.0" darkMode="light" width="100%" />
+              <PidComponent value="https://spdx.org/licenses/Apache-2.0" darkMode={darkMode ? 'dark' : 'light'}
+                            width="100%" />
             </div>
             <div className="flex justify-end">
               <DialogClose asChild>

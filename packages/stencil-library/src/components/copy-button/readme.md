@@ -5,10 +5,11 @@
 
 ## Properties
 
-| Property             | Attribute | Description                                                                          | Type     | Default     |
-|----------------------|-----------|--------------------------------------------------------------------------------------|----------|-------------|
-| `label`              | `label`   | Optional custom label for the button. If not provided, a default label will be used. | `string` | `undefined` |
-| `value` _(required)_ | `value`   | The value to copy to the clipboard.                                                  | `string` | `undefined` |
+| Property             | Attribute   | Description                                                                                                | Type                            | Default     |
+|----------------------|-------------|------------------------------------------------------------------------------------------------------------|---------------------------------|-------------|
+| `darkMode`           | `dark-mode` | Dark mode setting for the button. When provided, this takes precedence over DOM-based dark mode detection. | `"dark" \| "light" \| "system"` | `'light'`   |
+| `label`              | `label`     | Optional custom label for the button. If not provided, a default label will be used.                       | `string`                        | `undefined` |
+| `value` _(required)_ | `value`     | The value to copy to the clipboard.                                                                        | `string`                        | `undefined` |
 
 
 ## Dependencies

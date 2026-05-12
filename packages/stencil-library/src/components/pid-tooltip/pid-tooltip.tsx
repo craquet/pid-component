@@ -46,6 +46,11 @@ export class PidTooltip {
    */
   @Prop() fitContent: boolean = true;
   /**
+   * Dark mode setting for the tooltip.
+   * When provided, this takes precedence over DOM-based dark mode detection.
+   */
+  @Prop() darkMode: 'light' | 'dark' | 'system' = 'light';
+  /**
    * Unique ID for ARIA attributes
    */
   private tooltipId: string = `tooltip-${Math.random().toString(36).substring(2, 11)}`;
@@ -87,6 +92,23 @@ export class PidTooltip {
     this.tableRow = this.el.closest('tr') as HTMLTableRowElement;
   }
 
+  private getIsDarkMode(): boolean {
+    if (this.darkMode === 'dark') {
+      return true;
+    }
+    if (this.darkMode === 'light') {
+      return false;
+    }
+    const parentComponent = this.el.closest('pid-component');
+    if (parentComponent?.classList.contains('bg-gray-800')) {
+      return true;
+    }
+    if (this.darkMode === 'system') {
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  }
+
   render() {
     // Don't show the tooltip icon if there's no text
     const hasTooltipText = this.text && this.text.trim().length > 0;
@@ -94,9 +116,8 @@ export class PidTooltip {
     // Determine appropriate button label based on visibility state
     const buttonLabel = `${this.isVisible ? 'Hide' : 'Show'} additional information`;
 
-    // Check if dark mode is active by looking at the closest pid-component
-    const parentComponent = this.el.closest('pid-component');
-    const isDarkMode = parentComponent?.classList.contains('bg-gray-800');
+    // Check if dark mode is active
+    const isDarkMode = this.getIsDarkMode();
 
     return (
       <Host class="relative inline-block w-full" onMouseEnter={this.showTooltip} onMouseLeave={this.hideTooltip}>
