@@ -1,53 +1,68 @@
 'use client';
 
-import * as Dialog from '@radix-ui/react-dialog';
 import { Scale } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { PidComponent } from '@kit-data-manager/react-pid-component';
+
+interface LicenseDialogProps {
+  darkMode?: boolean;
+}
 
 /**
  * Dialog component for displaying license information.
+ * Uses shadcn/ui dialog and card components.
  * Uses SPDX license identifier for the Apache 2.0 license.
  */
-export function LicenseDialog() {
+export function LicenseDialog({ darkMode = false }: LicenseDialogProps) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h2 className="text-lg font-semibold text-slate-900 flex items-center gap-2 mb-4">
-        <Scale className="h-5 w-5 text-slate-700" />
-        License Information
-      </h2>
-      <Dialog.Root>
-        <Dialog.Trigger asChild>
-          <button
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-700 disabled:pointer-events-none disabled:opacity-50">
-            <Scale className="h-4 w-4" />
-            View License
-          </button>
-        </Dialog.Trigger>
-        <Dialog.Portal>
-          <Dialog.Overlay
-            className="fixed inset-0 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-          <Dialog.Content
-            className="fixed left-1/2 top-1/2 max-h-85vh w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-6 shadow-lg focus:outline-none">
-            <Dialog.Title className="text-lg font-semibold text-slate-900 mb-2">
-              Apache 2.0 License
-            </Dialog.Title>
-            <Dialog.Description className="text-sm text-slate-600 mb-4">
-              Dataset published under Apache 2.0 license, allowing free reuse with appropriate attribution.
-            </Dialog.Description>
+    <Card className={darkMode ? 'bg-slate-800 border-slate-700' : 'bg-white'}>
+      <CardHeader>
+        <CardTitle className={darkMode ? 'text-white' : ''}>
+          <Scale className={`inline h-5 w-5 mr-2 ${darkMode ? 'text-slate-300' : 'text-slate-700'}`} />
+          License Information
+        </CardTitle>
+        <CardDescription className={darkMode ? 'text-slate-400' : ''}>
+          This dataset is published under the Apache 2.0 license.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="default">
+              <Scale className="h-4 w-4" />
+              View License
+            </Button>
+          </DialogTrigger>
+          <DialogContent className={darkMode ? 'bg-slate-800 border-slate-700' : ''}>
+            <DialogHeader>
+              <DialogTitle className={darkMode ? 'text-white' : ''}>Apache 2.0 License</DialogTitle>
+              <DialogDescription className={darkMode ? 'text-slate-400' : ''}>
+                Dataset published under Apache 2.0 license, allowing free reuse with appropriate attribution.
+              </DialogDescription>
+            </DialogHeader>
             <div className="mb-4">
-              <PidComponent value="https://spdx.org/licenses/Apache-2.0" width="100%" />
+              <PidComponent value="https://spdx.org/licenses/Apache-2.0" darkMode={darkMode ? 'dark' : 'light'}
+                            width="100%" />
             </div>
             <div className="flex justify-end">
               <Dialog.Close asChild>
-                <button
-                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 disabled:pointer-events-none disabled:opacity-50">
+                <Button variant="outline" className={darkMode ? 'border-slate-600 bg-slate-700 text-slate-200' : ''}>
                   Close
-                </button>
+                </Button>
               </Dialog.Close>
             </div>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
-    </div>
+          </DialogContent>
+        </Dialog>
+      </CardContent>
+    </Card>
   );
 }

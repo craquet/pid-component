@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
 import { HeroCard } from './components/HeroCard';
 import { DoiCard } from './components/DoiCard';
@@ -55,10 +55,20 @@ const authors = [
  */
 export default function ResearchDemoPage() {
   const [activePage, setActivePage] = useState('home');
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <Navigation activePage={activePage} onNavigate={setActivePage} />
+    <div className={`min-h-screen ${darkMode ? 'bg-slate-900' : 'bg-slate-50'}`}>
+      <Navigation activePage={activePage} onNavigate={setActivePage} darkMode={darkMode}
+                  onDarkModeChange={setDarkMode} />
 
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         {activePage === 'home' && (
@@ -68,42 +78,45 @@ export default function ResearchDemoPage() {
                 className="col-span-2"
                 title="This is an example webpage"
                 description="This is an example of how the pid-component can be used within a Next.js app. Demo showcases DOIs (e.g. 10.5281/zenodo.13629109), ORCIDs (e.g. 0009-0005-2800-4833), RORs (e.g. https://ror.org/04t3en479), SPDX licenses (e.g. Apache-2.0), and more."
+                darkMode={darkMode}
               />
               <DoiCard
                 value="https://doi.org/10.5281/zenodo.13629109"
                 license="https://spdx.org/licenses/Apache-2.0"
+                darkMode={darkMode}
               />
             </div>
 
-            <DatasetTable datasets={datasets} className="mb-8" />
+            <DatasetTable datasets={datasets} className="mb-8" darkMode={darkMode} />
 
-            <AuthorGrid authors={authors} />
+            <AuthorGrid authors={authors} darkMode={darkMode} />
 
-            <ArticleSection />
+            <ArticleSection darkMode={darkMode} />
           </>
         )}
 
         {activePage === 'datasets' && (
-          <DatasetTable datasets={datasets} />
+          <DatasetTable datasets={datasets} darkMode={darkMode} />
         )}
 
         {activePage === 'about' && (
           <div className="space-y-8">
             <div className="prose">
-              <h1 className="text-3xl font-bold text-slate-900 mb-4">Lorem ipsum dolor sit amet</h1>
-              <p className="text-slate-600">
+              <h1 className={`text-3xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-slate-900'}`}>Lorem ipsum dolor
+                sit amet</h1>
+              <p className={darkMode ? 'text-slate-300' : 'text-slate-600'}>
                 Lorem ipsum dolor sit amet consectetur adipiscing elit. Demo showcases pid-component
                 integrated with Next.js, featuring DOIs, ORCIDs, RORs, Handles, SPDX licenses, and more.
               </p>
             </div>
-            <AuthorGrid authors={authors} />
+            <AuthorGrid authors={authors} darkMode={darkMode} />
           </div>
         )}
 
-        <LicenseDialog />
+        <LicenseDialog darkMode={darkMode} />
       </main>
 
-      <Footer />
+      <Footer darkMode={darkMode} />
     </div>
   );
 }

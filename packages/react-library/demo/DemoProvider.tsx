@@ -1,8 +1,9 @@
 'use client';
 
 import { type ReactNode } from 'react';
-import { createTheme, MantineProvider } from '@mantine/core';
-import '@mantine/core/styles.css';
+import { createTheme, MantineProvider, useColorScheme } from '@mantine/core';
+import { useHotkeys } from '@mantine/hooks';
+import { useState } from 'react';
 
 export const theme = createTheme({
   primaryColor: 'indigo',
@@ -11,12 +12,24 @@ export const theme = createTheme({
 
 interface DemoProviderProps {
   children: ReactNode;
+  darkMode: boolean;
+  onDarkModeChange: (darkMode: boolean) => void;
 }
 
-export function DemoProvider({ children }: DemoProviderProps) {
+function MantineThemeProvider({ children, darkMode, onDarkModeChange }: DemoProviderProps) {
+  useHotkeys([['mod+J', () => onDarkModeChange(!darkMode)]]);
+
   return (
-    <MantineProvider theme={theme}>
+    <MantineProvider theme={theme} colorScheme={darkMode ? 'dark' : 'light'}>
       {children}
     </MantineProvider>
+  );
+}
+
+export function DemoProvider({ children, darkMode, onDarkModeChange }: DemoProviderProps) {
+  return (
+    <MantineThemeProvider darkMode={darkMode} onDarkModeChange={onDarkModeChange}>
+      {children}
+    </MantineThemeProvider>
   );
 }

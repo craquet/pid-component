@@ -5,13 +5,19 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconScale } from '@tabler/icons-react';
 import { PidComponent } from '../../lib';
 
-export function LicenseDialog() {
+interface LicenseDialogProps {
+  darkMode?: boolean;
+}
+
+export function LicenseDialog({ darkMode = false }: LicenseDialogProps) {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <>
-      <Paper shadow="sm" padding="xl" radius="md" withBorder>
-        <Text fw={600} size="md" mb="md" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <Paper shadow="sm" padding="xl" radius="md" withBorder
+             className={darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}>
+        <Text fw={600} size="md" mb="md" style={{ display: 'flex', alignItems: 'center', gap: 8 }}
+              className={darkMode ? 'text-white' : 'text-gray-900'}>
           <IconScale size={20} />
           License Information
         </Text>
@@ -26,13 +32,19 @@ export function LicenseDialog() {
         title="Apache License 2.0"
         centered
         size="md"
+        classNames={{
+          content: darkMode ? 'bg-gray-800' : 'bg-white',
+          header: darkMode ? 'bg-gray-800' : 'bg-white',
+          body: darkMode ? 'bg-gray-800' : 'bg-white',
+        }}
       >
-        <Text size="sm" c="dimmed" mb="md">
+        <Text size="sm" c="dimmed" mb="md" className={darkMode ? 'text-gray-300' : ''}>
           This dataset is published under the Apache 2.0 license, allowing free reuse
           with appropriate attribution.
         </Text>
         <div style={{ minHeight: 150, maxHeight: 400, overflow: 'hidden' }}>
-          <PidComponent value="https://spdx.org/licenses/Apache-2.0" width="100%" />
+          <PidComponent value="https://spdx.org/licenses/Apache-2.0" darkMode={darkMode ? 'dark' : 'light'}
+                        width="100%" />
         </div>
         <Group justify="flex-end" mt="xl">
           <Button variant="outline" color="gray" onClick={close}>

@@ -14,15 +14,15 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
     PidComponent,
   ],
   template: `
-    <mat-card class="doi-card">
+    <mat-card [class]="darkMode ? 'bg-gray-800' : 'bg-white'" class="doi-card">
       <mat-card-content>
-        <h3 class="label">Digital Object Identifier</h3>
+        <h3 [class]="darkMode ? 'text-gray-300' : 'text-gray-500'" class="label">Digital Object Identifier</h3>
         <div style="min-height: 120px; max-height: 300px; overflow: hidden;">
           <pid-component [value]="value" [openByDefault]="true" width="100%" />
         </div>
         @if (license) {
           <mat-divider></mat-divider>
-          <h3 class="label" style="margin-top: 16px">License</h3>
+          <h3 [class]="darkMode ? 'text-gray-300' : 'text-gray-500'" class="label" style="margin-top: 16px">License</h3>
           <div style="min-height: 80px; max-height: 200px; overflow: hidden;">
             <pid-component [value]="license" width="100%" />
           </div>
@@ -40,7 +40,6 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
     .label {
       font-size: 12px;
       font-weight: 600;
-      color: #9e9e9e;
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 12px;
@@ -50,4 +49,5 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
 export class DoiCardComponent {
   @Input() value = '';
   @Input() license?: string;
+  @Input() darkMode = false;
 }

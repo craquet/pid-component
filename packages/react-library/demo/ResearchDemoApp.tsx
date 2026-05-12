@@ -14,6 +14,7 @@ import {
   LicenseDialog,
   Navigation,
 } from './components';
+import { DemoProvider } from './DemoProvider';
 import { initPidDetection, type PidDetectionController } from '@kit-data-manager/pid-component';
 
 interface AutodiscoveryContextValue {
@@ -76,9 +77,18 @@ interface AppProps {
 
 export function ResearchDemoApp({ activePage = 'home', onNavigate }: AppProps) {
   const [currentPage, setCurrentPage] = useState(activePage);
+  const [darkMode, setDarkMode] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const articleRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<PidDetectionController | null>(null);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
 
   const handleNavigate = (page: string) => {
     setCurrentPage(page);
@@ -89,7 +99,7 @@ export function ResearchDemoApp({ activePage = 'home', onNavigate }: AppProps) {
     if (articleRef.current && !controllerRef.current) {
       controllerRef.current = initPidDetection({
         root: articleRef.current,
-        darkMode: 'light',
+        darkMode: darkMode ? 'dark' : 'light',
       });
       setIsActive(true);
     }
@@ -104,9 +114,11 @@ export function ResearchDemoApp({ activePage = 'home', onNavigate }: AppProps) {
   }, []);
 
   return (
+    <DemoProvider darkMode={darkMode} onDarkModeChange={setDarkMode}>
     <AutodiscoveryContext.Provider value={{ controller: controllerRef.current, isActive }}>
-      <div style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
-        <Navigation activePage={currentPage} onNavigate={handleNavigate} />
+      <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <Navigation activePage={currentPage} onNavigate={handleNavigate} darkMode={darkMode}
+                    onDarkModeChange={setDarkMode} />
 
         <Container size="xl" py="xl">
           {currentPage === 'home' && (
@@ -116,34 +128,37 @@ export function ResearchDemoApp({ activePage = 'home', onNavigate }: AppProps) {
                   <HeroCard
                     title="This is an example webpage"
                     description="This is an example of how the pid-component can be used within a Next.js app. Demo showcases DOIs (e.g. 10.5281/zenodo.13629109), ORCIDs (e.g. 0009-0005-2800-4833), RORs (e.g. https://ror.org/04t3en479), SPDX licenses (e.g. Apache-2.0), and more."
+                    darkMode={darkMode}
                   />
                 </Grid.Col>
                 <Grid.Col span={{ base: 12, md: 4 }}>
                   <DoiCard
                     value="https://doi.org/10.5281/zenodo.13629109"
                     license="https://spdx.org/licenses/Apache-2.0"
+                    darkMode={darkMode}
                   />
                 </Grid.Col>
               </Grid>
 
-              <DatasetTable datasets={datasets} />
+              <DatasetTable datasets={datasets} darkMode={darkMode} />
 
-              <AuthorGrid authors={authors} />
+              <AuthorGrid authors={authors} darkMode={darkMode} />
 
               <div ref={articleRef}>
-                <ArticleSection />
+                <ArticleSection darkMode={darkMode} />
               </div>
             </Stack>
           )}
 
-          {currentPage === 'datasets' && <DatasetsPage />}
-          {currentPage === 'about' && <AboutPage />}
+          {currentPage === 'datasets' && <DatasetsPage darkMode={darkMode} />}
+          {currentPage === 'about' && <AboutPage darkMode={darkMode} />}
 
-          <LicenseDialog />
+          <LicenseDialog darkMode={darkMode} />
         </Container>
 
-        <Footer />
+        <Footer darkMode={darkMode} />
       </div>
     </AutodiscoveryContext.Provider>
+    </DemoProvider>
   );
 }

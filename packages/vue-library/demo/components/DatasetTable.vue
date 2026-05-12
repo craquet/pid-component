@@ -11,6 +11,7 @@ interface Dataset {
 
 defineProps<{
   datasets: Dataset[];
+  darkMode?: boolean;
 }>();
 
 const columnWidths = reactive<Record<string, number>>({
@@ -47,13 +48,14 @@ function onResizeEnd() {
 </script>
 
 <template>
-  <v-card elevation="1" style="overflow: hidden">
-    <v-card-title class="d-flex align-center pa-4 border-b">
-      <v-icon class="mr-2" color="grey-darken-2">mdi-file-document</v-icon>
+  <v-card :color="darkMode ? 'grey-darken-3' : 'white'" elevation="1" style="overflow: hidden">
+    <v-card-title class="d-flex align-center pa-4 border-b" :class="darkMode ? 'text-white' : 'text-grey-darken-3'">
+      <v-icon class="mr-2" :class="darkMode ? 'text-grey-lighten-1' : 'text-grey-darken-2'">mdi-file-document</v-icon>
       <span class="text-h6">Related Datasets</span>
     </v-card-title>
     <div style="overflow-x: auto">
-      <v-table class="dataset-table-inner elevation-0" style="table-layout: fixed; width: 100%">
+      <v-table :color="darkMode ? 'grey-darken-3' : 'white'" class="dataset-table-inner elevation-0"
+               style="table-layout: fixed; width: 100%">
         <thead>
         <tr>
           <th
@@ -76,7 +78,9 @@ function onResizeEnd() {
         </thead>
         <tbody>
         <tr v-for="item in datasets" :key="item.id">
-          <td style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ item.title }}</td>
+          <td :class="darkMode ? 'text-white' : 'text-grey-darken-3'"
+              style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ item.title }}
+          </td>
           <td style="overflow: hidden; min-width: 0;">
             <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
               <pid-component :emphasize-component="false" :value="item.doi" style="display: block;" width="100%" />

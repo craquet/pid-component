@@ -1,0 +1,180 @@
+/* Angular Material Dark Mode Overrides
+ * These styles override the prebuilt azure-blue theme for dark mode
+ */
+
+/* When .dark class is present, override Material component colors */
+.dark {
+  background-color: #111827 !important;
+  color: #f9fafb !important;
+}
+
+/* Override Material toolbar */
+.dark mat-toolbar,
+.dark .mat-toolbar {
+  background-color: #1f2937 !important;
+  color: #f9fafb !important;
+}
+
+/* Override Material card */
+.dark mat-card,
+.dark .mat-card {
+  background-color: #1f2937 !important;
+}
+
+/* Override MDC card */
+.dark .mdc-card {
+  background-color: #1f2937 !important;
+}
+
+/* Override Material dialog */
+.dark mat-dialog-container,
+.dark .mat-dialog-container,
+.dark mat-dialog-content,
+.dark .mat-dialog-content {
+  background-color: #1f2937 !important;
+}
+
+.dark .mdc-dialog__surface {
+  background-color: #1f2937 !important;
+}
+
+/* Override Material buttons */
+.dark mat-button,
+.dark .mat-button,
+.dark .mdc-button {
+  color: #818cf8 !important;
+}
+
+.dark mat-mini-fab,
+.dark .mat-mdc-mini-fab {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+}
+
+/* Override Material chips */
+.dark mat-chip,
+.dark .mat-mdc-chip {
+  background-color: #374151 !important;
+  color: #f9fafb !important;
+}
+
+/* Override Material icons */
+.dark mat-icon,
+.dark .mat-icon {
+  color: #d1d5db !important;
+}
+
+/* Override Material tabs */
+.dark .mat-mdc-tab-group {
+  --mdc-tab-indicator-active-indicator-color: #818cf8;
+  --mat-tab-header-active-label-text-color: #818cf8;
+  --mat-tab-header-active-ripple-color: #818cf8;
+  --mat-tab-header-inactive-label-text-color: #9ca3af;
+}
+
+/* Override Material form fields */
+.dark .mat-mdc-form-field {
+  background-color: #374151 !important;
+}
+
+/* Override Material select */
+.dark .mat-mdc-select {
+  background-color: #374151 !important;
+}
+
+.dark .mdc-text-field--filled {
+  background-color: #374151 !important;
+}
+
+/* Override Material table */
+.dark mat-table,
+.dark .mat-mdc-table {
+  background-color: #1f2937 !important;
+}
+
+.dark .mat-mdc-header-cell {
+  background-color: #374151 !important;
+}
+
+.dark .mat-mdc-row {
+  background-color: inherit;
+}
+
+.dark .mat-mdc-cell {
+  color: #f9fafb !important;
+}
+
+/* Override Material menu */
+.dark mat-menu-content,
+.dark .mat-mdc-menu-content {
+  background-color: #1f2937 !important;
+}
+
+.dark .mat-mdc-menu-item {
+  color: #f9fafb !important;
+}
+
+/* Override Material slide toggle */
+.dark .mdc-switch {
+  --mdc-switch-selected-track-color: #4f46e5 !important;
+  --mdc-switch-selected-handle-color: #818cf8 !important;
+  --mdc-switch-selected-focus-track-color: #4f46e5 !important;
+  --mdc-switch-selected-hover-track-color: #4f46e5 !important;
+  --mdc-switch-selected-pressed-track-color: #4f46e5 !important;
+}
+
+/* Override text on dark backgrounds */
+.dark,
+.dark * {
+  color: #f9fafb !important;
+}
+
+/* Preserve specific element colors */
+.dark a,
+.dark a * {
+  color: #818cf8 !important;
+}
+
+.dark mat-icon,
+.dark mat-icon * {
+  color: #d1d5db !important;
+}
+
+/* Override container backgrounds */
+.dark .mat-drawer-container {
+  background-color: #111827 !important;
+}
+
+.dark .mat-drawer {
+  background-color: #1f2937 !important;
+}
+
+/* Override footer */
+.dark app-footer,
+.dark .footer {
+  background-color: #1f2937 !important;
+  border-top-color: #374151 !important;
+}
+
+/* Override navigation */
+.dark .navigation-toolbar {
+  background-color: #1f2937 !important;
+}
+
+/* Override chip sets */
+.dark .mat-mdc-chip-set {
+  background-color: transparent !important;
+}
+
+.dark .mdc-chip {
+  background-color: #374151 !important;
+}
+
+/* Override scrollbar in dark mode */
+.dark ::-webkit-scrollbar {
+  background-color: #1f2937;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+}

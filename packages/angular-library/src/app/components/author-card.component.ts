@@ -18,15 +18,15 @@ export interface Author {
     PidComponent,
   ],
   template: `
-    <mat-card class="author-card">
+    <mat-card [class]="darkMode ? 'bg-gray-800' : 'bg-white'" class="author-card">
       <div class="author-content">
         <div class="avatar-placeholder">
           {{ getInitials(author.name) }}
         </div>
         <div class="author-info">
-          <h3 class="author-name">{{ author.name }}</h3>
+          <h3 [class]="darkMode ? 'text-white' : 'text-gray-900'" class="author-name">{{ author.name }}</h3>
           @if (author.institution) {
-            <p class="author-institution">{{ author.institution }}</p>
+            <p [class]="darkMode ? 'text-gray-400' : 'text-gray-500'" class="author-institution">{{ author.institution }}</p>
           }
           <div style="min-height: 24px; max-height: 80px; overflow: hidden;">
             <pid-component [value]="author.orcid" [emphasizeComponent]="false" width="100%" />
@@ -69,7 +69,6 @@ export interface Author {
     .author-name {
       font-size: 16px;
       font-weight: 600;
-      color: #212121;
       margin: 0 0 4px 0;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -84,7 +83,6 @@ export interface Author {
 
     .author-institution {
       font-size: 12px;
-      color: #bdbdbd;
       margin: 0 0 12px 0;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -94,6 +92,7 @@ export interface Author {
 })
 export class AuthorCardComponent {
   @Input() author!: Author;
+  @Input() darkMode = false;
 
   getInitials(name: string): string {
     return name.split(' ').map(n => n[0]).join('');
@@ -106,10 +105,10 @@ export class AuthorCardComponent {
   imports: [CommonModule, AuthorCardComponent],
   template: `
     <div class="author-grid">
-      <h2 class="grid-title">Lorem ipsum dolor sit amet</h2>
+      <h2 [class]="darkMode ? 'text-white' : 'text-gray-900'" class="grid-title">Lorem ipsum dolor sit amet</h2>
       <div class="grid">
         @for (author of authors; track author.orcid) {
-          <app-author-card [author]="author" />
+          <app-author-card [author]="author" [darkMode]="darkMode" />
         }
       </div>
     </div>
@@ -122,7 +121,6 @@ export class AuthorCardComponent {
     .grid-title {
       font-size: 18px;
       font-weight: 600;
-      color: #212121;
       margin-bottom: 16px;
     }
 
@@ -135,4 +133,5 @@ export class AuthorCardComponent {
 })
 export class AuthorGridComponent {
   @Input() authors: Author[] = [];
+  @Input() darkMode = false;
 }

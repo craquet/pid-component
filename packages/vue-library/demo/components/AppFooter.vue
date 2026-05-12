@@ -1,25 +1,25 @@
 <script lang="ts" setup>
-import { PidComponent } from '../../lib';
+defineProps<{
+  darkMode?: boolean;
+}>();
 </script>
 
 <template>
-  <v-footer class="pa-0" color="grey-lighten-4">
-    <v-container class="py-6" fluid>
-      <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <v-btn icon size="small" variant="text">
-            <v-icon color="grey-darken-2">mdi-database</v-icon>
-          </v-btn>
-          <span class="text-body-1 font-weight-bold text-black">Lorem ipsum</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span class="text-body-2 text-grey" style="white-space: nowrap;">Powered by</span>
-          <div style="flex: 1; min-width: 0;">
-            <pid-component :emphasize-component="false" :hide-subcomponents="true" style="display: block;"
-                           value="https://ror.org/04t3en479" />
-          </div>
-        </div>
-      </div>
-    </v-container>
+  <v-footer :color="darkMode ? 'grey-darken-4' : 'white'" class="pa-0">
+    <div class="d-flex align-center w-100 px-4 py-3">
+      <v-icon :icon="darkMode ? 'mdi-database' : 'mdi-database'" :color="darkMode ? 'white' : 'grey-darken-2'" />
+      <span class="ml-3 text-body-1 font-weight-bold" :class="darkMode ? 'text-white' : 'text-black'">Lorem ipsum</span>
+      <v-spacer />
+      <span class="text-body-2" :class="darkMode ? 'text-grey-lighten-1' : 'text-grey-darken-2'">Powered by</span>
+      <v-btn
+        icon
+        variant="text"
+        size="small"
+        class="ml-2"
+        :color="darkMode ? 'grey-lighten-1' : 'grey-darken-2'"
+      >
+        <v-icon size="20">mdi-database</v-icon>
+      </v-btn>
+    </div>
   </v-footer>
 </template>

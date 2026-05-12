@@ -20,7 +20,7 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
     PidComponent,
   ],
   template: `
-    <mat-card class="hero-card">
+    <mat-card [class]="darkMode ? 'bg-gray-800' : 'bg-white'" class="hero-card">
       <mat-card-header>
         <mat-chip-set>
           <mat-chip color="primary" highlighted>DOI</mat-chip>
@@ -28,15 +28,15 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
         </mat-chip-set>
       </mat-card-header>
       <mat-card-content>
-        <h1 class="hero-title">{{ title }}</h1>
-        <p class="hero-description">{{ description }}</p>
+        <h1 [class]="darkMode ? 'text-white' : 'text-gray-900'" class="hero-title">{{ title }}</h1>
+        <p [class]="darkMode ? 'text-gray-300' : 'text-gray-600'" class="hero-description">{{ description }}</p>
       </mat-card-content>
       <mat-card-actions>
         <button mat-flat-button color="primary">
           <mat-icon>download</mat-icon>
           Download Dataset
         </button>
-        <button mat-stroked-button>
+        <button mat-stroked-button [color]="darkMode ? 'accent' : 'primary'">
           <mat-icon>open_in_new</mat-icon>
           View Source
         </button>
@@ -51,14 +51,12 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
     .hero-title {
       font-size: 24px;
       font-weight: 700;
-      color: #212121;
       margin: 16px 0;
       line-height: 1.3;
     }
 
     .hero-description {
       font-size: 14px;
-      color: #757575;
       line-height: 1.6;
       margin-bottom: 24px;
     }
@@ -72,4 +70,5 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
 export class HeroCardComponent {
   @Input() title = '';
   @Input() description = '';
+  @Input() darkMode = false;
 }

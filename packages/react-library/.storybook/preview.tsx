@@ -36,6 +36,9 @@ import {
 // Import Mantine styles for ResearchDemo
 import '@mantine/core/styles.css';
 
+// Import Tailwind CSS with dark mode configuration for ResearchDemo
+import '../demo/globals.css';
+
 definePidComponent();
 defineCopyButton();
 defineJsonViewer();

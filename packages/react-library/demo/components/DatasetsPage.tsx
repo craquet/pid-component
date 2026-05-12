@@ -1,15 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import { Badge, Card, Table, Title } from '@mantine/core';
 import { PidComponent } from '../../lib';
 
 interface DatasetsPageProps {
+  darkMode?: boolean;
 }
 
-export function DatasetsPage({}: DatasetsPageProps) {
-  const [isActive] = useState(false);
-
+export function DatasetsPage({ darkMode = false }: DatasetsPageProps) {
   const headers = ['ID', 'Title', 'DOI', 'License'];
   const datasets = [
     {
@@ -46,26 +44,30 @@ export function DatasetsPage({}: DatasetsPageProps) {
 
   return (
     <div style={{ marginBottom: 32 }}>
-      <Title order={2} mb="md" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <Title order={2} mb="md" className={darkMode ? 'text-white' : 'text-gray-900'}
+             style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         Lorem ipsum dolor sit amet
-        <Badge color={isActive ? 'green' : 'red'} variant="light" size="sm">
-          {isActive ? 'Scanning Active' : 'Scanning Inactive'}
+        <Badge color="gray" variant="light" size="sm">
+          PID Showcase
         </Badge>
       </Title>
-      <Card shadow="sm" padding="xl" radius="md" withBorder>
-        <Table striped highlightOnHover>
+      <Card className={darkMode ? 'bg-gray-800' : 'bg-white'} shadow="sm" padding="xl" radius="md" withBorder>
+        <Table highlightOnHover>
           <Table.Thead>
-            <Table.Tr>
-              {headers.map(h => <Table.Th key={h}>{h}</Table.Th>)}
+            <Table.Tr className={darkMode ? 'bg-gray-700' : 'bg-gray-50'}>
+              {headers.map(h => <Table.Th key={h}
+                                          className={darkMode ? 'text-gray-300' : 'text-gray-600'}>{h}</Table.Th>)}
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
-            {datasets.map(item => (
-              <Table.Tr key={item.id}>
-                <Table.Td>{item.id}</Table.Td>
-                <Table.Td>{item.title}</Table.Td>
-                <Table.Td><PidComponent value={item.doi} openByDefault={false} /></Table.Td>
-                <Table.Td><PidComponent value={item.license} openByDefault={false} /></Table.Td>
+            {datasets.map((item, index) => (
+              <Table.Tr key={item.id}
+                        className={darkMode ? (index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-750') : (index % 2 === 0 ? 'bg-white' : 'bg-gray-50')}>
+                <Table.Td className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{item.id}</Table.Td>
+                <Table.Td className={darkMode ? 'text-gray-300' : 'text-gray-700'}>{item.title}</Table.Td>
+                <Table.Td><PidComponent value={item.doi} openByDefault={false} darkMode={darkMode ? 'dark' : 'light'} /></Table.Td>
+                <Table.Td><PidComponent value={item.license} openByDefault={false}
+                                        darkMode={darkMode ? 'dark' : 'light'} /></Table.Td>
               </Table.Tr>
             ))}
           </Table.Tbody>

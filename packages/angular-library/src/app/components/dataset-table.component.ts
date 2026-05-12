@@ -25,10 +25,10 @@ export interface Dataset {
     PidComponent,
   ],
   template: `
-    <mat-card class="dataset-table-card">
+    <mat-card [class]="darkMode ? 'bg-gray-800' : 'bg-white'" class="dataset-table-card">
       <mat-card-header class="table-header">
-        <mat-icon mat-card-avatar>description</mat-icon>
-        <mat-card-title>Lorem ipsum dolor</mat-card-title>
+        <mat-icon mat-card-avatar [class]="darkMode ? 'text-gray-400' : 'text-indigo-500'">description</mat-icon>
+        <mat-card-title [class]="darkMode ? 'text-white' : 'text-gray-900'">Lorem ipsum dolor</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="table-scroll-wrapper">
@@ -97,7 +97,6 @@ export interface Dataset {
 
     .table-header mat-icon {
       margin-right: 12px;
-      color: #6366f1;
     }
 
     .table-scroll-wrapper {
@@ -113,13 +112,11 @@ export interface Dataset {
       font-weight: 600;
       font-size: 12px;
       text-transform: uppercase;
-      color: #9e9e9e;
       background: #fafafa;
     }
 
     td.mat-cell {
       font-size: 14px;
-      color: #424242;
     }
 
     .cell-overflow {
@@ -150,6 +147,7 @@ export interface Dataset {
 })
 export class DatasetTableComponent {
   @Input() datasets: Dataset[] = [];
+  @Input() darkMode = false;
   displayedColumns = ['title', 'doi', 'license', 'actions'];
 
   columnWidths: Record<string, number> = {

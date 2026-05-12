@@ -1,23 +1,19 @@
 'use client';
 
-import { Anchor, Badge, Button, Container, Group, Text } from '@mantine/core';
-import { IconDatabase } from '@tabler/icons-react';
-import { PidComponent } from '../../lib';
+import { ActionIcon, Anchor, Badge, Button, Container, Group } from '@mantine/core';
+import { IconDatabase, IconMoon, IconSun } from '@tabler/icons-react';
 
 interface NavigationProps {
   activePage?: string;
   onNavigate?: (page: string) => void;
+  darkMode?: boolean;
+  onDarkModeChange?: (darkMode: boolean) => void;
 }
 
-export function Navigation({ activePage = 'home', onNavigate }: NavigationProps) {
+export function Navigation({ activePage = 'home', onNavigate, darkMode = false, onDarkModeChange }: NavigationProps) {
   return (
-    <div style={{
-      position: 'sticky',
-      top: 0,
-      zIndex: 100,
-      background: 'white',
-      borderBottom: '1px solid #e0e0e0',
-    }}>
+    <div
+      className={`sticky top-0 z-50 border-b ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
       <Container size="xl">
         <Group justify="space-between" h={64}>
           <Group gap="sm">
@@ -27,17 +23,19 @@ export function Navigation({ activePage = 'home', onNavigate }: NavigationProps)
               size="sm"
               leftSection={<IconDatabase size={18} />}
               radius="md"
+              className={darkMode ? 'text-white' : ''}
             >
-              ResearchDemo
+              Lorem ipsum
             </Button>
-            <Badge color="orange" variant="light" size="sm">Demo</Badge>
+            <Badge color="orange" variant="light" size="sm"
+                   className={darkMode ? 'bg-orange-600 text-white' : 'bg-orange-100 text-orange-800'}>Demo</Badge>
           </Group>
           <Group gap="md">
             <Anchor
               component="button"
               type="button"
               onClick={() => onNavigate?.('home')}
-              c={activePage === 'home' ? 'indigo.7' : 'dimmed'}
+              className={darkMode ? (activePage === 'home' ? 'text-white' : 'text-gray-400') : (activePage === 'home' ? 'text-indigo-600' : 'text-gray-600')}
               fw={activePage === 'home' ? 600 : 400}
               underline="never"
             >
@@ -47,7 +45,7 @@ export function Navigation({ activePage = 'home', onNavigate }: NavigationProps)
               component="button"
               type="button"
               onClick={() => onNavigate?.('datasets')}
-              c={activePage === 'datasets' ? 'indigo.7' : 'dimmed'}
+              className={darkMode ? (activePage === 'datasets' ? 'text-white' : 'text-gray-400') : (activePage === 'datasets' ? 'text-indigo-600' : 'text-gray-600')}
               fw={activePage === 'datasets' ? 600 : 400}
               underline="never"
             >
@@ -57,12 +55,21 @@ export function Navigation({ activePage = 'home', onNavigate }: NavigationProps)
               component="button"
               type="button"
               onClick={() => onNavigate?.('about')}
-              c={activePage === 'about' ? 'indigo.7' : 'dimmed'}
+              className={darkMode ? (activePage === 'about' ? 'text-white' : 'text-gray-400') : (activePage === 'about' ? 'text-indigo-600' : 'text-gray-600')}
               fw={activePage === 'about' ? 600 : 400}
               underline="never"
             >
               About
             </Anchor>
+            <ActionIcon
+              variant="subtle"
+              color="gray"
+              onClick={() => onDarkModeChange?.(!darkMode)}
+              size="lg"
+              className={darkMode ? 'text-yellow-400' : 'text-gray-600'}
+            >
+              {darkMode ? <IconSun size={20} /> : <IconMoon size={20} />}
+            </ActionIcon>
           </Group>
         </Group>
       </Container>

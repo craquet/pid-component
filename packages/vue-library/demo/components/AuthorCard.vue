@@ -9,6 +9,7 @@ export interface Author {
 <script lang="ts" setup>
 defineProps<{
   author: Author;
+  darkMode?: boolean;
 }>();
 
 const getInitials = (name: string): string => {
@@ -17,18 +18,27 @@ const getInitials = (name: string): string => {
 </script>
 
 <template>
-  <v-card elevation="1">
+  <v-card :color="darkMode ? 'grey-darken-3' : 'white'" elevation="1">
     <v-card-text>
       <div class="d-flex align-start ga-4">
-        <v-avatar class="flex-shrink-0" color="indigo-lighten-5" size="48">
-          <span class="text-indigo-darken-2 font-weight-bold">{{ getInitials(author.name) }}</span>
+        <v-avatar class="flex-shrink-0" :color="darkMode ? 'grey-darken-1' : 'indigo-lighten-5'" size="48">
+          <span :class="darkMode ? 'text-grey-lighten-1' : 'text-indigo-darken-2'"
+                class="font-weight-bold">{{ getInitials(author.name) }}</span>
         </v-avatar>
         <div class="flex-grow-1" style="min-width: 0;">
-          <div class="text-body-1 font-weight-bold"
-               style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ author.name }}
+          <div
+            class="text-body-1 font-weight-bold"
+            :class="darkMode ? 'text-white' : 'text-grey-darken-3'"
+            style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+          >
+            {{ author.name }}
           </div>
-          <div v-if="author.institution" class="text-caption text-grey-lighten-1 mb-2"
-               style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+          <div
+            v-if="author.institution"
+            class="text-caption mb-2"
+            :class="darkMode ? 'text-grey-lighten-1' : 'text-grey-darken-2'"
+            style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+          >
             {{ author.institution }}
           </div>
           <div style="min-height: 24px; max-height: 80px; overflow: hidden;">

@@ -1,3 +1,7 @@
+import { Download, ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { PidComponent } from '@kit-data-manager/react-pid-component';
 import { cn } from '../lib/utils';
 
@@ -5,38 +9,51 @@ interface HeroCardProps {
   title: string;
   description: string;
   doi?: string;
+  actions?: React.ReactNode;
   className?: string;
+  darkMode?: boolean;
 }
 
 /**
  * Primary hero card component for the demo portal.
- * Displays a featured dataset or article with call-to-action buttons.
+ * Uses shadcn/ui card, button, and badge components.
  */
-export function HeroCard({ title, description, className }: HeroCardProps) {
+export function HeroCard({ title, description, actions, className, darkMode = false }: HeroCardProps) {
   return (
-    <div className={cn('rounded-xl border border-slate-200 bg-white p-6 shadow-sm', className)}>
-      <div className="flex gap-2 mb-4">
-        <span
-          className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-700">
-          DOI
-        </span>
-        <span
-          className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">
-          Research Data
-        </span>
-      </div>
-      <h1 className="text-2xl font-bold text-slate-900 mb-2">{title}</h1>
-      <p className="text-slate-600 text-sm leading-relaxed mb-6">{description}</p>
-      <div className="flex gap-3">
-        <button
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-700 disabled:pointer-events-none disabled:opacity-50">
-          Download Dataset
-        </button>
-        <button
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-700 disabled:pointer-events-none disabled:opacity-50">
-          View Source
-        </button>
-      </div>
-    </div>
+    <Card className={cn(darkMode ? 'bg-slate-800 border-slate-700' : '', className)}>
+      <CardHeader>
+        <div className="flex gap-2">
+          <Badge variant="default" className={darkMode ? 'bg-blue-900 text-blue-200' : 'bg-blue-100 text-blue-700'}>
+            DOI
+          </Badge>
+          <Badge variant="secondary"
+                 className={darkMode ? 'bg-emerald-900 text-emerald-200' : 'bg-emerald-100 text-emerald-700'}>
+            Research Data
+          </Badge>
+        </div>
+        <CardTitle className={cn('mt-4 text-2xl font-bold', darkMode ? 'text-white' : 'text-slate-900')}>
+          {title}
+        </CardTitle>
+        <CardDescription className={cn(darkMode ? 'text-slate-400' : 'text-slate-600')}>
+          {description}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex gap-3">
+          {actions || (
+            <>
+              <Button>
+                <Download className="h-4 w-4" />
+                Download Dataset
+              </Button>
+              <Button variant="outline" className={darkMode ? 'border-slate-600 bg-slate-700 text-slate-200' : ''}>
+                <ExternalLink className="h-4 w-4" />
+                View Source
+              </Button>
+            </>
+          )}
+        </div>
+      </CardContent>
+    </Card>
   );
 }

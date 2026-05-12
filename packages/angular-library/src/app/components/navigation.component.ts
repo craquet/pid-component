@@ -4,6 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PidComponent } from '@kit-data-manager/angular-pid-component';
 
 @Component({
@@ -15,29 +16,38 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
+    MatSlideToggleModule,
     PidComponent,
   ],
   template: `
-    <mat-toolbar class="navigation-toolbar">
+    <mat-toolbar [class]="darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'" class="navigation-toolbar">
       <div class="nav-container">
         <div class="nav-brand">
-          <button mat-mini-fab color="primary" disabled>
-            <mat-icon>storage</mat-icon>
+          <button mat-mini-fab [color]="darkMode ? 'accent' : 'primary'" disabled>
+            <mat-icon [class.text-white]="darkMode" [class.text-gray-900]="!darkMode">storage</mat-icon>
           </button>
-          <span class="brand-text">Lorem ipsum</span>
-          <mat-chip color="warn" size="small">Demo</mat-chip>
+          <span [class]="darkMode ? 'text-white' : 'text-gray-900'" class="brand-text">Lorem ipsum</span>
+          <mat-chip [color]="darkMode ? 'warn' : 'warn'" class="{{ darkMode ? 'dark-chip' : '' }}">Demo</mat-chip>
         </div>
 
         <div class="nav-links">
-          <button mat-button [color]="activePage === 'home' ? 'primary' : undefined" (click)="navigate.emit('home')">
+          <button mat-button [color]="activePage === 'home' ? 'primary' : undefined" [class.text-white]="darkMode && activePage === 'home'" [class.text-gray-300]="darkMode && activePage !== 'home'" (click)="navigate.emit('home')">
             Home
           </button>
-          <button mat-button [color]="activePage === 'datasets' ? 'primary' : undefined" (click)="navigate.emit('datasets')">
+          <button mat-button [color]="activePage === 'datasets' ? 'primary' : undefined" [class.text-white]="darkMode && activePage === 'datasets'" [class.text-gray-300]="darkMode && activePage !== 'datasets'" (click)="navigate.emit('datasets')">
             Datasets
           </button>
-          <button mat-button [color]="activePage === 'about' ? 'primary' : undefined" (click)="navigate.emit('about')">
+          <button mat-button [color]="activePage === 'about' ? 'primary' : undefined" [class.text-white]="darkMode && activePage === 'about'" [class.text-gray-300]="darkMode && activePage !== 'about'" (click)="navigate.emit('about')">
             About
           </button>
+          <mat-slide-toggle
+            [checked]="darkMode"
+            (change)="darkModeChange.emit($event.checked)"
+            color="primary"
+            class="theme-toggle"
+          >
+            <mat-icon>{{ darkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
+          </mat-slide-toggle>
         </div>
       </div>
     </mat-toolbar>
@@ -47,8 +57,7 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid #e0e0e0;
-      background: white;
+      border-bottom: 1px solid;
     }
 
     .nav-container {
@@ -70,7 +79,6 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
     .brand-text {
       font-size: 18px;
       font-weight: 600;
-      color: #212121;
     }
 
     .nav-links {
@@ -81,7 +89,6 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
 
     .nav-divider {
       margin: 0 16px;
-      color: #9e9e9e;
     }
 
     .powered-by {
@@ -92,11 +99,20 @@ import { PidComponent } from '@kit-data-manager/angular-pid-component';
 
     .powered-text {
       font-size: 14px;
-      color: #757575;
+    }
+
+    .theme-toggle {
+      margin-left: 16px;
+    }
+
+    ::ng-deep .dark-chip .mdc-chip__text {
+      color: white !important;
     }
   `],
 })
 export class NavigationComponent {
   @Input() activePage = 'home';
+  @Input() darkMode = false;
   @Output() navigate = new EventEmitter<string>();
+  @Output() darkModeChange = new EventEmitter<boolean>();
 }

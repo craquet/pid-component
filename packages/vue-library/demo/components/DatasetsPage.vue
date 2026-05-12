@@ -4,6 +4,7 @@ import type { PidDetectionController } from '@kit-data-manager/pid-component';
 
 defineProps<{
   excludeArticleRef?: boolean;
+  darkMode?: boolean;
 }>();
 
 const articleRef = inject<{
@@ -55,18 +56,20 @@ const datasets = ref([
 
 <template>
   <div class="mb-8">
-    <h2 class="text-h6 font-weight-bold mb-4 d-flex align-center">
+    <h2 class="text-h6 font-weight-bold mb-4 d-flex align-center"
+        :class="darkMode ? 'text-white' : 'text-grey-darken-3'">
       <v-icon class="mr-2" color="primary">mdi-database</v-icon>
       Lorem ipsum dolor sit amet
       <v-chip class="ml-3" color="primary-lighten-5" size="small" text-color="primary-darken-2">
         {{ articleRef?.isActive ? 'Scanning Active' : 'Scanning Inactive' }}
       </v-chip>
     </h2>
-    <v-card class="pa-6" elevation="1">
+    <v-card :color="darkMode ? 'grey-darken-3' : 'white'" class="pa-6" elevation="1">
       <v-data-table
         :headers="headers"
         :items="datasets"
         :items-per-page="5"
+        :theme="darkMode ? 'dark' : 'light'"
         class="elevation-0"
       >
         <template v-slot:item.doi="{ item }">

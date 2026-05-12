@@ -57,8 +57,11 @@
     "@storybook/addon-a11y": "^10.3.6",
     "@storybook/addon-docs": "^10.3.6",
     "@storybook/angular": "^10.3.6",
+    "@tailwindcss/postcss": "^4.3.0",
     "ajv": "^8.20.0",
+    "postcss": "^8.5.14",
     "storybook": "^10.3.6",
+    "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
     "zone.js": "^0.16.2"
   },

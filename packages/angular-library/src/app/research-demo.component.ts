@@ -33,8 +33,8 @@ import { initPidDetection, type PidDetectionController } from '@kit-data-manager
     AboutPageComponent,
   ],
   template: `
-    <div class="research-demo-app">
-      <app-navigation [activePage]="activePage()" (navigate)="onNavigate($event)" />
+    <div [class]="darkMode() ? 'bg-gray-900' : 'bg-gray-50'" class="research-demo-app">
+      <app-navigation [activePage]="activePage()" [darkMode]="darkMode()" (navigate)="onNavigate($event)" (darkModeChange)="onDarkModeChange($event)" />
 
       <main class="main-content">
         <div class="container">
@@ -44,22 +44,24 @@ import { initPidDetection, type PidDetectionController } from '@kit-data-manager
                 <app-hero-card
                   title="This is an example webpage"
                   description="This is an example of how the pid-component can be used within a Next.js app. Demo showcases DOIs (e.g. 10.5281/zenodo.13629109), ORCIDs (e.g. 0009-0005-2800-4833), RORs (e.g. https://ror.org/04t3en479), SPDX licenses (e.g. Apache-2.0), and more."
+                  [darkMode]="darkMode()"
                 />
               </div>
               <div class="hero-doi">
                 <app-doi-card
                   value="https://doi.org/10.5281/zenodo.13629109"
                   license="https://spdx.org/licenses/Apache-2.0"
+                  [darkMode]="darkMode()"
                 />
               </div>
             </div>
 
-            <app-dataset-table [datasets]="datasets" />
+            <app-dataset-table [datasets]="datasets" [darkMode]="darkMode()" />
 
-            <app-author-grid [authors]="authors" />
+            <app-author-grid [authors]="authors" [darkMode]="darkMode()" />
 
             <div #articleSection>
-              <app-article-section [standalone]="false" />
+              <app-article-section [standalone]="false" [darkMode]="darkMode()" />
             </div>
           }
 
@@ -75,13 +77,12 @@ import { initPidDetection, type PidDetectionController } from '@kit-data-manager
         </div>
       </main>
 
-      <app-footer />
+      <app-footer [darkMode]="darkMode()" />
     </div>
   `,
   styles: [`
     .research-demo-app {
       min-height: 100vh;
-      background: #fafafa;
     }
 
     .main-content {
@@ -105,6 +106,7 @@ export class ResearchDemoComponent implements AfterViewInit, OnDestroy {
   @ViewChild('articleSection') articleSection!: ElementRef<HTMLElement>;
 
   activePage = signal('home');
+  darkMode = signal(false);
   isAutodiscoveryActive = signal(false);
   datasets: Dataset[] = [
     {
@@ -149,7 +151,7 @@ export class ResearchDemoComponent implements AfterViewInit, OnDestroy {
     if (this.articleSection?.nativeElement) {
       this.controller = initPidDetection({
         root: this.articleSection.nativeElement,
-        darkMode: 'light',
+        darkMode: this.darkMode() ? 'dark' : 'light',
         emphasizeComponent: false,
       });
       this.isAutodiscoveryActive.set(true);
@@ -165,5 +167,14 @@ export class ResearchDemoComponent implements AfterViewInit, OnDestroy {
 
   onNavigate(page: string) {
     this.activePage.set(page);
+  }
+
+  onDarkModeChange(darkMode: boolean) {
+    this.darkMode.set(darkMode);
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }
 }

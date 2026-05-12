@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { nextTick, onMounted, onUnmounted, provide, ref } from 'vue';
+import { nextTick, onMounted, onUnmounted, provide, ref, watch } from 'vue';
 import {
   AboutPage,
   AppFooter,
@@ -15,8 +15,17 @@ import {
 import { initPidDetection, type PidDetectionController } from '@kit-data-manager/pid-component';
 
 const activePage = ref('home');
+const darkMode = ref(false);
 const articleSectionRef = ref<InstanceType<typeof ArticleSection> | null>(null);
 const autodiscoveryController = ref<PidDetectionController | null>(null);
+
+watch(darkMode, (isDark) => {
+  if (isDark) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+});
 
 const handleNavigate = (page: string) => {
   activePage.value = page;
@@ -27,7 +36,7 @@ const initAutodetection = () => {
   if (articleRoot && !autodiscoveryController.value) {
     autodiscoveryController.value = initPidDetection({
       root: articleRoot,
-      darkMode: 'light',
+      darkMode: darkMode.value ? 'dark' : 'light',
     });
   }
 };
@@ -91,11 +100,11 @@ const authors = [
 </script>
 
 <template>
-  <v-app class="dark:bg-[#3a3a3a] bg-blue-50">
-    <AppNavigation :active-page="activePage" @navigate="handleNavigate" />
+  <v-app :dark="darkMode">
+    <AppNavigation :active-page="activePage" :dark-mode="darkMode" @navigate="handleNavigate"
+                   @update:darkMode="darkMode = $event" />
 
-    <v-main
-    ">
+    <v-main>
       <v-container class="pa-8" fluid>
 
         <template v-if="activePage === 'home'">
@@ -104,37 +113,38 @@ const authors = [
               <HeroCard
                 title="This is an example webpage"
                 description="This is an example of how the pid-component can be used within a Next.js app. Demo showcases DOIs (e.g. 10.5281/zenodo.13629109), ORCIDs (e.g. 0009-0005-2800-4833), RORs (e.g. https://ror.org/04t3en479), SPDX licenses (e.g. Apache-2.0), and more."
+                :dark-mode="darkMode"
               />
             </v-col>
             <v-col cols="4">
               <DoiCard
                 license="https://spdx.org/licenses/Apache-2.0"
                 value="https://doi.org/10.5281/zenodo.13629109"
+                :dark-mode="darkMode"
               />
             </v-col>
           </v-row>
 
-          <DatasetTable :datasets="datasets" class="mb-6" />
+          <DatasetTable :datasets="datasets" :dark-mode="darkMode" class="mb-6" />
 
-          <AuthorGrid :authors="authors" />
+          <AuthorGrid :authors="authors" :dark-mode="darkMode" />
 
-          <ArticleSection ref="articleSectionRef" class="mb-6" />
-
+          <ArticleSection ref="articleSectionRef" :dark-mode="darkMode" class="mb-6" />
 
         </template>
 
         <template v-else-if="activePage === 'datasets'">
-          <DatasetsPage />
+          <DatasetsPage :dark-mode="darkMode" />
         </template>
 
         <template v-else-if="activePage === 'about'">
           <AboutPage />
         </template>
 
-        <LicenseDialog />
+        <LicenseDialog :dark-mode="darkMode" />
       </v-container>
     </v-main>
 
-    <AppFooter />
+    <AppFooter :dark-mode="darkMode" />
   </v-app>
 </template>

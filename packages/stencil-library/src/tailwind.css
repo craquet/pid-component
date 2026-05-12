@@ -1,10 +1,6 @@
 @import "./../../../node_modules/tailwindcss/index.css";
-@layer theme, base, components, utilities;
-@import "./../../../node_modules/tailwindcss/theme.css" layer(theme);
-@import "./../../../node_modules/tailwindcss/preflight.css" layer(base);
-@import "./../../../node_modules/tailwindcss/utilities.css" layer(utilities);
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   *,
