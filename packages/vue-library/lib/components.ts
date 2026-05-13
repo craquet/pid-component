@@ -17,7 +17,7 @@ export const ColorHighlight: StencilVueComponent<JSX.ColorHighlight> = /*@__PURE
 export const CopyButton: StencilVueComponent<JSX.CopyButton> = /*@__PURE__*/ defineContainer<JSX.CopyButton>('copy-button', undefined, [
   'value',
   'label',
-  'darkMode',
+  'darkMode'
 ]);
 
 

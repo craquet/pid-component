@@ -41,7 +41,7 @@ export declare interface ColorHighlight extends Components.ColorHighlight {}
 
 @ProxyCmp({
   defineCustomElementFn: defineCopyButton,
-  inputs: ['darkMode', 'label', 'value'],
+  inputs: ['darkMode', 'label', 'value']
 })
 @Component({
   selector: 'copy-button',
@@ -171,7 +171,7 @@ Useful for pagination to ensure proper height
 
 @ProxyCmp({
   defineCustomElementFn: definePidComponent,
-  inputs: ['currentLevelOfSubcomponents', 'darkMode', 'defaultTTL', 'emphasizeComponent', 'fallbackToAll', 'height', 'hideSubcomponents', 'itemsPerPage', 'levelOfSubcomponents', 'openByDefault', 'renderers', 'settings', 'showTopLevelCopy', 'value', 'width'],
+  inputs: ['currentLevelOfSubcomponents', 'darkMode', 'defaultTTL', 'emphasizeComponent', 'fallbackToAll', 'height', 'hideSubcomponents', 'itemsPerPage', 'levelOfSubcomponents', 'openByDefault', 'renderers', 'settings', 'showTopLevelCopy', 'value', 'width']
 })
 @Component({
   selector: 'pid-component',
@@ -264,7 +264,7 @@ export declare interface PidPagination extends Components.PidPagination {
 
 @ProxyCmp({
   defineCustomElementFn: definePidTooltip,
-  inputs: ['darkMode', 'fitContent', 'maxHeight', 'maxWidth', 'position', 'text'],
+  inputs: ['darkMode', 'fitContent', 'maxHeight', 'maxWidth', 'position', 'text']
 })
 @Component({
   selector: 'pid-tooltip',
