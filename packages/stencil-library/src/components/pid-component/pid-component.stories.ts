@@ -380,9 +380,9 @@ export const RenderersStrictRestriction: Story = {
   play: async ({ canvasElement }) => {
     await new Promise(r => setTimeout(r, 3000));
     const pidComponent = canvasElement.querySelector('pid-component');
-    expect(pidComponent).toBeTruthy();
+    await expect(pidComponent).toBeTruthy();
     // Component should exist but be invisible (unmatched state)
-    expect((pidComponent as HTMLPidComponentElement).fallbackToAll).toBe(false);
+    await expect((pidComponent as HTMLPidComponentElement).fallbackToAll).toBe(false);
   },
 };
 

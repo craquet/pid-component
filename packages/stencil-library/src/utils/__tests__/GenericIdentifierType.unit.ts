@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { FunctionalComponent } from '@stencil/core';
-import { GenericIdentifierType } from '../../utils/GenericIdentifierType';
+import { GenericIdentifierType } from '../GenericIdentifierType';
 
 // Polyfill window for Node environment before importing the module
 (globalThis as any).window = {

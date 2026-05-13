@@ -1,9 +1,8 @@
 'use client';
 
 import { type ReactNode } from 'react';
-import { createTheme, MantineProvider, useColorScheme } from '@mantine/core';
+import { createTheme, MantineProvider } from '@mantine/core';
 import { useHotkeys } from '@mantine/hooks';
-import { useState } from 'react';
 
 export const theme = createTheme({
   primaryColor: 'indigo',

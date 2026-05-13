@@ -5,8 +5,6 @@ import { fileURLToPath } from 'node:url';
 import { codecovVitePlugin } from '@codecov/vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 
-const __filename = fileURLToPath(import.meta.url);
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const stencilRoot = path.resolve(__dirname, '../../stencil-library');
 

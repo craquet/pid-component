@@ -3,7 +3,6 @@ import { PIDDataType } from '../PIDDataType';
 import { PID } from '../PID';
 
 // Mock DOMParser for Node environment
-const mockParseFromString = vi.fn();
 global.DOMParser = class DOMParser {
   parseFromString(str: string, _type: string) {
     const locations: any[] = [];

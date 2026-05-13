@@ -5,8 +5,6 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { codecovVitePlugin } from '@codecov/vite-plugin';
 
-const __filename = fileURLToPath(import.meta.url);
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 const stencilRoot = path.resolve(__dirname, '../../stencil-library');

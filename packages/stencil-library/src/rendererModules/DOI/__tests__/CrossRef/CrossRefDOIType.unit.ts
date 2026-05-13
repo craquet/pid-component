@@ -29,8 +29,6 @@ const funderFixture = {
 let originalFetch: typeof global.fetch;
 
 describe('CrossRefDOIType', () => {
-  const testDOI = new DOI(DOI_examples.CROSSREF_JOURNAL_PAPER);
-
   beforeEach(() => {
     originalFetch = global.fetch;
   });

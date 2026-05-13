@@ -191,7 +191,7 @@ export function initPidDetection(config: PidDetectionConfig = {}): PidDetectionC
   }
 
   // Start the initial scan
-  runScan();
+  runScan().then(r => void r).catch(e => console.error('Error during initial PID detection scan:', e));
 
   // Return the controller
   return {
@@ -203,7 +203,7 @@ export function initPidDetection(config: PidDetectionConfig = {}): PidDetectionC
 
     rescan() {
       if (!destroyed) {
-        runScan();
+        runScan().then(r => void r).catch(e => console.error('Error during PID detection rescan:', e));
       }
     },
 

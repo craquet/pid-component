@@ -354,7 +354,6 @@ describe('DataCiteInfo', () => {
         },
       };
       const info = new DataCiteInfo(testDOI, responseWithCorrespondingNoName as any);
-      const items = info.generateItems();
       expect(info.correspondingAuthor).toBeDefined();
     });
 

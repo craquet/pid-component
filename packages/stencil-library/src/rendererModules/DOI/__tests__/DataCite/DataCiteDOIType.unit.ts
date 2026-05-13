@@ -8,8 +8,6 @@ import dataCiteFixture from '../../../../../../../examples/fixtures/doi-datacite
 let cachedFetchSpy: any;
 
 describe('DataCiteDOIType', () => {
-  const testDOI = new DOI(DOI_examples.DATACITE_SLIDES);
-
   beforeEach(() => {
     cachedFetchSpy = vi.spyOn(DataCache, 'cachedFetch');
   });

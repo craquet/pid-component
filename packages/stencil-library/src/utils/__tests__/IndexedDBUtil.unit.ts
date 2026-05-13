@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { Database } from '../../utils/IndexedDBUtil';
-import { Parser } from '../../utils/Parser';
+import { Database } from '../IndexedDBUtil';
+import { Parser } from '../Parser';
 
 // Mock DOM globals for Node environment
 if (typeof document === 'undefined') {

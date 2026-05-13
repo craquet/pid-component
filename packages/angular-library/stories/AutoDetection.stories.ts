@@ -31,7 +31,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 const meta: Meta = {
   title: 'Auto-Detection',
   tags: ['autodocs'],
-  render: (args) => {
+  render: () => {
     // Each story overrides render, so this is just a default.
     return { template: '<div></div>' };
   },

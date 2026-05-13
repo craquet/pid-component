@@ -127,7 +127,7 @@ export class Parser {
           return obj;
         }
 
-        if (quickResult === undefined || quickResult === false) {
+        if (quickResult === undefined || !quickResult) {
           if (await obj.hasMeaningfulInformation()) {
             Parser.applySettings(obj, settings);
             await obj.init();

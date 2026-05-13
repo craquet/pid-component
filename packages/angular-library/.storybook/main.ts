@@ -3,7 +3,6 @@ import type { StorybookConfig } from '@storybook/angular';
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const stencilRoot = path.resolve(__dirname, '../../stencil-library');
 

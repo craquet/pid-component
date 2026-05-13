@@ -35,7 +35,7 @@ export class LocaleVisualization {
     };
 
     const generateFlag = (locale: string): string => {
-      if (this.showFlag === false) return '';
+      if (!this.showFlag) return '';
       const codePoints = locale
         .toUpperCase()
         .split('')

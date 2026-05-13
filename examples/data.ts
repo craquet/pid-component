@@ -1,6 +1,6 @@
-import { DOI_examples } from './doi/values';
-import { ORCID_examples } from './orcid/values';
-import { SPDX_examples } from './spdx/values';
+import { DOI_examples } from './doi';
+import { ORCID_examples } from './orcid';
+import { SPDX_examples } from './spdx';
 
 export const demo_datasets = [
   {
