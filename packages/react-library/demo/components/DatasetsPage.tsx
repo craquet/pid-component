@@ -47,11 +47,13 @@ export function DatasetsPage({ darkMode = false }: DatasetsPageProps) {
       <Title order={2} mb="md" className={darkMode ? 'text-white' : 'text-gray-900'}
              style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         Lorem ipsum dolor sit amet
-        <Badge color="gray" variant="light" size="sm">
+        <Badge color={darkMode ? 'gray' : 'gray'} variant="light" size="sm"
+               className={darkMode ? 'text-gray-300' : 'text-gray-700'}>
           PID Showcase
         </Badge>
       </Title>
-      <Card className={darkMode ? 'bg-gray-800' : 'bg-white'} shadow="sm" padding="xl" radius="md" withBorder>
+      <Card style={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff' }} shadow="sm" padding="xl" radius="md"
+            withBorder>
         <Table highlightOnHover>
           <Table.Thead>
             <Table.Tr className={darkMode ? 'bg-gray-700' : 'bg-gray-50'}>

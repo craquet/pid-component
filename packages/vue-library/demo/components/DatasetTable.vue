@@ -54,10 +54,11 @@ function onResizeEnd() {
       <span class="text-h6">Related Datasets</span>
     </v-card-title>
     <div style="overflow-x: auto">
-      <v-table :color="darkMode ? 'grey-darken-3' : 'white'" class="dataset-table-inner elevation-0"
+      <v-table class="dataset-table-inner elevation-0"
+               :style="{ backgroundColor: darkMode ? '#424242' : 'white' }"
                style="table-layout: fixed; width: 100%">
         <thead>
-        <tr>
+        <tr :style="{ backgroundColor: darkMode ? '#616161' : '#f5f5f5' }">
           <th
             v-for="col in [
                 { key: 'title', label: 'Title' },
@@ -66,7 +67,7 @@ function onResizeEnd() {
                 { key: 'actions', label: 'Actions' },
               ]"
             :key="col.key"
-            :style="{ width: columnWidths[col.key] + '%', position: 'relative', userSelect: 'none' }"
+            :style="{ width: columnWidths[col.key] + '%', position: 'relative', userSelect: 'none', color: darkMode ? '#e0e0e0' : '#6b7288' }"
           >
             {{ col.label }}
             <span

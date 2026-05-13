@@ -41,7 +41,7 @@ const openDialog = () => {
         </p>
         <div style="min-height: 150px; max-height: 400px; overflow: hidden;">
           <pid-component style="display: block;" value="https://spdx.org/licenses/Apache-2.0"
-                         width="100%" />
+                         :dark-mode="darkMode ? 'dark' : 'light'" width="100%" />
         </div>
       </v-card-text>
       <v-card-actions>

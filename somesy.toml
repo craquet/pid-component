@@ -8,6 +8,7 @@ homepage = "https://kit-data-manager.github.io/pid-component"
 documentation = "https://kit-data-manager.github.io/pid-component"
 keywords = [
   "react",
+  "nextjs",
   "vue",
   "angular",
   "pid",

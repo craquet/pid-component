@@ -55,8 +55,8 @@ export function DatasetTable({ datasets, darkMode = false }: DatasetTableProps) 
   const rowTextColor = darkMode ? '#ffffff' : '#1f2937';
 
   return (
-    <Paper className={darkMode ? 'bg-gray-800' : 'bg-white'} shadow="sm" padding={0} radius="md" withBorder
-           style={{ overflow: 'hidden' }}>
+    <Paper style={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff', overflow: 'hidden' }} shadow="sm" padding={0}
+           radius="md" withBorder>
       <div style={{ padding: '20px 24px', borderBottom: darkMode ? '1px solid #4b5563' : '1px solid #e0e0e0' }}>
         <Group gap="xs">
           <IconFileText size={20} className={darkMode ? 'text-gray-400' : 'text-indigo-500'} />

@@ -105,7 +105,8 @@ const authors = [
                    @update:darkMode="darkMode = $event" />
 
     <v-main>
-      <v-container class="pa-8" fluid>
+      <v-container class="pa-8" fluid
+                   :style="{ backgroundColor: darkMode ? '#121212' : '#fafafa', minHeight: '100vh' }">
 
         <template v-if="activePage === 'home'">
           <v-row class="mb-6">
@@ -138,7 +139,7 @@ const authors = [
         </template>
 
         <template v-else-if="activePage === 'about'">
-          <AboutPage />
+          <AboutPage :dark-mode="darkMode" />
         </template>
 
         <LicenseDialog :dark-mode="darkMode" />

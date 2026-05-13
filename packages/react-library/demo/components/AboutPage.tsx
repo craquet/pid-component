@@ -15,7 +15,8 @@ export function AboutPage({ darkMode = false }: AboutPageProps) {
         About ResearchDemo
         <Badge color="blue" variant="light" size="sm">Demo Application</Badge>
       </Title>
-      <Card className={darkMode ? 'bg-gray-800' : 'bg-white'} shadow="sm" padding="xl" radius="md" withBorder>
+      <Card style={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff' }} shadow="sm" padding="xl" radius="md"
+            withBorder>
         <Text size="sm" className={darkMode ? 'text-gray-300' : 'text-gray-700'}
               style={{ lineHeight: 1.8, marginBottom: 16 }}>
           Lorem ipsum dolor sit amet consectetur adipiscing elit. Click the &quot;View License&quot; button below to see

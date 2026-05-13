@@ -15,7 +15,8 @@ interface HeroCardProps {
 
 export function HeroCard({ title, description, doi, actions, darkMode = false }: HeroCardProps) {
   return (
-    <Paper className={darkMode ? 'bg-gray-800' : 'bg-white'} shadow="sm" padding="xl" radius="md" withBorder>
+    <Paper style={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff' }} shadow="sm" padding="xl" radius="md"
+           withBorder>
       <Group gap="xs" mb="md">
         <Badge color="blue" variant="light" size="sm">DOI</Badge>
         <Badge color="green" variant="light" size="sm">Research Data</Badge>
@@ -52,8 +53,8 @@ interface DoiCardProps {
 
 export function DoiCard({ value, license, darkMode = false }: DoiCardProps) {
   return (
-    <Paper className={darkMode ? 'bg-gray-800' : 'bg-white'} shadow="sm" padding="lg" radius="md" withBorder
-           style={{ overflow: 'hidden' }}>
+    <Paper style={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff', overflow: 'hidden' }} shadow="sm" padding="lg"
+           radius="md" withBorder>
       <Text size="xs" fw={600} c={darkMode ? 'gray.4' : 'dimmed'} mb="xs" tt="uppercase" style={{ letterSpacing: 1 }}>
         Digital Object Identifier
       </Text>

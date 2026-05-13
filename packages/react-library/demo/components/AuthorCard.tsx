@@ -19,8 +19,8 @@ export function AuthorCard({ author, darkMode = false }: AuthorCardProps) {
   const initials = author.name.split(' ').map(n => n[0]).join('');
 
   return (
-    <Paper className={darkMode ? 'bg-gray-800' : 'bg-white'} shadow="sm" padding="lg" radius="md" withBorder
-           style={{ overflow: 'hidden' }}>
+    <Paper style={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff', overflow: 'hidden' }} shadow="sm" padding="lg"
+           radius="md" withBorder>
       <Group gap="md" align="flex-start">
         <Avatar size={48} radius="xl" color="indigo" className={darkMode ? 'bg-indigo-700' : ''}>
           {initials}

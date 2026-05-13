@@ -73,10 +73,10 @@ const datasets = ref([
         class="elevation-0"
       >
         <template v-slot:item.doi="{ item }">
-          <pid-component :open-by-default="false" :value="item.doi" />
+          <pid-component :open-by-default="false" :value="item.doi" :dark-mode="darkMode ? 'dark' : 'light'" />
         </template>
         <template v-slot:item.license="{ item }">
-          <pid-component :open-by-default="false" :value="item.license" />
+          <pid-component :open-by-default="false" :value="item.license" :dark-mode="darkMode ? 'dark' : 'light'" />
         </template>
       </v-data-table>
     </v-card>

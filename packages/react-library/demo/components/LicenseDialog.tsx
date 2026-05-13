@@ -15,7 +15,10 @@ export function LicenseDialog({ darkMode = false }: LicenseDialogProps) {
   return (
     <>
       <Paper shadow="sm" padding="xl" radius="md" withBorder
-             className={darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}>
+             style={{
+               backgroundColor: darkMode ? '#1f2937' : '#ffffff',
+               borderColor: darkMode ? '#374151' : '#e5e7eb',
+             }}>
         <Text fw={600} size="md" mb="md" style={{ display: 'flex', alignItems: 'center', gap: 8 }}
               className={darkMode ? 'text-white' : 'text-gray-900'}>
           <IconScale size={20} />
@@ -32,10 +35,10 @@ export function LicenseDialog({ darkMode = false }: LicenseDialogProps) {
         title="Apache License 2.0"
         centered
         size="md"
-        classNames={{
-          content: darkMode ? 'bg-gray-800' : 'bg-white',
-          header: darkMode ? 'bg-gray-800' : 'bg-white',
-          body: darkMode ? 'bg-gray-800' : 'bg-white',
+        styles={{
+          content: { backgroundColor: darkMode ? '#1f2937' : '#ffffff' },
+          header: { backgroundColor: darkMode ? '#1f2937' : '#ffffff' },
+          body: { backgroundColor: darkMode ? '#1f2937' : '#ffffff' },
         }}
       >
         <Text size="sm" c="dimmed" mb="md" className={darkMode ? 'text-gray-300' : ''}>

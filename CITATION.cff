@@ -39,6 +39,7 @@ contact:
 license: Apache-2.0
 keywords:
   - react
+  - nextjs
   - vue
   - angular
   - pid

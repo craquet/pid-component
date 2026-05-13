@@ -47,7 +47,7 @@ export function ArticleSection({ config, standalone = true, darkMode = false }: 
       </Text>
       <Paper
         ref={articleRef}
-        className={darkMode ? 'bg-gray-800' : 'bg-white'}
+        style={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff' }}
         shadow="sm"
         padding="xl"
         radius="md"

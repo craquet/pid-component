@@ -13,11 +13,11 @@ defineProps<{
     <v-card-item>
       <template #prepend>
         <div class="d-flex gap-2">
-          <v-chip size="small" :color="darkMode ? 'blue-darken-3' : 'blue-lighten-5'"
-                  :text-color="darkMode ? 'blue-lighten-2' : 'blue-darken-2'">DOI
+          <v-chip size="small" :color="darkMode ? 'blue-darken-1' : 'blue-lighten-5'"
+                  :text-color="darkMode ? 'white' : 'blue-darken-2'">DOI
           </v-chip>
-          <v-chip size="small" :color="darkMode ? 'green-darken-3' : 'green-lighten-5'"
-                  :text-color="darkMode ? 'green-lighten-2' : 'green-darken-2'">Research Data
+          <v-chip size="small" :color="darkMode ? 'green-darken-1' : 'green-lighten-5'"
+                  :text-color="darkMode ? 'white' : 'green-darken-2'">Research Data
           </v-chip>
         </div>
       </template>
@@ -32,8 +32,9 @@ defineProps<{
       </p>
     </v-card-text>
     <v-card-actions>
-      <v-btn color="primary" prepend-icon="mdi-download">Download Dataset</v-btn>
-      <v-btn :color="darkMode ? 'white' : 'primary'" prepend-icon="mdi-open-in-new" variant="outlined">View Source
+      <v-btn :color="darkMode ? 'blue-lighten-1' : 'primary'" prepend-icon="mdi-download">Download Dataset</v-btn>
+      <v-btn :color="darkMode ? 'blue-lighten-1' : 'primary'" prepend-icon="mdi-open-in-new" variant="outlined">View
+        Source
       </v-btn>
     </v-card-actions>
   </v-card>

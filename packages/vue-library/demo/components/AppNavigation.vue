@@ -32,7 +32,9 @@ const toggleDarkMode = () => {
     </template>
     <v-app-bar-title class="font-weight-bold">
       <span :class="darkMode ? 'text-white' : 'text-grey-darken-3'">Lorem ipsum</span>
-      <v-chip class="ml-2" size="x-small" color="orange" :class="darkMode ? 'text-white' : 'text-white'">Demo</v-chip>
+      <v-chip class="ml-2" size="x-small" :color="darkMode ? 'orange-darken-3' : 'orange-lighten-5'"
+              :text-color="darkMode ? 'orange-lighten-2' : 'orange-darken-3'">Demo
+      </v-chip>
     </v-app-bar-title>
     <v-spacer></v-spacer>
     <div class="d-flex align-center ga-2 mr-4">

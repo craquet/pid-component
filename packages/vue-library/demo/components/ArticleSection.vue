@@ -78,8 +78,8 @@ defineExpose({
       <v-icon :color="darkMode ? 'success' : 'success'" class="mr-2">mdi-file-document</v-icon>
       Lorem ipsum dolor sit amet
       <v-chip
-        :color="isInitialized ? 'success-lighten-5' : 'error-lighten-5'"
-        :text-color="isInitialized ? 'success-darken-2' : 'error-darken-2'"
+        :color="isInitialized ? (darkMode ? 'success-darken-3' : 'success-lighten-5') : (darkMode ? 'error-darken-3' : 'error-lighten-5')"
+        :text-color="isInitialized ? (darkMode ? 'success-lighten-2' : 'success-darken-2') : (darkMode ? 'error-lighten-2' : 'error-darken-2')"
         class="ml-3"
         size="small"
       >
