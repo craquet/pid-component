@@ -25,7 +25,7 @@ jobs:
           cache: 'npm'  # Added caching
       - run: npm ci
       - name: Install Playwright browsers
-        run: npx playwright install
+        run: npx playwright install --with-deps
       - run: npx lerna run build
       - run: npx lerna run test
       - name: Upload build artifacts
