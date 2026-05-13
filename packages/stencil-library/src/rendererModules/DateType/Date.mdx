@@ -1,0 +1,51 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as DateStories from './Date.stories';
+
+<Meta of={DateStories} />
+
+# Date
+
+The Date renderer detects ISO 8601 date strings and renders them in a user-friendly, locale-aware format. Dates are simple types with no expandable details.
+
+## Supported Formats
+
+- Full ISO 8601: `2022-11-11T08:01:20.557+00:00`
+- Date only: `2024-06-15`
+- Date with time: `2024-06-15T09:30:00.000+02:00`
+
+## Settings
+
+No additional settings are required. The renderer uses the browser's locale defaults for formatting.
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={DateStories.Default} />
+
+### ISO 8601 with Time
+
+<Canvas of={DateStories.ISO8601WithTime} />
+
+### Date Only
+
+<Canvas of={DateStories.DateOnly} />
+
+### DateTime Short
+
+<Canvas of={DateStories.DateTimeShort} />
+
+### Dark Mode
+
+<Canvas of={DateStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="2022-11-11T08:01:20.557+00:00"></pid-component>
+```

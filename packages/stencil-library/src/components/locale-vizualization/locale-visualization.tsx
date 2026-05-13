@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Component, h, Host, Prop } from '@stencil/core';
 
 @Component({
@@ -36,7 +35,7 @@ export class LocaleVisualization {
     };
 
     const generateFlag = (locale: string): string => {
-      if (this.showFlag === false) return '';
+      if (!this.showFlag) return '';
       const codePoints = locale
         .toUpperCase()
         .split('')

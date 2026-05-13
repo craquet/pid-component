@@ -1,0 +1,57 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import * as DOIStories from './DOI.stories';
+
+<Meta of={DOIStories} />
+
+# DOI Renderer Module
+
+The DOI (Digital Object Identifier) renderer module provides two separate renderers for resolving DOIs from different metadata providers:
+
+## Available Renderers
+
+### [DataCite DOI Renderer](./DataCite/DataCite.mdx)
+
+Fetches metadata directly from the [DataCite API](https://api.datacite.org/). Use this renderer for DOIs registered with DataCite, including:
+
+- Journal articles
+- Software (e.g., Zenodo)
+- RFC documents
+- Preprints
+- Presentations
+
+### [CrossRef DOI Renderer](./CrossRef/CrossRef.mdx)
+
+Fetches metadata from the [CrossRef API](https://api.crossref.org/). This renderer automatically detects whether a DOI refers to:
+
+- **Works**: Publications like journal articles, books, conference papers
+- **Funders**: Research funding organizations (via the CrossRef funders endpoint)
+
+## Key Features
+
+- **ORCID Extraction**: Both renderers automatically extract ORCID identifiers from creator/author metadata
+- **ROR Extraction**: DataCite renderer also extracts ROR identifiers from affiliation data
+- **Citation Styles**: Supports APA, Chicago, IEEE, Harvard, and Anglia Ruskin citation styles
+- **Metadata Caching**: Uses cached API responses for improved performance
+
+## Choosing a Renderer
+
+By default, both renderers are registered and will be tried in order. You can explicitly specify which renderer to use:
+
+```html
+<!-- DataCite DOI -->
+<pid-component value="10.5445/IR/1000188026" renderers='["DataCiteDOIType"]'></pid-component>
+
+<!-- CrossRef DOI -->
+<pid-component value="10.1109/eScience65000.2025.00022" renderers='["CrossRefDOIType"]'></pid-component>
+
+<!-- Funder DOI (CrossRef only) -->
+<pid-component value="10.13039/501100001659" renderers='["CrossRefDOIType"]'></pid-component>
+```
+
+## Technical Details
+
+- **DataCite API**: `https://api.datacite.org/dois/{doi}`
+- **CrossRef Works API**: `https://api.crossref.org/works/{doi}`
+- **CrossRef Funders API**: `https://api.crossref.org/funders/{doi}`
+
+Both renderers use the `cachedFetch` utility for efficient API request handling and caching.

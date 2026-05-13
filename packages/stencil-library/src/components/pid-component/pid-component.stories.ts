@@ -1,5 +1,11 @@
 import { html } from 'lit';
 import { Meta, StoryObj } from '@storybook/web-components-vite';
+import { expect, waitFor } from 'storybook/test';
+import {
+  DOI_examples,
+  HANDLE_examples,
+} from '../../../../../examples';
+
 
 /**
  * The pid-component is a versatile component for displaying and interacting with
@@ -7,7 +13,8 @@ import { Meta, StoryObj } from '@storybook/web-components-vite';
  * management, and adaptive pagination.
  */
 const meta: Meta = {
-  title: 'PID-Component',
+  title: 'pid-component',
+  id: '01-pid-component',
   component: 'pid-component',
   tags: ['autodocs'],
   argTypes: {
@@ -30,10 +37,11 @@ const meta: Meta = {
       description: 'Determines whether the component is open or not by default',
       control: { type: 'boolean' },
       table: {
+        defaultValue: { summary: 'false' },
         type: { summary: 'boolean' },
       },
     },
-    amountOfItems: {
+    itemsPerPage: {
       description: 'The number of items to show in the table per page',
       control: {
         type: 'number',
@@ -67,9 +75,10 @@ const meta: Meta = {
       },
     },
     hideSubcomponents: {
-      description: 'Determines whether subcomponents should generally be shown or not',
+      description: 'Determines whether subcomponents should generally be shown or not. If true, no nested sub-components are rendered.',
       control: { type: 'boolean' },
       table: {
+        defaultValue: { summary: 'false' },
         type: { summary: 'boolean' },
       },
     },
@@ -89,21 +98,61 @@ const meta: Meta = {
         type: { summary: 'boolean' },
       },
     },
+    defaultTTL: {
+      description: 'Default time-to-live for cached responses in milliseconds (default: 86400000 = 24 hours)',
+      control: { type: 'number', min: 0 },
+      table: {
+        defaultValue: { summary: '86400000' },
+        type: { summary: 'number' },
+      },
+    },
+    width: {
+      description: 'Initial width of the component (e.g. "500px", "50%"). If not set, defaults to 500px on large screens, 400px on medium, 300px on small.',
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    height: {
+      description: 'Initial height of the component (e.g. "300px", "50vh"). If not set, defaults to 300px.',
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' },
+      },
+    },
     darkMode: {
       description: 'The dark mode setting for the component',
       control: 'select',
       options: ['light', 'dark', 'system'],
       table: {
+        type: { summary: '"light" | "dark" | "system"' },
+        defaultValue: { summary: 'light' },
+      },
+    },
+    renderers: {
+      description:
+        'An ordered list of renderer keys to try first (JSON string array, non-binding preselection). These are tried in order; if none match, the full registry is used (unless fallbackToAll is false).',
+      control: { type: 'text' },
+      table: {
         type: { summary: 'string' },
-        defaultValue: { summary: 'system' },
+        defaultValue: { summary: 'undefined' },
+      },
+    },
+    fallbackToAll: {
+      description:
+        'When renderers is set and no listed renderer matches, fall back to the full default renderer registry. Set to false to strictly restrict to listed renderers only.',
+      control: { type: 'boolean' },
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
       },
     },
   },
   args: {
-    value: '21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343',
+    value: HANDLE_examples.FDO_BARE,
     settings: '[]',
     openByDefault: false,
-    amountOfItems: 10,
+    itemsPerPage: 10,
     levelOfSubcomponents: 1,
     currentLevelOfSubcomponents: 0,
     hideSubcomponents: false,
@@ -113,7 +162,7 @@ const meta: Meta = {
   },
 };
 
-const textDecorator = (story: () => unknown) =>
+const _textDecorator = (story: () => unknown) =>
   html`<p class="items-center align-middle">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
     ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
@@ -126,296 +175,38 @@ const textDecorator = (story: () => unknown) =>
 export default meta;
 type Story = StoryObj;
 
+/**
+ * Default story showing a Handle PID in its collapsed initial state.
+ * Click the component to expand and see the resolved record.
+ */
 export const Default: Story = {
+  id: 'pid-component-default',
   args: {
-    value: '21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343',
+    value: HANDLE_examples.FDO_BARE,
   },
   parameters: {
     docs: {
       source: {
         code: `
-<pid-component value='21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343'></pid-component>
+<pid-component value='${HANDLE_examples.FDO_BARE}'></pid-component>
         `,
       },
     },
   },
 };
 
-export const Handle: Story = {
-  args: {
-    value: '21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<pid-component value='21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343'></pid-component>
-        `,
-      },
-    },
-  },
-};
 
-export const HandleWithoutSubcomponent: Story = {
-  args: {
-    value: '21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343',
-    hideSubcomponents: true,
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<pid-component value='21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343' hide-subcomponents='true'></pid-component>
-        `,
-      },
-    },
-  },
-};
 
-export const ORCID: Story = {
-  args: {
-    value: '0009-0005-2800-4833',
-    openByDefault: true,
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<pid-component value='0009-0005-2800-4833'></pid-component>
-        `,
-      },
-    },
-  },
-};
-
-export const ROR: Story = {
-  args: {
-    value: 'https://ror.org/04t3en479',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<pid-component value='https://ror.org/04t3en479'></pid-component>`,
-      },
-    },
-  },
-};
-
-export const SPDXLong: Story = {
-  args: {
-    value: 'https://spdx.org/licenses/Apache-2.0',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<pid-component value='https://spdx.org/licenses/Apache-2.0'></pid-component>`,
-      },
-    },
-  },
-};
-
-export const SPDXShort: Story = {
-  args: {
-    value: 'Apache-2.0',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<pid-component value='Apache-2.0'></pid-component>`,
-      },
-    },
-  },
-};
-
-export const Date: Story = {
-  args: {
-    value: '2022-11-11T08:01:20.557+00:00',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<pid-component value='2022-11-11T08:01:20.557+00:00'></pid-component>`,
-      },
-    },
-  },
-};
-
-export const URL: Story = {
-  args: {
-    value: 'https://scc.kit.edu',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<pid-component value='https://scc.kit.edu'></pid-component>`,
-      },
-    },
-  },
-};
-
-export const Email: Story = {
-  args: {
-    value: 'someone@example.com',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<pid-component value='someone@example.com'></pid-component>`,
-      },
-    },
-  },
-};
-
-export const CommaSeperatedMails: Story = {
-  args: {
-    value: 'someone@example.com, john.doe@demo.example',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<pid-component value='someone@example.com, john.doe@demo.example'></pid-component>`,
-      },
-    },
-  },
-};
-
-export const Fallback: Story = {
-  args: {
-    value: 'This is a fallback test',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<pid-component value='This is a fallback test'></pid-component>`,
-      },
-    },
-  },
-};
-
-export const ORCIDInRecord = {
-  args: {
-    value: '21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6',
-    openStatus: true,
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<pid-component value='This is a fallback test'></pid-component>`,
-      },
-    },
-  },
-};
-
-export const ORCIDInRecordWithoutLimit = {
-  args: {
-    value: '21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6',
-    amountOfItems: 100,
-    openStatus: true,
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `<pid-component value='21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6' amount-of-items='100' open-by-default='true'></pid-component>`,
-      },
-    },
-  },
-};
-
-export const ORCIDInRecordWithSettings = {
-  args: {
-    value: '21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6',
-    settings: '[{"type":"ORCIDType","values":[{"name":"affiliationAt","value":949363200000},{"name":"showAffiliation","value":true}]}]',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<pid-component value='21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343' settings='[{"type":"ORCIDConfig","values":[{"name":"affiliationAt","value":949363200000},{"name":"showAffiliation","value":true}]}]'></pid-component>
-        `,
-      },
-    },
-  },
-};
-
-export const HandleInText: Story = {
-  args: {
-    value: '21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6',
-  },
-  decorators: [textDecorator],
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<p class='align-middle items-center'>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <pid-component value='21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6'></pid-component>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute <pid-component value='21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6'></pid-component> irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>`,
-      },
-    },
-  },
-};
-
-export const HandleInTextNotEmphasized: Story = {
-  args: {
-    value: '21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6',
-    emphasizeComponent: false,
-  },
-  decorators: [textDecorator],
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<p class='align-middle items-center'>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <pid-component value='21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6' emphasize-component="false"></pid-component>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute <pid-component value='21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6' emphasize-component="false"></pid-component> irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>`,
-      },
-    },
-  },
-};
-
-export const ORCIDInText: Story = {
-  args: {
-    value: '0009-0005-2800-4833',
-  },
-  decorators: [textDecorator],
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<p class='align-middle items-center'>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <pid-component value='0009-0005-2800-4833'></pid-component>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute <pid-component value='0009-0005-2800-4833'></pid-component> irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>`,
-      },
-    },
-  },
-};
-
-export const HandleWithoutSubcomponentInText: Story = {
-  args: {
-    value: '21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343',
-    hideSubcomponents: true,
-    emphasizeComponent: false,
-  },
-  decorators: [textDecorator],
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<p class='align-middle items-center'>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<pid-component value='21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343' hide-subcomponents='true'  emphasize-component='false'></pid-component>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute <pid-component value='21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343' hide-subcomponents='true' emphasize-component='false'></pid-component> irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-        `,
-      },
-    },
-  },
-};
-
+/**
+ * A real-world example: a PID embedded in a descriptive paragraph about
+ * the Typed PID Maker. The component starts collapsed so it reads naturally
+ * as part of the sentence.
+ */
 export const TypedPIDMakerExampleText: Story = {
+  id: 'pid-component-typed-pid-maker-text',
   args: {
-    value: '21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6',
+    value: HANDLE_examples.FDO_TYPED,
+    openByDefault: false,
   },
   decorators: [
     (story: () => unknown) => html`
@@ -430,12 +221,15 @@ export const TypedPIDMakerExampleText: Story = {
 };
 
 /**
- * Demonstrates the component in dark mode
+ * Demonstrates the component in dark mode. The component and all its
+ * sub-components adapt their colors for dark backgrounds.
  */
 export const DarkMode: Story = {
+  id: 'pid-component-dark-mode',
   args: {
-    value: '21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343',
+    value: HANDLE_examples.FDO_BARE,
     darkMode: 'dark',
+    openByDefault: true,
   },
   globals: {
     backgrounds: { value: 'dark' },
@@ -444,7 +238,7 @@ export const DarkMode: Story = {
     docs: {
       source: {
         code: `
-<pid-component value="21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343" dark-mode="dark" open-by-default="true"></pid-component>
+<pid-component value="${HANDLE_examples.FDO_BARE}" dark-mode="dark" open-by-default="true"></pid-component>
         `,
       },
     },
@@ -452,12 +246,14 @@ export const DarkMode: Story = {
 };
 
 /**
- * Demonstrates the component in light mode
+ * Demonstrates the component in light mode (the default).
  */
 export const LightMode: Story = {
+  id: 'pid-component-light-mode',
   args: {
-    value: '21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343',
+    value: HANDLE_examples.FDO_BARE,
     darkMode: 'light',
+    openByDefault: true,
   },
   globals: {
     backgrounds: { value: 'light' },
@@ -466,7 +262,7 @@ export const LightMode: Story = {
     docs: {
       source: {
         code: `
-<pid-component value="21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343" dark-mode="light" open-by-default="true"></pid-component>
+<pid-component value="${HANDLE_examples.FDO_BARE}" dark-mode="light" open-by-default="true"></pid-component>
         `,
       },
     },
@@ -474,84 +270,82 @@ export const LightMode: Story = {
 };
 
 /**
- * Demonstrates the component with system preference for dark mode
+ * Uses the operating system's color scheme preference. The component
+ * automatically switches between light and dark based on the user's
+ * system setting.
  */
 export const SystemMode: Story = {
+  id: 'pid-component-system-mode',
   args: {
-    value: '21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343',
+    value: HANDLE_examples.FDO_BARE,
     darkMode: 'system',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<pid-component value="21.11152/B88E78D4-E1EE-40F7-96CE-EC1AFCFF6343" dark-mode="system" open-by-default="true"></pid-component>
-        `,
-      },
-    },
-  },
-};
-
-/**
- * Demonstrates DOI rendering with DataCite metadata - Journal Paper
- */
-export const DOI_DataCite_JournalPaper: Story = {
-  args: {
-    value: '10.5445/IR/1000185135',
     openByDefault: true,
   },
   parameters: {
     docs: {
-      description: {
-        story: 'Displays a journal paper DOI with metadata from DataCite.',
-      },
       source: {
         code: `
-<pid-component value="10.5445/IR/1000185135" open-by-default="true"></pid-component>
+<pid-component value="${HANDLE_examples.FDO_BARE}" dark-mode="system" open-by-default="true"></pid-component>
         `,
       },
     },
   },
 };
 
+
 /**
- * Demonstrates DOI rendering with CrossRef metadata - Journal Paper
+ * Restricts detection to only the DataCiteDOIType renderer.
+ * Since the value is a DataCite DOI, it matches and renders normally.
  */
-export const DOI_CrossRef_JournalPaper: Story = {
+export const RenderersMatchingDOI: Story = {
+  id: 'pid-component-renderers-matching-doi',
   args: {
-    value: '10.1109/eScience65000.2025.00022',
-    openByDefault: true,
+    value: DOI_examples.DATACITE_JOURNAL_PAPER,
+    renderers: '["DataCiteDOIType"]',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Displays a journal paper DOI with metadata from CrossRef.',
+        story:
+          'Uses the `renderers` prop to restrict detection to only DataCiteDOIType. The DOI value matches, so it renders as expected.',
       },
       source: {
         code: `
-<pid-component value="10.1109/eScience65000.2025.00022" open-by-default="true"></pid-component>
+<pid-component value='${DOI_examples.DATACITE_JOURNAL_PAPER}' renderers='["DataCiteDOIType"]'></pid-component>
         `,
       },
     },
   },
+  play: async ({ canvasElement }) => {
+    // Wait for auto-detection and check output
+    await waitFor(() => {
+      const pidComponent = canvasElement.querySelector('pid-component');
+      expect(pidComponent).toBeTruthy();
+      expect((pidComponent as HTMLPidComponentElement).renderers).toEqual('["DataCiteDOIType"]');
+    }, { timeout: 5000 });
+  },
 };
 
 /**
- * Demonstrates DOI rendering with DataCite metadata - Software on Zenodo
+ * Preselects ORCIDType, but the value is a DOI. Since renderers is a
+ * non-binding preselection, the component falls back to the full registry
+ * and correctly renders it as a DOI.
  */
-export const DOI_DataCite_Software: Story = {
+export const RenderersPreselectionFallback: Story = {
+  id: 'pid-component-renderers-preselection-fallback',
   args: {
-    value: 'https://doi.org/10.5281/zenodo.13629109',
-    openByDefault: true,
+    value: DOI_examples.DATACITE_JOURNAL_PAPER,
+    renderers: '["ORCIDType"]',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Displays software DOI from Zenodo with DataCite metadata.',
+        story:
+          'Uses the `renderers` prop with only ORCIDType, but the value is a DOI. Since renderers is a non-binding preselection (fallbackToAll defaults to true), the component falls back to the full registry and renders as a DOI.',
       },
       source: {
         code: `
-<pid-component value="https://doi.org/10.5281/zenodo.13629109" open-by-default="true"></pid-component>
+<pid-component value='${DOI_examples.DATACITE_JOURNAL_PAPER}' renderers='["ORCIDType"]'></pid-component>
         `,
       },
     },
@@ -559,43 +353,59 @@ export const DOI_DataCite_Software: Story = {
 };
 
 /**
- * Demonstrates DOI rendering with DataCite metadata - RFC Document
+ * Strictly restricts detection to only ORCIDType with fallbackToAll=false.
+ * Since ORCIDType doesn't match the DOI value and fallback is disabled,
+ * the component renders nothing (unmatched state).
  */
-export const DOI_DataCite_RFC: Story = {
+export const RenderersStrictRestriction: Story = {
+  id: 'pid-component-renderers-strict-restriction',
   args: {
-    value: 'doi:10.17487/rfc3650',
-    openByDefault: true,
+    value: DOI_examples.DATACITE_JOURNAL_PAPER,
+    renderers: '["ORCIDType"]',
+    fallbackToAll: false,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Displays an RFC document DOI with DataCite metadata.',
+        story:
+          'Strictly restricts detection to ORCIDType only with `fallback-to-all="false"`. Since ORCIDType does not match the DOI, and fallback is disabled, the component is invisible (unmatched state).',
       },
       source: {
         code: `
-<pid-component value="doi:10.17487/rfc3650" open-by-default="true"></pid-component>
+<pid-component value='${DOI_examples.DATACITE_JOURNAL_PAPER}' renderers='["ORCIDType"]' fallback-to-all='false'></pid-component>
         `,
       },
     },
   },
+  play: async ({ canvasElement }) => {
+    await new Promise(r => setTimeout(r, 3000));
+    const pidComponent = canvasElement.querySelector('pid-component');
+    await expect(pidComponent).toBeTruthy();
+    // Component should exist but be invisible (unmatched state)
+    await expect((pidComponent as HTMLPidComponentElement).fallbackToAll).toBe(false);
+  },
 };
 
 /**
- * Demonstrates DOI rendering with CrossRef metadata - Book
+ * Demonstrates ordering priority: HandleType is listed before DataCiteDOIType.
+ * Since DOIs also match HandleType's regex, the Handle renderer is used
+ * instead of the DataCite DOI renderer because it appears first in the ordered list.
  */
-export const DOI_CrossRef_Book: Story = {
+export const RenderersOrderPriority: Story = {
+  id: 'pid-component-renderers-order-priority',
   args: {
-    value: '10.1007/978-1-4419-8598-9',
-    openByDefault: true,
+    value: DOI_examples.DATACITE_JOURNAL_PAPER,
+    renderers: '["HandleType", "DataCiteDOIType"]',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Displays a book DOI with metadata from CrossRef.',
+        story:
+          'The ordered list puts HandleType before DataCiteDOIType. Since a DOI like `10.5445/IR/1000185135` also matches the Handle PID regex, the Handle renderer is used first because it appears earlier in the list.',
       },
       source: {
         code: `
-<pid-component value="10.1007/978-1-4419-8598-9" open-by-default="true"></pid-component>
+<pid-component value='${DOI_examples.DATACITE_JOURNAL_PAPER}' renderers='["HandleType", "DataCiteDOIType"]'></pid-component>
         `,
       },
     },
@@ -603,21 +413,24 @@ export const DOI_CrossRef_Book: Story = {
 };
 
 /**
- * Demonstrates DOI rendering with DataCite metadata - Slides/Presentation
+ * Multiple renderers in the preferred order: DataCiteDOIType first, then HandleType.
+ * The DOI value matches DataCiteDOIType first, so the DataCite DOI renderer is used.
  */
-export const DOI_DataCite_Slides: Story = {
+export const RenderersCorrectOrder: Story = {
+  id: 'pid-component-renderers-correct-order',
   args: {
-    value: '10.5445/IR/1000178054',
-    openByDefault: true,
+    value: DOI_examples.DATACITE_JOURNAL_PAPER,
+    renderers: '["DataCiteDOIType", "HandleType"]',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Displays a presentation/slides DOI with DataCite metadata.',
+        story:
+          'The ordered list puts DataCiteDOIType before HandleType. The DOI matches DataCiteDOIType first, so the DOI renderer is used as expected.',
       },
       source: {
         code: `
-<pid-component value="10.5445/IR/1000178054" open-by-default="true"></pid-component>
+<pid-component value='${DOI_examples.DATACITE_JOURNAL_PAPER}' renderers='["DataCiteDOIType", "HandleType"]'></pid-component>
         `,
       },
     },
@@ -625,54 +438,23 @@ export const DOI_DataCite_Slides: Story = {
 };
 
 /**
- * Demonstrates DOI rendering with DataCite metadata - arXiv Preprint
+ * Collapsed by default (openByDefault=false). The component shows
+ * only the identifier, suitable for inline use in text.
  */
-export const DOI_DataCite_Preprint: Story = {
+export const OpenByDefaultCollapsed: Story = {
+  id: 'pid-component-open-by-default-collapsed',
   args: {
-    value: '10.48550/ARXIV.2505.16550',
-    openByDefault: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Displays an arXiv preprint DOI with DataCite metadata.',
-      },
-      source: {
-        code: `
-<pid-component value="10.48550/ARXIV.2505.16550" open-by-default="true"></pid-component>
-        `,
-      },
-    },
-  },
-};
-
-/**
- * Demonstrates DOI rendering with different citation styles
- */
-export const DOI_CitationStyles: Story = {
-  args: {
-    value: '10.5445/IR/1000185135',
+    value: HANDLE_examples.FDO_TYPED,
     openByDefault: false,
-    settings: JSON.stringify([
-      {
-        type: 'DOIType',
-        values: [
-          { name: 'citationStyle', value: 'APA' }
-        ]
-      }
-    ]),
   },
   parameters: {
     docs: {
       description: {
-        story: 'Demonstrates how to configure citation style (APA, Chicago, IEEE, Harvard, Anglia Ruskin) via settings.',
+        story: 'The component starts in its collapsed state, showing only the identifier. Click to expand and view the resolved record.',
       },
       source: {
         code: `
-<pid-component
-  value="10.5445/IR/1000185135"
-  settings='[{"type":"DOIType","values":[{"name":"citationStyle","value":"APA"}]}]'
-></pid-component>
+<pid-component value="${HANDLE_examples.FDO_TYPED}" open-by-default="false"></pid-component>
         `,
       },
     },
@@ -680,21 +462,23 @@ export const DOI_CitationStyles: Story = {
 };
 
 /**
- * Demonstrates rendering of a JSON object
+ * Expanded by default (openByDefault=true). The resolved record
+ * is immediately visible without clicking.
  */
-export const JSON_Object: Story = {
+export const OpenByDefaultExpanded: Story = {
+  id: 'pid-component-open-by-default-expanded',
   args: {
-    value: '{"name": "pid-component", "version": "1.0.0", "features": ["PIDs", "ORCiDs", "DOIs"]}',
+    value: HANDLE_examples.FDO_TYPED,
     openByDefault: true,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Renders a JSON object with syntax highlighting and tree view.',
+        story: 'The component starts expanded, showing the full resolved record with all its entries.',
       },
       source: {
         code: `
-<pid-component value='{"name": "pid-component", "version": "1.0.0", "features": ["PIDs", "ORCiDs", "DOIs"]}'></pid-component>
+<pid-component value="${HANDLE_examples.FDO_TYPED}" open-by-default="true"></pid-component>
         `,
       },
     },
@@ -702,20 +486,97 @@ export const JSON_Object: Story = {
 };
 
 /**
- * Demonstrates rendering of a Locale
+ * With emphasis (default). The component has a subtle border
+ * and shadow to make it stand out from surrounding content.
  */
-export const Locale: Story = {
+export const Emphasized: Story = {
+  id: 'pid-component-emphasized',
   args: {
-    value: 'de-DE',
+    value: HANDLE_examples.FDO_BARE,
+    emphasizeComponent: true,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Renders a locale code with its flag and name.',
+        story: 'The component is emphasized with a border and subtle shadow to distinguish it from surrounding content.',
       },
       source: {
         code: `
-<pid-component value='de-DE'></pid-component>
+<pid-component value="${HANDLE_examples.FDO_BARE}" emphasize-component="true"></pid-component>
+        `,
+      },
+    },
+  },
+};
+
+/**
+ * Without emphasis. The component blends into surrounding
+ * content, suitable for inline use in flowing text.
+ */
+export const Unemphasized: Story = {
+  id: 'pid-component-unemphasized',
+  args: {
+    value: HANDLE_examples.FDO_BARE,
+    emphasizeComponent: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The component has no border or shadow, allowing it to blend into inline text contexts.',
+      },
+      source: {
+        code: `
+<pid-component value="${HANDLE_examples.FDO_BARE}" emphasize-component="false"></pid-component>
+        `,
+      },
+    },
+  },
+};
+
+/**
+ * Default page size (10 items per page). For records with many
+ * entries, pagination controls appear to navigate through pages.
+ */
+export const DefaultPageSize: Story = {
+  id: 'pid-component-default-page-size',
+  args: {
+    value: HANDLE_examples.FDO_TYPED,
+    openByDefault: true,
+    itemsPerPage: 10,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'With the default itemsPerPage of 10, records with more than 10 entries are paginated.',
+      },
+      source: {
+        code: `
+<pid-component value="${HANDLE_examples.FDO_TYPED}" items-per-page="10" open-by-default="true"></pid-component>
+        `,
+      },
+    },
+  },
+};
+
+/**
+ * Unlimited page size (itemsPerPage=100). Shows all entries
+ * on a single page without pagination controls.
+ */
+export const UnlimitedPageSize: Story = {
+  id: 'pid-component-unlimited-page-size',
+  args: {
+    value: HANDLE_examples.FDO_TYPED,
+    openByDefault: true,
+    itemsPerPage: 100,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Setting itemsPerPage to a high value (e.g., 100) displays all entries on one page without pagination.',
+      },
+      source: {
+        code: `
+<pid-component value="${HANDLE_examples.FDO_TYPED}" items-per-page="100" open-by-default="true"></pid-component>
         `,
       },
     },

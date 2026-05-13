@@ -1,0 +1,59 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as EmailStories from './Email.stories';
+
+<Meta of={EmailStories} />
+
+# Email
+
+The Email renderer recognizes email addresses and renders them as clickable `mailto` links. It supports single addresses as well as comma-separated lists.
+
+## Settings
+
+No additional settings are required.
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={EmailStories.Default} />
+
+### KIT Email
+
+<Canvas of={EmailStories.KITEmail} />
+
+### KIT Email (Alt)
+
+<Canvas of={EmailStories.KITEmailAlt} />
+
+### Multiple Emails
+
+<Canvas of={EmailStories.MultipleEmails} />
+
+### Multiple KIT Emails
+
+<Canvas of={EmailStories.MultipleKITEmails} />
+
+### Inline in Text
+
+<Canvas of={EmailStories.InlineInText} />
+
+### Dark Mode
+
+<Canvas of={EmailStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="someone@example.com"></pid-component>
+```
+
+### Multiple Emails
+
+```html
+<pid-component value="someone@example.com, another@demo.example"></pid-component>
+```

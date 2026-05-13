@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json",
   "description-markup": "markdown",
   "name": "@kit-data-manager/pid-component",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "contributions": {
     "html": {
       "elements": [
@@ -50,6 +50,14 @@
               "description": "Optional custom label for the button.\nIf not provided, a default label will be used.",
               "required": false,
               "default": "",
+              "priority": "high"
+            },
+            {
+              "name": "dark-mode",
+              "deprecated": false,
+              "description": "Dark mode setting for the button.\nWhen provided, this takes precedence over DOM-based dark mode detection.",
+              "required": false,
+              "default": "'light'",
               "priority": "high"
             }
           ],
@@ -244,6 +252,22 @@
               "required": false,
               "default": "false",
               "priority": "high"
+            },
+            {
+              "name": "expanded",
+              "deprecated": false,
+              "description": "Whether to apply floating/overlay styling when expanded.\nWhen true, applies absolute positioning and z-index for overlay behavior.",
+              "required": false,
+              "default": "false",
+              "priority": "high"
+            },
+            {
+              "name": "preview-scrollable",
+              "deprecated": false,
+              "description": "Whether the preview should be scrollable (for subcomponents or expanded state).",
+              "required": false,
+              "default": "false",
+              "priority": "high"
             }
           ],
           "slots": [],
@@ -283,7 +307,7 @@
               "priority": "high"
             },
             {
-              "name": "amount-of-items",
+              "name": "items-per-page",
               "deprecated": false,
               "description": "The number of items to show in the table per page.\nDefaults to 10.\n(optional)",
               "required": false,
@@ -360,6 +384,22 @@
               "description": "The dark mode setting for the component\nOptions: \"light\", \"dark\", \"system\"\nDefault: \"light\" for better compatibility",
               "required": false,
               "default": "'light'",
+              "priority": "high"
+            },
+            {
+              "name": "renderers",
+              "deprecated": false,
+              "description": "An ordered list of renderer keys to try first (JSON string array).\nThese renderers are tried in the specified order as a non-binding preselection.\nIf none match, the component falls back to the full default renderer registry\n(unless fallbackToAll is explicitly set to false).\nNot forwarded to child subcomponents — their types are independent.\n(optional)\n\nExample: '[\"DOIType\", \"ORCIDType\", \"HandleType\"]'",
+              "required": false,
+              "default": "",
+              "priority": "high"
+            },
+            {
+              "name": "fallback-to-all",
+              "deprecated": false,
+              "description": "When renderers is set and no listed renderer matches the value, this flag\ncontrols whether to fall back to the full default renderer registry.\nDefault: true (always falls back to try all renderers).\nSet to false to strictly restrict detection to only the listed renderers.\nNot forwarded to child subcomponents.\n(optional)",
+              "required": false,
+              "default": "true",
               "priority": "high"
             }
           ],
@@ -544,6 +584,14 @@
               "required": false,
               "default": "true",
               "priority": "high"
+            },
+            {
+              "name": "dark-mode",
+              "deprecated": false,
+              "description": "Dark mode setting for the tooltip.\nWhen provided, this takes precedence over DOM-based dark mode detection.",
+              "required": false,
+              "default": "'light'",
+              "priority": "high"
             }
           ],
           "slots": [],
@@ -631,6 +679,9 @@
             },
             {
               "name": "label"
+            },
+            {
+              "name": "darkMode"
             }
           ]
         },
@@ -701,6 +752,12 @@
             },
             {
               "name": "showFooter"
+            },
+            {
+              "name": "expanded"
+            },
+            {
+              "name": "previewScrollable"
             }
           ]
         },
@@ -716,7 +773,7 @@
               "name": "openByDefault"
             },
             {
-              "name": "amountOfItems"
+              "name": "itemsPerPage"
             },
             {
               "name": "levelOfSubcomponents"
@@ -744,6 +801,12 @@
             },
             {
               "name": "darkMode"
+            },
+            {
+              "name": "renderers"
+            },
+            {
+              "name": "fallbackToAll"
             }
           ]
         },
@@ -819,6 +882,9 @@
             },
             {
               "name": "fitContent"
+            },
+            {
+              "name": "darkMode"
             }
           ]
         }

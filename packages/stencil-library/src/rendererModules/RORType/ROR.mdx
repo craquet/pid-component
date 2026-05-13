@@ -1,0 +1,54 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as RORStories from './ROR.stories';
+
+<Meta of={RORStories} />
+
+# ROR (Research Organization Registry)
+
+The ROR renderer resolves ROR IDs to identify research organizations. It fetches organization details such as name, acronyms, location, and relationships (parent/child organizations) from the ROR API.
+
+## Settings
+
+- **`ttl`** (`number`, default: `86400000`): Time-to-live for cached organization data
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={RORStories.Default} />
+
+### With HTTPS Prefix
+
+<Canvas of={RORStories.WithHTTPS} />
+
+### Bare ID (without prefix)
+
+<Canvas of={RORStories.BareID} />
+
+### Second Organization
+
+<Canvas of={RORStories.SecondOrganization} />
+
+### Dark Mode
+
+<Canvas of={RORStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="https://ror.org/04t3en479"></pid-component>
+```
+
+### With Settings
+
+```html
+<pid-component
+  value="https://ror.org/04t3en479"
+  settings='[{"type":"RORType","values":[{"name":"ttl","value":3600000}]}]'>
+</pid-component>
+```

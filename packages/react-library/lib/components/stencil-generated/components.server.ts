@@ -43,7 +43,8 @@ export const CopyButton: StencilReactComponent<CopyButtonElement, CopyButtonEven
     tagName: 'copy-button',
     properties: {
         value: 'value',
-        label: 'label'
+        label: 'label',
+      darkMode: 'dark-mode',
     },
     hydrateModule: import('@kit-data-manager/pid-component/hydrate') as Promise<HydrateModule>,
     clientModule: clientComponents.CopyButton as StencilReactComponent<CopyButtonElement, CopyButtonEvents, Components.CopyButton>,
@@ -107,7 +108,9 @@ export const PidCollapsible: StencilReactComponent<PidCollapsibleElement, PidCol
         initialWidth: 'initial-width',
         initialHeight: 'initial-height',
         lineHeight: 'line-height',
-        showFooter: 'show-footer'
+        showFooter: 'show-footer',
+        expanded: 'expanded',
+      previewScrollable: 'preview-scrollable',
     },
     hydrateModule: import('@kit-data-manager/pid-component/hydrate') as Promise<HydrateModule>,
     clientModule: clientComponents.PidCollapsible as StencilReactComponent<PidCollapsibleElement, PidCollapsibleEvents, Components.PidCollapsible>,
@@ -122,7 +125,7 @@ export const PidComponent: StencilReactComponent<PidComponentElement, PidCompone
         value: 'value',
         settings: 'settings',
         openByDefault: 'open-by-default',
-        amountOfItems: 'amount-of-items',
+        itemsPerPage: 'items-per-page',
         levelOfSubcomponents: 'level-of-subcomponents',
         currentLevelOfSubcomponents: 'current-level-of-subcomponents',
         hideSubcomponents: 'hide-subcomponents',
@@ -131,7 +134,9 @@ export const PidComponent: StencilReactComponent<PidComponentElement, PidCompone
         defaultTTL: 'default-t-t-l',
         width: 'width',
         height: 'height',
-        darkMode: 'dark-mode'
+        darkMode: 'dark-mode',
+        renderers: 'renderers',
+        fallbackToAll: 'fallback-to-all'
     },
     hydrateModule: import('@kit-data-manager/pid-component/hydrate') as Promise<HydrateModule>,
     clientModule: clientComponents.PidComponent as StencilReactComponent<PidComponentElement, PidComponentEvents, Components.PidComponent>,
@@ -188,7 +193,8 @@ export const PidTooltip: StencilReactComponent<PidTooltipElement, PidTooltipEven
         position: 'position',
         maxWidth: 'max-width',
         maxHeight: 'max-height',
-        fitContent: 'fit-content'
+        fitContent: 'fit-content',
+      darkMode: 'dark-mode',
     },
     hydrateModule: import('@kit-data-manager/pid-component/hydrate') as Promise<HydrateModule>,
     clientModule: clientComponents.PidTooltip as StencilReactComponent<PidTooltipElement, PidTooltipEvents, Components.PidTooltip>,

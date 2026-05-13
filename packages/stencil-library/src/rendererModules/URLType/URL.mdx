@@ -1,0 +1,41 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as URLStories from './URL.stories';
+
+<Meta of={URLStories} />
+
+# URL
+
+The URL renderer renders URLs as clickable external links. URLs are simple types with no expandable details.
+
+## Settings
+
+No additional settings are required.
+
+## Controls
+
+<Controls />
+
+## Examples
+
+### Default
+
+<Canvas of={URLStories.Default} />
+
+### GitHub Repository
+
+<Canvas of={URLStories.GitHub} />
+
+### Zenodo
+
+<Canvas of={URLStories.Zenodo} />
+
+### Dark Mode
+
+<Canvas of={URLStories.DarkMode} />
+
+## Usage
+
+```html
+<pid-component value="https://scc.kit.edu"></pid-component>
+```

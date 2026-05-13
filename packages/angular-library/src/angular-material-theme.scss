@@ -1,0 +1,32 @@
+@use '@angular/material' as mat;
+
+// Define light theme
+$light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+  ),
+));
+
+// Define dark theme
+$dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$azure-palette,
+  ),
+));
+
+// Apply light theme by default
+:root {
+  @include mat.all-component-themes($light-theme);
+}
+
+// Dark mode - override CSS custom properties when .dark class is present
+.dark {
+  color-scheme: dark;
+}
+
+// Alternative approach: use data-color-scheme attribute
+[data-color-scheme="dark"] {
+  color-scheme: dark;
+}
