@@ -27,7 +27,7 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
       - run: npx lerna run build
-      - run: npx lerna run test -- --coverage
+      - run: npx lerna run test
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
