@@ -35,10 +35,10 @@ export function AboutPage({ darkMode = false }: AboutPageProps) {
 
         <Tabs defaultValue="dois">
           <Tabs.List>
-            <Tabs.Tab value="dois" className={darkMode ? 'text-white' : ''}>DOIs</Tabs.Tab>
-            <Tabs.Tab value="orcids" className={darkMode ? 'text-white' : ''}>ORCIDs</Tabs.Tab>
-            <Tabs.Tab value="handles" className={darkMode ? 'text-white' : ''}>Handles</Tabs.Tab>
-            <Tabs.Tab value="rors" className={darkMode ? 'text-white' : ''}>RORs</Tabs.Tab>
+            <Tabs.Tab value="dois" className={darkMode ? 'text-gray-300' : 'text-gray-700'}>DOIs</Tabs.Tab>
+            <Tabs.Tab value="orcids" className={darkMode ? 'text-gray-300' : 'text-gray-700'}>ORCIDs</Tabs.Tab>
+            <Tabs.Tab value="handles" className={darkMode ? 'text-gray-300' : 'text-gray-700'}>Handles</Tabs.Tab>
+            <Tabs.Tab value="rors" className={darkMode ? 'text-gray-300' : 'text-gray-700'}>RORs</Tabs.Tab>
           </Tabs.List>
 
           <Tabs.Panel value="dois" pt="md">

@@ -156,10 +156,10 @@ export namespace Components {
           * Public method to recalculate content dimensions Can be called externally, for example when pagination changes Optimized for better performance
          */
         'recalculateContentDimensions': () => Promise<{
-          contentWidth: number;
-          contentHeight: number;
-          maxWidth: number;
-          maxHeight: number;
+            contentWidth: number;
+            contentHeight: number;
+            maxWidth: number;
+            maxHeight: number;
         }>;
         /**
           * Whether to show the footer section
@@ -889,7 +889,7 @@ declare namespace LocalJSX {
     interface CopyButtonAttributes {
         "value": string;
         "label": string;
-      'darkMode': 'light' | 'dark' | 'system';
+        'darkMode': 'light' | 'dark' | 'system';
     }
     interface JsonViewerAttributes {
         "data": string | object;
@@ -915,14 +915,14 @@ declare namespace LocalJSX {
         "initialHeight": string;
         "lineHeight": number;
         "showFooter": boolean;
-      'expanded': boolean;
-      'previewScrollable': boolean;
+        'expanded': boolean;
+        'previewScrollable': boolean;
     }
     interface PidComponentAttributes {
         "value": string;
         "settings": string;
         "openByDefault": boolean;
-      'itemsPerPage': number;
+        'itemsPerPage': number;
         "levelOfSubcomponents": number;
         "currentLevelOfSubcomponents": number;
         "hideSubcomponents": boolean;
@@ -958,7 +958,7 @@ declare namespace LocalJSX {
         "maxWidth": string;
         "maxHeight": string;
         "fitContent": boolean;
-      'darkMode': 'light' | 'dark' | 'system';
+        'darkMode': 'light' | 'dark' | 'system';
     }
 
     interface IntrinsicElements {
