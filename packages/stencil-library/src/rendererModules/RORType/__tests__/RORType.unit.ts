@@ -1,7 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { RORType } from '../RORType';
 import { ROR_examples } from '../../../../../../examples';
-import rorFixture from '../../../../../../../examples/fixtures/ror-org.json';
 
 describe('RORType', () => {
   describe('quickCheck()', () => {

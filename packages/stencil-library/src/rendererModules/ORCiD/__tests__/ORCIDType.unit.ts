@@ -5,7 +5,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ORCIDType } from '../ORCIDType';
 import * as DataCache from '../../../utils/DataCache';
 import { ORCID_examples } from '../../../../../../examples';
-import orcidFixture from '../../../../../../../examples/fixtures/orcid-profile.json';
 
 let cachedFetchSpy: any;
 beforeEach(() => {

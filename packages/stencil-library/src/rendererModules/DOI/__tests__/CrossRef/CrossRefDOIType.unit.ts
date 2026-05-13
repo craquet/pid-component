@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CrossRefDOIType } from '../../CrossRef/CrossRefDOIType';
 import { DOI } from '../../DOI';
-import { DOI_examples } from '../../../../../../examples';
+import { DOI_examples } from '../../../../../../../examples';
 import workFixture from '../../../../../../../examples/fixtures/doi-crossref.json';
 
 const funderFixture = {

@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DataCiteDOIType } from '../../DataCite/DataCiteDOIType';
 import { DOI } from '../../DOI';
 import * as DataCache from '../../../../utils/DataCache';
-import { DOI_examples } from '../../../../../../examples';
+import { DOI_examples } from '../../../../../../../examples';
 import dataCiteFixture from '../../../../../../../examples/fixtures/doi-datacite.json';
 
 let cachedFetchSpy: any;

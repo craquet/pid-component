@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { ORCIDInfo } from '../../../rendererModules/ORCiD/ORCIDInfo';
+import { ORCIDInfo } from '../ORCIDInfo';
 import { ORCID_examples } from '../../../../../../examples';
 
 // Mock the cachedFetch dependency to prevent real network calls

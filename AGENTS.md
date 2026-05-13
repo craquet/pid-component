@@ -39,6 +39,8 @@
   `npm run test:e2e`, `npm run test:watch`.
 - Browser-based tests and Storybook tests require Chromium: `npx playwright install --with-deps chromium`.
 - CI also checks formatting via `npx lerna run format:check`.
+- Before giving any result to the user, please run `lerna run build && npm run build-storybook` as well as
+  `npm run lint` and `npm test` to ensure the code is in good shape.
 
 ## What to be careful with
 

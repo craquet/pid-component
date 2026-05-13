@@ -1,16 +1,17 @@
 import { h, render } from '@stencil/vitest';
 import { describe, expect, it } from 'vitest';
+import { DOI_examples, HANDLE_examples, ROR_examples, URL_examples } from '../../../../../../examples';
 // h is the JSX factory required at runtime by TSX – do not remove
 void h;
 
 describe('pid-component e2e', () => {
   it('renders and gets hydrated class', async () => {
-    const { root } = await render(<pid-component value="10.5281/zenodo.1234567" />);
+    const { root } = await render(<pid-component value={DOI_examples.DATACITE_SLIDES} />);
     expect(root).toHaveClass('hydrated');
   });
 
   it('has correct default attribute values', async () => {
-    const { root } = await render(<pid-component value="test-value" />);
+    const { root } = await render(<pid-component value={URL_examples.KIT_WEBSITE} />);
 
     // emphasize-component defaults to true (reflected as attribute presence)
     expect(root.emphasizeComponent).toBe(true);
@@ -27,12 +28,12 @@ describe('pid-component e2e', () => {
   });
 
   it('value attribute is set correctly', async () => {
-    const { root } = await render(<pid-component value="10.1234/example-doi" />);
-    expect(root.value).toBe('10.1234/example-doi');
+    const { root } = await render(<pid-component value={DOI_examples.DATACITE_SLIDES} />);
+    expect(root.value).toBe(DOI_examples.DATACITE_SLIDES);
   });
 
   it('has role="button" in shadow DOM for the preview', async () => {
-    const { root, waitForChanges } = await render(<pid-component value="test-value" />);
+    const { root, waitForChanges } = await render(<pid-component value={HANDLE_examples.FDO_TYPED} />);
     await waitForChanges();
     // Wait for the component to finish loading
     await new Promise(r => setTimeout(r, 1000));
@@ -48,7 +49,7 @@ describe('pid-component e2e', () => {
   });
 
   it('has aria-describedby for accessibility', async () => {
-    const { waitForChanges } = await render(<pid-component value="test-value" />);
+    const { waitForChanges } = await render(<pid-component value={URL_examples.KIT_WEBSITE} />);
     await waitForChanges();
     await new Promise(r => setTimeout(r, 1000));
     await waitForChanges();
@@ -56,38 +57,38 @@ describe('pid-component e2e', () => {
 
   it('renderers attribute is accepted', async () => {
     const { root } = await render(
-      <pid-component value="10.5281/zenodo.1234567" renderers='["DOIType"]' />,
+      <pid-component value={DOI_examples.DATACITE_SLIDES} renderers='["DOIType"]' />,
     );
     expect(root.renderers).toBe('["DOIType"]');
   });
 
   it('fallback-to-all attribute defaults correctly', async () => {
-    const { root } = await render(<pid-component value="test" />);
+    const { root } = await render(<pid-component value={ROR_examples.VALID} />);
     expect(root.fallbackToAll).toBe(true);
   });
 
   it('fallback-to-all can be set to false', async () => {
     const { root } = await render(
-      <pid-component value="test" fallbackToAll={false} />,
+      <pid-component value={ROR_examples.VALID} fallbackToAll={false} />,
     );
     expect(root.fallbackToAll).toBe(false);
   });
 
   it('dark-mode attribute applies', async () => {
-    const { root } = await render(<pid-component value="test" darkMode="dark" />);
+    const { root } = await render(<pid-component value={DOI_examples.DATACITE_SLIDES} darkMode="dark" />);
     expect(root.darkMode).toBe('dark');
   });
 
   it('emphasize-component attribute applies', async () => {
     const { root } = await render(
-      <pid-component value="test" emphasizeComponent={false} />,
+      <pid-component value={URL_examples.KIT_WEBSITE} emphasizeComponent={false} />,
     );
     expect(root.emphasizeComponent).toBe(false);
   });
 
   it('sets expanded attribute when opened via open-by-default', async () => {
     const { root, waitForChanges } = await render(
-      <pid-component value="test" openByDefault={true} />,
+      <pid-component value={DOI_examples.DATACITE_SLIDES} openByDefault={true} />,
     );
     await waitForChanges();
     await new Promise(r => setTimeout(r, 1000));
@@ -100,14 +101,14 @@ describe('pid-component e2e', () => {
   });
 
   it('renders loading state initially', async () => {
-    const { root } = await render(<pid-component value="test-value" />);
+    const { root } = await render(<pid-component value={URL_examples.KIT_WEBSITE} />);
     // The component should show loading spinner or status initially
     expect(root).not.toBeNull();
   });
 
   it('width and height props are accepted', async () => {
     const { root } = await render(
-      <pid-component value="test" width="600px" height="400px" />,
+      <pid-component value={ROR_examples.VALID} width="600px" height="400px" />,
     );
     expect(root.width).toBe('600px');
     expect(root.height).toBe('400px');
@@ -116,14 +117,14 @@ describe('pid-component e2e', () => {
 
 describe('pid-component CSS classes', () => {
   it('host element has relative and font-sans classes', async () => {
-    const { root } = await render(<pid-component value="test-value" />);
+    const { root } = await render(<pid-component value={URL_examples.KIT_WEBSITE} />);
     expect(root.className).toContain('relative');
     expect(root.className).toContain('font-sans');
   });
 
   it('has expanded attribute when openByDefault is true', async () => {
     const { root, waitForChanges } = await render(
-      <pid-component value="10.5281/zenodo.1234567" openByDefault={true} />,
+      <pid-component value={DOI_examples.DATACITE_SLIDES} openByDefault={true} />,
     );
     await waitForChanges();
     await new Promise(r => setTimeout(r, 500));
@@ -132,7 +133,7 @@ describe('pid-component CSS classes', () => {
 
   it('does not have expanded attribute when openByDefault is false', async () => {
     const { root, waitForChanges } = await render(
-      <pid-component value="test-value" openByDefault={false} />,
+      <pid-component value={URL_examples.KIT_WEBSITE} openByDefault={false} />,
     );
     await waitForChanges();
     await new Promise(r => setTimeout(r, 500));
@@ -140,13 +141,13 @@ describe('pid-component CSS classes', () => {
   });
 
   it('has hydrated class when component is rendered', async () => {
-    const { root } = await render(<pid-component value="test-value" />);
+    const { root } = await render(<pid-component value={DOI_examples.DATACITE_SLIDES} />);
     expect(root.className).toContain('hydrated');
   });
 
   it('dark mode host has correct classes', async () => {
     const { root } = await render(
-      <pid-component value="test-value" darkMode="dark" />,
+      <pid-component value={URL_examples.KIT_WEBSITE} darkMode="dark" />,
     );
     await new Promise(r => setTimeout(r, 500));
     const shadowHtml = root.shadowRoot?.innerHTML || '';
@@ -155,7 +156,7 @@ describe('pid-component CSS classes', () => {
 
   it('light mode host has correct classes', async () => {
     const { root } = await render(
-      <pid-component value="test-value" darkMode="light" />,
+      <pid-component value={URL_examples.KIT_WEBSITE} darkMode="light" />,
     );
     await new Promise(r => setTimeout(r, 500));
     const shadowHtml = root.shadowRoot?.innerHTML || '';
@@ -164,7 +165,7 @@ describe('pid-component CSS classes', () => {
 
   it('emphasized component shows border and shadow classes in preview', async () => {
     const { root, waitForChanges } = await render(
-      <pid-component value="test-value" emphasizeComponent={true} />,
+      <pid-component value={DOI_examples.DATACITE_SLIDES} emphasizeComponent={true} />,
     );
     await waitForChanges();
     await new Promise(r => setTimeout(r, 500));
@@ -174,7 +175,7 @@ describe('pid-component CSS classes', () => {
 
   it('non-emphasized component does not show emphasis classes in preview', async () => {
     const { root, waitForChanges } = await render(
-      <pid-component value="test-value" emphasizeComponent={false} />,
+      <pid-component value={URL_examples.KIT_WEBSITE} emphasizeComponent={false} />,
     );
     await waitForChanges();
     await new Promise(r => setTimeout(r, 500));
@@ -183,7 +184,7 @@ describe('pid-component CSS classes', () => {
 
   it('expanded attribute is added/removed on toggle', async () => {
     const { root, waitForChanges } = await render(
-      <pid-component value="test-value" openByDefault={true} />,
+      <pid-component value={DOI_examples.DATACITE_SLIDES} openByDefault={true} />,
     );
     await waitForChanges();
     await new Promise(r => setTimeout(r, 500));
@@ -197,7 +198,7 @@ describe('pid-component CSS classes', () => {
 
   it('width and height are applied to host element', async () => {
     const { root } = await render(
-      <pid-component value="test-value" width="500px" height="300px" />,
+      <pid-component value={ROR_examples.VALID} width="500px" height="300px" />,
     );
     expect(root.width).toBe('500px');
     expect(root.height).toBe('300px');
@@ -205,7 +206,7 @@ describe('pid-component CSS classes', () => {
 
   it('has cursor-pointer class on preview element when interactive', async () => {
     const { root, waitForChanges } = await render(
-      <pid-component value="test-value" />,
+      <pid-component value={URL_examples.KIT_WEBSITE} />,
     );
     await waitForChanges();
     await new Promise(r => setTimeout(r, 500));
@@ -215,7 +216,7 @@ describe('pid-component CSS classes', () => {
 
   it('system dark mode uses correct classes', async () => {
     const { root } = await render(
-      <pid-component value="test-value" darkMode="system" />,
+      <pid-component value={DOI_examples.DATACITE_SLIDES} darkMode="system" />,
     );
     expect(root.darkMode).toBe('system');
     await new Promise(r => setTimeout(r, 500));
@@ -223,7 +224,7 @@ describe('pid-component CSS classes', () => {
 
   it('showsInlineFlex class pattern in preview when expanded', async () => {
     const { root, waitForChanges } = await render(
-      <pid-component value="10.5281/zenodo.1234567" openByDefault={true} />,
+      <pid-component value={DOI_examples.DATACITE_SLIDES} openByDefault={true} />,
     );
     await waitForChanges();
     await new Promise(r => setTimeout(r, 500));
@@ -233,7 +234,7 @@ describe('pid-component CSS classes', () => {
 
   it('overflow-hidden class in collapsed preview', async () => {
     const { root, waitForChanges } = await render(
-      <pid-component value="test-value" openByDefault={false} />,
+      <pid-component value={URL_examples.KIT_WEBSITE} openByDefault={false} />,
     );
     await waitForChanges();
     await new Promise(r => setTimeout(r, 500));

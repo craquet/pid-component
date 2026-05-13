@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { Parser } from '../../utils/Parser';
-import { renderers } from '../../utils/utils';
+import { Parser } from '../Parser';
+import { renderers } from '../utils';
 
 // ---------------------------------------------------------------------------
 // Mock renderers — we replace the real `renderers` array from ./utils with

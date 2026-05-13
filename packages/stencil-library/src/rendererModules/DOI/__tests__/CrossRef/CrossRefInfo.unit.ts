@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CrossRefInfo } from '../../CrossRef/CrossRefInfo';
 import { DOI } from '../../DOI';
-import { DOI_examples, ORCID_examples } from '../../../../../../examples';
+import { DOI_examples, ORCID_examples } from '../../../../../../../examples';
 import crossRefFixture from '../../../../../../../examples/fixtures/doi-crossref.json';
 
 let originalFetch: typeof global.fetch;
