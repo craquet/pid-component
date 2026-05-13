@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { HandleType } from '../HandleType';
+import { HANDLE_examples } from '../../../../../../examples';
 
 // Mock PID module dependencies
 vi.mock('../../../utils/utils', () => ({
@@ -66,7 +67,7 @@ describe('HandleType', () => {
 
   describe('quickCheck()', () => {
     it('returns true for a valid Handle PID', () => {
-      const ht = new HandleType('21.T11981/be908bd1-e049-4d35-975e-8e27d40117e6');
+      const ht = new HandleType(HANDLE_examples.FDO_TYPED);
       expect(ht.quickCheck()).toBe(true);
     });
 
@@ -76,12 +77,12 @@ describe('HandleType', () => {
     });
 
     it('returns false for a non-PID string', () => {
-      const ht = new HandleType('not-a-handle');
+      const ht = new HandleType(HANDLE_examples.INVALID_NOT_A_PID);
       expect(ht.quickCheck()).toBe(false);
     });
 
     it('returns false for empty string', () => {
-      const ht = new HandleType('');
+      const ht = new HandleType(HANDLE_examples.INVALID_EMPTY);
       expect(ht.quickCheck()).toBe(false);
     });
   });
@@ -91,10 +92,10 @@ describe('HandleType', () => {
       const mockPIDInstance = {
         prefix: '21.T11981',
         suffix: 'abc123',
-        toString: () => '21.T11981/abc123',
+        toString: () => '21.T11981/test123',
         toObject: () => ({ prefix: '21.T11981', suffix: 'abc123' }),
         resolve: vi.fn().mockResolvedValue({
-          pid: { prefix: '21.T11981', suffix: 'abc123', toString: () => '21.T11981/abc123' },
+          pid: { prefix: '21.T11981', suffix: 'abc123', toString: () => '21.T11981/test123' },
           values: [{ type: { name: 'URL' }, data: { value: 'https://example.com' } }],
           toObject: () => ({}),
         }),
@@ -102,22 +103,22 @@ describe('HandleType', () => {
       const { PID } = await import('../../../rendererModules/Handle/PID');
       vi.mocked(PID.getPIDFromString).mockReturnValue(mockPIDInstance as any);
 
-      const ht = new HandleType('21.T11981/abc123');
+      const ht = new HandleType('21.T11981/test123');
       expect(await ht.hasMeaningfulInformation()).toBe(ht.quickCheck());
     });
   });
 
   describe('getSettingsKey()', () => {
     it('returns "HandleType"', () => {
-      const ht = new HandleType('21.T11981/abc123');
+      const ht = new HandleType('21.T11981/test123');
       expect(ht.getSettingsKey()).toBe('HandleType');
     });
   });
 
   describe('constructor', () => {
     it('stores the value', () => {
-      const ht = new HandleType('21.T11981/abc123');
-      expect(ht.value).toBe('21.T11981/abc123');
+      const ht = new HandleType('21.T11981/test123');
+      expect(ht.value).toBe('21.T11981/test123');
     });
   });
 
@@ -137,7 +138,7 @@ describe('HandleType', () => {
         ],
       });
 
-      const ht = new HandleType('21.T11981/abc123');
+      const ht = new HandleType('21.T11981/test123');
       await ht.init(serializedRecord);
 
       expect(ht.actions.length).toBeGreaterThanOrEqual(2);
@@ -159,7 +160,7 @@ describe('HandleType', () => {
         ],
       });
 
-      const ht = new HandleType('21.T11981/abc123');
+      const ht = new HandleType('21.T11981/test123');
       await ht.init(serializedRecord);
 
       // String types don't get added as items (only PIDDataType instances do)
@@ -183,7 +184,7 @@ describe('HandleType', () => {
         ],
       });
 
-      const ht = new HandleType('21.T11981/abc123');
+      const ht = new HandleType('21.T11981/test123');
       await ht.init(serializedRecord);
 
       expect(ht.isResolvable()).toBe(true);
@@ -195,7 +196,7 @@ describe('HandleType', () => {
         values: [],
       });
 
-      const ht = new HandleType('21.T11981/abc123');
+      const ht = new HandleType('21.T11981/test123');
       await ht.init(serializedRecord);
 
       expect(ht.isResolvable()).toBe(false);
@@ -217,7 +218,7 @@ describe('HandleType', () => {
         ],
       });
 
-      const ht = new HandleType('21.T11981/abc123');
+      const ht = new HandleType('21.T11981/test123');
       await ht.init(serializedRecord);
 
       const preview = ht.renderPreview();
@@ -230,13 +231,13 @@ describe('HandleType', () => {
       const mockPIDInstance = {
         prefix: '21.T11981',
         suffix: 'abc123',
-        toString: () => '21.T11981/abc123',
+        toString: () => '21.T11981/test123',
         toObject: () => ({ prefix: '21.T11981', suffix: 'abc123' }),
         resolve: vi.fn().mockResolvedValue({
           pid: {
             prefix: '21.T11981',
             suffix: 'abc123',
-            toString: () => '21.T11981/abc123',
+            toString: () => '21.T11981/test123',
             toObject: () => ({ prefix: '21.T11981', suffix: 'abc123' }),
           },
           values: [
@@ -265,7 +266,7 @@ describe('HandleType', () => {
       const { PID } = await import('../../../rendererModules/Handle/PID');
       vi.mocked(PID.getPIDFromString).mockReturnValue(mockPIDInstance as any);
 
-      const ht = new HandleType('21.T11981/abc123');
+      const ht = new HandleType('21.T11981/test123');
       await ht.init();
 
       const data = ht.data;

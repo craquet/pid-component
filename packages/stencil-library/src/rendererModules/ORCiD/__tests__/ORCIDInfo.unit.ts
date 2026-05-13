@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { ORCIDInfo } from '../../../rendererModules/ORCiD/ORCIDInfo';
+import { ORCID_examples } from '../../../../../../examples';
 
 // Mock the cachedFetch dependency to prevent real network calls
 vi.mock('../../../utils/DataCache', () => ({
@@ -9,15 +10,15 @@ vi.mock('../../../utils/DataCache', () => ({
 describe('ORCIDInfo', () => {
   describe('isORCiD()', () => {
     it('returns true for a bare ORCiD', () => {
-      expect(ORCIDInfo.isORCiD('0009-0005-2800-4833')).toBe(true);
+      expect(ORCIDInfo.isORCiD(ORCID_examples.VALID)).toBe(true);
     });
 
     it('returns true for ORCiD with https://orcid.org/ prefix', () => {
-      expect(ORCIDInfo.isORCiD('https://orcid.org/0009-0005-2800-4833')).toBe(true);
+      expect(ORCIDInfo.isORCiD(ORCID_examples.VALID_WITH_HTTPS)).toBe(true);
     });
 
     it('returns true for ORCiD ending with X', () => {
-      expect(ORCIDInfo.isORCiD('0000-0002-1825-009X')).toBe(true);
+      expect(ORCIDInfo.isORCiD(ORCID_examples.VALID_THIRD + 'X')).toBe(true);
     });
 
     it('returns false for random text', () => {
@@ -35,7 +36,7 @@ describe('ORCIDInfo', () => {
 
   describe('constructor and getters', () => {
     const info = new ORCIDInfo(
-      '0009-0005-2800-4833',
+      ORCID_examples.VALID,
       { raw: 'json' },
       'Doe',
       ['Jane'],
@@ -49,7 +50,7 @@ describe('ORCIDInfo', () => {
     );
 
     it('returns the orcid', () => {
-      expect(info.orcid).toBe('0009-0005-2800-4833');
+      expect(info.orcid).toBe(ORCID_examples.VALID);
     });
 
     it('returns the family name', () => {

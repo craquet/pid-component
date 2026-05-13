@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { render } from '@stencil/vitest';
 import '../copy-button';
+import { DOI_examples } from '../../../../../../examples';
 
 beforeEach(() => {
   vi.stubGlobal('matchMedia', vi.fn().mockReturnValue({
@@ -23,8 +24,8 @@ describe('copy-button source', () => {
   });
 
   it('renders with value and label together', async () => {
-    const { root } = await render(<copy-button value="10.5445/IR/1000185135" label="Copy DOI"></copy-button>);
-    expect(root.value).toBe('10.5445/IR/1000185135');
+    const { root } = await render(<copy-button value={DOI_examples.DATACITE_SLIDES} label="Copy DOI"></copy-button>);
+    expect(root.value).toBe(DOI_examples.DATACITE_SLIDES);
     expect(root.label).toBe('Copy DOI');
   });
 

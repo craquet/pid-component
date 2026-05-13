@@ -1,13 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 import { h, render } from '@stencil/vitest';
 import { initPidDetection } from '../initPidDetection';
+import { DOI_examples } from '../../../../../examples';
 // h is the JSX factory required at runtime by TSX – do not remove
 void h;
-
-const DOI_examples = {
-  VALID_BARE: '10.52825/ocp.v5i.1411',
-  DATACITE_JOURNAL_PAPER: '10.5445/IR/1000188026',
-};
 
 vi.mock('../../components/json-viewer/json-viewer', () => ({}));
 

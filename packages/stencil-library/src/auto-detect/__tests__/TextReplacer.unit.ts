@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { replaceMatches, restoreOriginalText } from '../../auto-detect/TextReplacer';
-import type { DetectionMatch, PidDetectionConfig } from '../../auto-detect/types';
+import { replaceMatches, restoreOriginalText } from '../TextReplacer';
+import type { DetectionMatch, PidDetectionConfig } from '../types';
 import { DOI_examples } from '../../../../../examples';
 
 vi.mock('../../components/json-viewer/json-viewer', () => ({

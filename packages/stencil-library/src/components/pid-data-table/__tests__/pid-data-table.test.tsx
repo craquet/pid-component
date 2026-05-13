@@ -1,13 +1,14 @@
 import { h, render } from '@stencil/vitest';
 import { describe, expect, it } from 'vitest';
 import { FoldableItem } from '../../../utils/FoldableItem';
+import { URL_examples } from '../../../../../../examples';
 // h is the JSX factory required at runtime by TSX – do not remove
 void h;
 
 describe('pid-data-table CSS classes', () => {
   const createItems = (count: number): FoldableItem[] => {
     return Array.from({ length: count }, (_, i) =>
-      new FoldableItem(i, `Key ${i}`, `Value ${i}`, `Tooltip ${i}`, `https://example.com/${i}`, undefined, false),
+      new FoldableItem(i, `Key ${i}`, `Value ${i}`, `Tooltip ${i}`, `${URL_examples.KIT_WEBSITE}/${i}`, undefined, false),
     );
   };
 

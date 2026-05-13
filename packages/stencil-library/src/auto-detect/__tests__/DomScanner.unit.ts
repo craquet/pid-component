@@ -1,6 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { scanDom } from '../../auto-detect/DomScanner';
-import { DOI_examples } from '../../../../../examples';
+import { scanDom } from '../DomScanner';
 
 describe('DomScanner', () => {
   beforeEach(() => {

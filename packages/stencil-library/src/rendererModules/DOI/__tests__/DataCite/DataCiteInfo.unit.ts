@@ -2,38 +2,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DataCiteInfo } from '../../DataCite/DataCiteInfo';
 import { DOI } from '../../DOI';
 import * as DataCache from '../../../../utils/DataCache';
-
-const dataCiteFixture = {
-  data: {
-    id: '10.5445/ir/1000185135',
-    type: 'dois',
-    attributes: {
-      doi: '10.5445/ir/1000185135',
-      titles: [{ title: 'The PID Component' }],
-      creators: [{
-        name: 'Inckmann, Maximilian',
-        givenName: 'Maximilian',
-        familyName: 'Inckmann',
-        nameIdentifiers: [{
-          nameIdentifier: 'https://orcid.org/0009-0005-2800-4833',
-          nameIdentifierScheme: 'ORCID',
-        }],
-      }],
-      publisher: { name: 'Karlsruhe Institute of Technology' },
-      publicationYear: 2024,
-      types: { resourceTypeGeneral: 'Software', resourceType: 'Software' },
-      descriptions: [{ description: 'A web component for PIDs.', descriptionType: 'Abstract' }],
-      url: 'https://github.com/kit-data-manager/pid-component',
-      subjects: [{ subject: 'Computer Science' }],
-      dates: [{ date: '2024-06-15', dateType: 'Issued' }],
-    },
-  },
-};
+import { DOI_examples } from '../../../../../../examples';
+import dataCiteFixture from '../../../../../../../examples/fixtures/doi-datacite.json';
 
 let cachedFetchSpy: any;
 
 describe('DataCiteInfo', () => {
-  const testDOI = new DOI('10.5445/ir/1000185135');
+  const testDOI = new DOI(DOI_examples.DATACITE_SLIDES);
 
   describe('fetch()', () => {
 
@@ -197,7 +172,7 @@ describe('DataCiteInfo', () => {
     });
 
     it('returns fallback url', () => {
-      expect(emptyInfo.url).toBe('https://doi.org/10.5445/ir/1000185135');
+      expect(emptyInfo.url).toBe(`https://doi.org/${DOI_examples.DATACITE_SLIDES}`);
     });
 
     it('returns undefined for resourceType', () => {

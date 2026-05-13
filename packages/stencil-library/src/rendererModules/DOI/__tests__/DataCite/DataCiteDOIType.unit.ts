@@ -2,38 +2,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { DataCiteDOIType } from '../../DataCite/DataCiteDOIType';
 import { DOI } from '../../DOI';
 import * as DataCache from '../../../../utils/DataCache';
-
-const dataCiteFixture = {
-  data: {
-    id: '10.5445/ir/1000185135',
-    type: 'dois',
-    attributes: {
-      doi: '10.5445/ir/1000185135',
-      titles: [{ title: 'The PID Component' }],
-      creators: [{
-        name: 'Inckmann, Maximilian',
-        givenName: 'Maximilian',
-        familyName: 'Inckmann',
-        nameIdentifiers: [{
-          nameIdentifier: 'https://orcid.org/0009-0005-2800-4833',
-          nameIdentifierScheme: 'ORCID',
-        }],
-      }],
-      publisher: { name: 'Karlsruhe Institute of Technology' },
-      publicationYear: 2024,
-      types: { resourceTypeGeneral: 'Software', resourceType: 'Software' },
-      descriptions: [{ description: 'A web component for PIDs.', descriptionType: 'Abstract' }],
-      url: 'https://github.com/kit-data-manager/pid-component',
-      subjects: [{ subject: 'Computer Science' }],
-      dates: [{ date: '2024-06-15', dateType: 'Issued' }],
-    },
-  },
-};
+import { DOI_examples } from '../../../../../../examples';
+import dataCiteFixture from '../../../../../../../examples/fixtures/doi-datacite.json';
 
 let cachedFetchSpy: any;
 
 describe('DataCiteDOIType', () => {
-  const testDOI = new DOI('10.5445/ir/1000185135');
+  const testDOI = new DOI(DOI_examples.DATACITE_SLIDES);
 
   beforeEach(() => {
     cachedFetchSpy = vi.spyOn(DataCache, 'cachedFetch');
@@ -45,7 +20,7 @@ describe('DataCiteDOIType', () => {
 
   describe('quickCheck()', () => {
     it('returns true for valid DOI value', () => {
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       expect(type.quickCheck()).toBe(true);
     });
 
@@ -59,7 +34,7 @@ describe('DataCiteDOIType', () => {
     it('returns true when fetch returns valid info', async () => {
       cachedFetchSpy.mockResolvedValue(dataCiteFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       const result = await type.hasMeaningfulInformation();
 
       expect(result).toBe(true);
@@ -68,7 +43,7 @@ describe('DataCiteDOIType', () => {
     it('returns false when fetch returns null', async () => {
       cachedFetchSpy.mockResolvedValue(null);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       const result = await type.hasMeaningfulInformation();
 
       expect(result).toBe(false);
@@ -77,7 +52,7 @@ describe('DataCiteDOIType', () => {
     it('returns false when fetch returns empty response', async () => {
       cachedFetchSpy.mockResolvedValue({});
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       const result = await type.hasMeaningfulInformation();
 
       expect(result).toBe(false);
@@ -93,7 +68,7 @@ describe('DataCiteDOIType', () => {
       };
       cachedFetchSpy.mockResolvedValue(noTitleFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       const result = await type.hasMeaningfulInformation();
 
       expect(result).toBe(false);
@@ -102,7 +77,7 @@ describe('DataCiteDOIType', () => {
     it('returns false when network error occurs', async () => {
       cachedFetchSpy.mockRejectedValue(new Error('Network error'));
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       const result = await type.hasMeaningfulInformation();
 
       expect(result).toBe(false);
@@ -113,7 +88,7 @@ describe('DataCiteDOIType', () => {
     it('initializes with fetched data', async () => {
       cachedFetchSpy.mockResolvedValue(dataCiteFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.init();
 
       expect(type.items.length).toBeGreaterThan(0);
@@ -121,7 +96,7 @@ describe('DataCiteDOIType', () => {
 
       const doiItem = type.items.find(i => i.keyTitle === 'DOI');
       expect(doiItem).toBeDefined();
-      expect(doiItem?.value).toBe('10.5445/ir/1000185135');
+      expect(doiItem?.value).toBe(DOI_examples.DATACITE_SLIDES);
 
       const metadataSource = type.items.find(i => i.keyTitle === 'Metadata Source');
       expect(metadataSource).toBeDefined();
@@ -131,7 +106,7 @@ describe('DataCiteDOIType', () => {
     it('returns early when info is null', async () => {
       cachedFetchSpy.mockResolvedValue(null);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.init();
 
       expect(type.items.length).toBe(0);
@@ -141,7 +116,7 @@ describe('DataCiteDOIType', () => {
     it('returns early when response has no data', async () => {
       cachedFetchSpy.mockResolvedValue({});
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.init();
 
       expect(type.items.length).toBe(0);
@@ -151,7 +126,7 @@ describe('DataCiteDOIType', () => {
     it('creates Open Resource action when url exists', async () => {
       cachedFetchSpy.mockResolvedValue(dataCiteFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.init();
 
       const openResourceAction = type.actions.find(a => a.title === 'Open Resource');
@@ -170,44 +145,44 @@ describe('DataCiteDOIType', () => {
       };
       cachedFetchSpy.mockResolvedValue(noUrlFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.init();
 
       const openResourceAction = type.actions.find(a => a.title === 'Open Resource');
       expect(openResourceAction).toBeDefined();
-      expect(openResourceAction?.link).toBe('https://doi.org/10.5445/ir/1000185135');
+      expect(openResourceAction?.link).toBe(`https://doi.org/${DOI_examples.DATACITE_SLIDES}`);
     });
 
     it('creates View DataCite Metadata action', async () => {
       cachedFetchSpy.mockResolvedValue(dataCiteFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.init();
 
       const viewMetadataAction = type.actions.find(a => a.title === 'View DataCite Metadata');
       expect(viewMetadataAction).toBeDefined();
-      expect(viewMetadataAction?.link).toContain('https://api.datacite.org/dois/10.5445%2Fir%2F1000185135');
+      expect(viewMetadataAction?.link).toContain(`https://api.datacite.org/dois/${encodeURIComponent(DOI_examples.DATACITE_SLIDES)}`);
     });
 
     it('creates Resolve DOI action', async () => {
       cachedFetchSpy.mockResolvedValue(dataCiteFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.init();
 
       const resolveDOIAction = type.actions.find(a => a.title === 'Resolve DOI');
       expect(resolveDOIAction).toBeDefined();
-      expect(resolveDOIAction?.link).toBe('https://doi.org/10.5445/ir/1000185135');
+      expect(resolveDOIAction?.link).toBe(`https://doi.org/${DOI_examples.DATACITE_SLIDES}`);
       expect(resolveDOIAction?.style).toBe('secondary');
     });
 
     it('initializes from serialized data', async () => {
       const info = {
-        doi: JSON.stringify({ doi: '10.5445/ir/1000185135' }),
+        doi: JSON.stringify({ doi: DOI_examples.DATACITE_SLIDES }),
         rawMetadata: dataCiteFixture,
       };
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.hasMeaningfulInformation();
       await type.init(JSON.stringify(info));
 
@@ -219,7 +194,7 @@ describe('DataCiteDOIType', () => {
     it('returns true when info exists with title', async () => {
       cachedFetchSpy.mockResolvedValue(dataCiteFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.hasMeaningfulInformation();
 
       expect(type.isResolvable()).toBe(true);
@@ -228,7 +203,7 @@ describe('DataCiteDOIType', () => {
     it('returns false when info is null', async () => {
       cachedFetchSpy.mockResolvedValue(null);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.hasMeaningfulInformation();
 
       expect(type.isResolvable()).toBe(false);
@@ -244,7 +219,7 @@ describe('DataCiteDOIType', () => {
       };
       cachedFetchSpy.mockResolvedValue(noTitleFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.hasMeaningfulInformation();
 
       expect(type.isResolvable()).toBe(false);
@@ -255,7 +230,7 @@ describe('DataCiteDOIType', () => {
     it('renders preview with creators and year', async () => {
       cachedFetchSpy.mockResolvedValue(dataCiteFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.init();
 
       const preview = type.renderPreview();
@@ -265,7 +240,7 @@ describe('DataCiteDOIType', () => {
     it('renders preview with dark mode setting', async () => {
       cachedFetchSpy.mockResolvedValue(dataCiteFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135', [
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES, [
         { name: 'darkMode', value: 'dark' },
       ]);
       await type.init();
@@ -277,7 +252,7 @@ describe('DataCiteDOIType', () => {
     it('renders preview with light mode setting', async () => {
       cachedFetchSpy.mockResolvedValue(dataCiteFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135', [
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES, [
         { name: 'darkMode', value: 'light' },
       ]);
       await type.init();
@@ -297,7 +272,7 @@ describe('DataCiteDOIType', () => {
       };
       cachedFetchSpy.mockResolvedValue(noCreatorsFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.init();
 
       const preview = type.renderPreview();
@@ -307,7 +282,7 @@ describe('DataCiteDOIType', () => {
 
   describe('getSettingsKey()', () => {
     it('returns DataCiteDOIType', () => {
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       expect(type.getSettingsKey()).toBe('DataCiteDOIType');
     });
   });
@@ -316,7 +291,7 @@ describe('DataCiteDOIType', () => {
     it('returns JSON string of info', async () => {
       cachedFetchSpy.mockResolvedValue(dataCiteFixture);
 
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       await type.init();
 
       const data = type.data;
@@ -326,7 +301,7 @@ describe('DataCiteDOIType', () => {
     });
 
     it('returns empty object JSON when info is null', () => {
-      const type = new DataCiteDOIType('10.5445/ir/1000185135');
+      const type = new DataCiteDOIType(DOI_examples.DATACITE_SLIDES);
       const data = type.data;
       expect(data).toBe('{}');
     });

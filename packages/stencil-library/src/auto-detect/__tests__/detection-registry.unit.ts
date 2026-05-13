@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { detectBestFit, detectionRegistry, sanitizeToken } from '../../auto-detect/detection-registry';
+import { detectBestFit, detectionRegistry, sanitizeToken } from '../detection-registry';
 import {
   DOI_examples,
   ORCID_examples,

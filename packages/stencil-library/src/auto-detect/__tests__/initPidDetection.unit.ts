@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { initPidDetection } from '../../auto-detect/initPidDetection';
+import { initPidDetection } from '../initPidDetection';
 
 const {
   mockScanDom,

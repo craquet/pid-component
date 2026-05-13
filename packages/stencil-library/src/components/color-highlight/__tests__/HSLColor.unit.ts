@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { HSLColor } from '../../../components/color-highlight/HSLColor';
+import { HSLColor } from '../HSLColor';
 
 describe('HSLColor', () => {
   beforeEach(() => {

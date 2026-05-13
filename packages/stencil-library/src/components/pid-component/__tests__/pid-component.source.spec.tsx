@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { render } from '@stencil/vitest';
 import '../pid-component';
+import { DOI_examples, ORCID_examples, ROR_examples, URL_examples } from '../../../../../../examples';
 
 vi.mock('../../utils/IndexedDBUtil', () => ({
   Database: vi.fn(),
@@ -214,23 +215,23 @@ describe('pid-component source', () => {
   });
 
   it('renders with URL value', async () => {
-    const { root } = await render(<pid-component value="https://example.com/10.1234/test"></pid-component>);
-    expect(root.value).toBe('https://example.com/10.1234/test');
+    const { root } = await render(<pid-component value={URL_examples.KIT_WEBSITE}></pid-component>);
+    expect(root.value).toBe(URL_examples.KIT_WEBSITE);
   });
 
   it('renders with DOI value', async () => {
-    const { root } = await render(<pid-component value="10.1234/Example.DOI.1234"></pid-component>);
-    expect(root.value).toBe('10.1234/Example.DOI.1234');
+    const { root } = await render(<pid-component value={DOI_examples.DATACITE_SLIDES}></pid-component>);
+    expect(root.value).toBe(DOI_examples.DATACITE_SLIDES);
   });
 
   it('renders with ORCID value', async () => {
-    const { root } = await render(<pid-component value="https://orcid.org/0000-0002-1234-5678"></pid-component>);
-    expect(root.value).toBe('https://orcid.org/0000-0002-1234-5678');
+    const { root } = await render(<pid-component value={ORCID_examples.VALID_WITH_HTTPS}></pid-component>);
+    expect(root.value).toBe(ORCID_examples.VALID_WITH_HTTPS);
   });
 
   it('renders with ROR ID value', async () => {
-    const { root } = await render(<pid-component value="https://ror.org/02mhbdp94"></pid-component>);
-    expect(root.value).toBe('https://ror.org/02mhbdp94');
+    const { root } = await render(<pid-component value={ROR_examples.VALID}></pid-component>);
+    expect(root.value).toBe(ROR_examples.VALID);
   });
 
   it('renders with various itemsPerPage values', async () => {

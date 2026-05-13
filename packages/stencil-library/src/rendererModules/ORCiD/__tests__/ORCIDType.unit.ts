@@ -4,10 +4,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ORCIDType } from '../ORCIDType';
 import * as DataCache from '../../../utils/DataCache';
-
-const VALID = '0009-0005-2800-4833';
-const VALID_WITH_HTTPS = 'https://orcid.org/0009-0005-2800-4833';
-const INVALID_NOT_AN_ORCID = 'not-an-orcid';
+import { ORCID_examples } from '../../../../../../examples';
+import orcidFixture from '../../../../../../../examples/fixtures/orcid-profile.json';
 
 let cachedFetchSpy: any;
 beforeEach(() => {
@@ -20,17 +18,17 @@ afterEach(() => {
 describe('ORCIDType', () => {
   describe('quickCheck()', () => {
     it('returns true for a bare ORCiD', () => {
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       expect(ot.quickCheck()).toBe(true);
     });
 
     it('returns true for ORCiD with prefix URL', () => {
-      const ot = new ORCIDType(VALID_WITH_HTTPS);
+      const ot = new ORCIDType(ORCID_examples.VALID_WITH_HTTPS);
       expect(ot.quickCheck()).toBe(true);
     });
 
     it('returns false for non-ORCiD string', () => {
-      const ot = new ORCIDType(INVALID_NOT_AN_ORCID);
+      const ot = new ORCIDType(ORCID_examples.INVALID_NOT_AN_ORCID);
       expect(ot.quickCheck()).toBe(false);
     });
 
@@ -42,22 +40,22 @@ describe('ORCIDType', () => {
 
   describe('hasMeaningfulInformation()', () => {
     it('matches quickCheck() result', async () => {
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       expect(await ot.hasMeaningfulInformation()).toBe(ot.quickCheck());
     });
   });
 
   describe('getSettingsKey()', () => {
     it('returns "ORCIDType"', () => {
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       expect(ot.getSettingsKey()).toBe('ORCIDType');
     });
   });
 
   describe('constructor', () => {
     it('stores the value', () => {
-      const ot = new ORCIDType(VALID);
-      expect(ot.value).toBe(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
+      expect(ot.value).toBe(ORCID_examples.VALID);
     });
   });
 
@@ -97,7 +95,7 @@ describe('ORCIDType', () => {
     it('fetches ORCIDInfo from API and populates items', async () => {
       cachedFetchSpy.mockResolvedValue(orcidApiResponse);
 
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       await ot.init();
 
       expect(ot.items.length).toBeGreaterThanOrEqual(1);
@@ -109,7 +107,7 @@ describe('ORCIDType', () => {
     it('adds primary email item and mailto action', async () => {
       cachedFetchSpy.mockResolvedValue(orcidApiResponse);
 
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       await ot.init();
 
       const emailItem = ot.items.find(i => i.keyTitle === 'Primary E-Mail address');
@@ -136,7 +134,7 @@ describe('ORCIDType', () => {
       };
       cachedFetchSpy.mockResolvedValue(responseWithMultipleEmails);
 
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       await ot.init();
 
       const otherEmailItem = ot.items.find(i => i.keyTitle === 'Other E-Mail addresses');
@@ -165,7 +163,7 @@ describe('ORCIDType', () => {
         'activities-summary': { employments: { 'affiliation-group': [] } },
       });
 
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       await ot.init();
 
       expect(ot.isResolvable()).toBe(true);
@@ -208,7 +206,7 @@ describe('ORCIDType', () => {
     it('returns a truthy functional component', async () => {
       cachedFetchSpy.mockResolvedValue(orcidApiResponse);
 
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       await ot.init();
 
       const preview = ot.renderPreview();
@@ -235,7 +233,7 @@ describe('ORCIDType', () => {
         'activities-summary': { employments: { 'affiliation-group': [] } },
       });
 
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       await ot.init();
 
       const data = ot.data;
@@ -264,13 +262,13 @@ describe('ORCIDType', () => {
         'activities-summary': { employments: { 'affiliation-group': [] } },
       });
 
-      const ot1 = new ORCIDType(VALID);
+      const ot1 = new ORCIDType(ORCID_examples.VALID);
       await ot1.init();
       const cachedData = ot1.data;
 
       // Create a new instance and init with cached data
       vi.clearAllMocks();
-      const ot2 = new ORCIDType(VALID);
+      const ot2 = new ORCIDType(ORCID_examples.VALID);
       await ot2.init(cachedData);
 
       // Should NOT have called cachedFetch since we passed cached data
@@ -304,7 +302,7 @@ describe('ORCIDType', () => {
         'activities-summary': { employments: { 'affiliation-group': [] } },
       });
 
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       await ot.init();
 
       expect(ot.items.length).toBeGreaterThan(1);
@@ -330,7 +328,7 @@ describe('ORCIDType', () => {
         'activities-summary': { employments: { 'affiliation-group': [] } },
       });
 
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       await ot.init();
 
       const urlItem = ot.items.find(i => i.keyTitle.includes('reference'));
@@ -362,7 +360,7 @@ describe('ORCIDType', () => {
         'activities-summary': { employments: { 'affiliation-group': [] } },
       });
 
-      const ot = new ORCIDType(VALID);
+      const ot = new ORCIDType(ORCID_examples.VALID);
       await ot.init();
 
       const keywordItem = ot.items.find(i => i.keyTitle === 'Keywords');

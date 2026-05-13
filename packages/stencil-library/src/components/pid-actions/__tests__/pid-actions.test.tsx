@@ -1,5 +1,6 @@
 import { h, render } from '@stencil/vitest';
 import { describe, expect, it } from 'vitest';
+import { URL_examples } from '../../../../../../examples';
 // h is the JSX factory required at runtime by TSX – do not remove
 void h;
 
@@ -52,8 +53,8 @@ describe('pid-actions e2e', () => {
 
   it('renders actions with correct structure', async () => {
     const { root } = await renderWithActions([
-      { priority: 1, title: 'View Details', link: 'https://example.com/details', style: 'primary' },
-      { priority: 2, title: 'Download', link: 'https://example.com/download', style: 'secondary' },
+      { priority: 1, title: 'View Details', link: URL_examples.KIT_WEBSITE + '/details', style: 'primary' },
+      { priority: 2, title: 'Download', link: URL_examples.GITHUB + '/download', style: 'secondary' },
     ]);
 
     const toolbar = root.querySelector('[role="toolbar"]');
@@ -65,17 +66,17 @@ describe('pid-actions e2e', () => {
 
   it('action links have correct href', async () => {
     const { root } = await renderWithActions([
-      { priority: 1, title: 'View Source', link: 'https://example.com/source', style: 'primary' },
+      { priority: 1, title: 'View Source', link: URL_examples.ZENODO + '/source', style: 'primary' },
     ]);
 
     const link = root.querySelector('a');
     expect(link).not.toBeNull();
-    expect(link?.getAttribute('href')).toBe('https://example.com/source');
+    expect(link?.getAttribute('href')).toBe(URL_examples.ZENODO + '/source');
   });
 
   it('has ARIA toolbar role', async () => {
     const { root } = await renderWithActions([
-      { priority: 1, title: 'Action', link: 'https://example.com', style: 'primary' },
+      { priority: 1, title: 'Action', link: URL_examples.KIT_WEBSITE, style: 'primary' },
     ]);
 
     const toolbar = root.querySelector('[role="toolbar"]');
@@ -87,7 +88,7 @@ describe('pid-actions e2e', () => {
 
   it('action links open in new tab', async () => {
     const { root } = await renderWithActions([
-      { priority: 1, title: 'External', link: 'https://example.com', style: 'primary' },
+      { priority: 1, title: 'External', link: URL_examples.GITHUB, style: 'primary' },
     ]);
 
     const link = root.querySelector('a');
@@ -97,7 +98,7 @@ describe('pid-actions e2e', () => {
 
   it('action links have accessible aria-label with new tab indicator', async () => {
     const { root } = await renderWithActions([
-      { priority: 1, title: 'View Details', link: 'https://example.com', style: 'primary' },
+      { priority: 1, title: 'View Details', link: URL_examples.KIT_WEBSITE, style: 'primary' },
     ]);
 
     const link = root.querySelector('a');
@@ -108,8 +109,8 @@ describe('pid-actions e2e', () => {
 
   it('renders action titles as text', async () => {
     const { root } = await renderWithActions([
-      { priority: 1, title: 'Resolve DOI', link: 'https://doi.org/test', style: 'primary' },
-      { priority: 2, title: 'View Metadata', link: 'https://example.com', style: 'secondary' },
+      { priority: 1, title: 'Resolve DOI', link: 'https://doi.org/10.1234/test', style: 'primary' },
+      { priority: 2, title: 'View Metadata', link: URL_examples.GITHUB, style: 'secondary' },
     ]);
 
     const links = root.querySelectorAll('a');
@@ -119,7 +120,7 @@ describe('pid-actions e2e', () => {
 
   it('has sr-only description for screen readers', async () => {
     const { root } = await renderWithActions([
-      { priority: 1, title: 'Test', link: 'https://example.com', style: 'primary' },
+      { priority: 1, title: 'Test', link: URL_examples.ZENODO, style: 'primary' },
     ]);
 
     const srOnly = root.querySelector('.sr-only');

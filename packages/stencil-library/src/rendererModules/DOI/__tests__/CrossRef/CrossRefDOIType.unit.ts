@@ -1,26 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CrossRefDOIType } from '../../CrossRef/CrossRefDOIType';
 import { DOI } from '../../DOI';
-
-const workFixture = {
-  status: 'ok',
-  'message-type': 'work',
-  message: {
-    DOI: '10.1109/escience65000.2025.00022',
-    title: ['FAIR Digital Objects in Practice'],
-    author: [
-      { given: 'Maximilian', family: 'Inckmann', ORCID: 'https://orcid.org/0009-0005-2800-4833' },
-      { given: 'Andreas', family: 'Pfeil' },
-    ],
-    publisher: 'IEEE',
-    type: 'journal-article',
-    abstract: '<jats:p>This paper presents FDO capabilities.</jats:p>',
-    URL: 'https://doi.org/10.1109/escience65000.2025.00022',
-    subject: ['Computer Science'],
-    published: { 'date-parts': [[2025, 1, 15]] },
-    'container-title': ['IEEE eScience'],
-  },
-};
+import { DOI_examples } from '../../../../../../examples';
+import workFixture from '../../../../../../../examples/fixtures/doi-crossref.json';
 
 const funderFixture = {
   status: 'ok',
@@ -47,7 +29,7 @@ const funderFixture = {
 let originalFetch: typeof global.fetch;
 
 describe('CrossRefDOIType', () => {
-  const testDOI = new DOI('10.1109/escience65000.2025.00022');
+  const testDOI = new DOI(DOI_examples.CROSSREF_JOURNAL_PAPER);
 
   beforeEach(() => {
     originalFetch = global.fetch;
@@ -59,7 +41,7 @@ describe('CrossRefDOIType', () => {
 
   describe('quickCheck()', () => {
     it('returns true for valid DOI value', () => {
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       expect(type.quickCheck()).toBe(true);
     });
 
@@ -76,7 +58,7 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(workFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       const result = await type.hasMeaningfulInformation();
 
       expect(result).toBe(true);
@@ -93,7 +75,7 @@ describe('CrossRefDOIType', () => {
         return Promise.resolve({ ok: false, status: 404 });
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       const result = await type.hasMeaningfulInformation();
 
       expect(result).toBe(true);
@@ -105,7 +87,7 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue({ status: 'ok' }),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       const result = await type.hasMeaningfulInformation();
 
       expect(result).toBe(false);
@@ -116,11 +98,11 @@ describe('CrossRefDOIType', () => {
         ok: true,
         json: vi.fn().mockResolvedValue({
           status: 'ok',
-          message: { DOI: '10.1109/escience65000.2025.00022', title: [] },
+          message: { DOI: DOI_examples.CROSSREF_JOURNAL_PAPER, title: [] },
         }),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       const result = await type.hasMeaningfulInformation();
 
       expect(result).toBe(false);
@@ -129,7 +111,7 @@ describe('CrossRefDOIType', () => {
     it('returns false when network error occurs', async () => {
       global.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       const result = await type.hasMeaningfulInformation();
 
       expect(result).toBe(false);
@@ -143,7 +125,7 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(workFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       expect(type.items.length).toBeGreaterThan(0);
@@ -151,7 +133,7 @@ describe('CrossRefDOIType', () => {
 
       const doiItem = type.items.find(i => i.keyTitle === 'DOI');
       expect(doiItem).toBeDefined();
-      expect(doiItem?.value).toBe('10.1109/escience65000.2025.00022');
+      expect(doiItem?.value).toBe(DOI_examples.CROSSREF_JOURNAL_PAPER);
 
       const metadataSource = type.items.find(i => i.keyTitle === 'Metadata Source');
       expect(metadataSource).toBeDefined();
@@ -169,7 +151,7 @@ describe('CrossRefDOIType', () => {
         return Promise.resolve({ ok: false, status: 404 });
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       const metadataSource = type.items.find(i => i.keyTitle === 'Metadata Source');
@@ -183,7 +165,7 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockRejectedValue(new Error('Not found')),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       expect(type.items.length).toBe(0);
@@ -196,12 +178,12 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(workFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       const openResourceAction = type.actions.find(a => a.title === 'Open Resource');
       expect(openResourceAction).toBeDefined();
-      expect(openResourceAction?.link).toBe('https://doi.org/10.1109/escience65000.2025.00022');
+      expect(openResourceAction?.link).toBe(`https://doi.org/${DOI_examples.CROSSREF_JOURNAL_PAPER}`);
       expect(openResourceAction?.style).toBe('primary');
     });
 
@@ -210,7 +192,7 @@ describe('CrossRefDOIType', () => {
         status: 'ok',
         'message-type': 'work',
         message: {
-          DOI: '10.1109/escience65000.2025.00022',
+          DOI: DOI_examples.CROSSREF_JOURNAL_PAPER,
           title: ['Test'],
         },
       };
@@ -219,12 +201,12 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(noUrlFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       const openResourceAction = type.actions.find(a => a.title === 'Open Resource');
       expect(openResourceAction).toBeDefined();
-      expect(openResourceAction?.link).toBe('https://doi.org/10.1109/escience65000.2025.00022');
+      expect(openResourceAction?.link).toBe(`https://doi.org/${DOI_examples.CROSSREF_JOURNAL_PAPER}`);
     });
 
     it('creates View CrossRef Metadata action for work', async () => {
@@ -233,12 +215,12 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(workFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       const viewMetadataAction = type.actions.find(a => a.title === 'View CrossRef Metadata');
       expect(viewMetadataAction).toBeDefined();
-      expect(viewMetadataAction?.link).toContain('https://api.crossref.org/works/10.1109/escience65000.2025.00022');
+      expect(viewMetadataAction?.link).toContain(`https://api.crossref.org/works/${DOI_examples.CROSSREF_JOURNAL_PAPER}`);
     });
 
     it('creates View CrossRef Metadata action for funder', async () => {
@@ -252,12 +234,12 @@ describe('CrossRefDOIType', () => {
         return Promise.resolve({ ok: false, status: 404 });
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       const viewMetadataAction = type.actions.find(a => a.title === 'View CrossRef Metadata');
       expect(viewMetadataAction).toBeDefined();
-      expect(viewMetadataAction?.link).toContain('https://api.crossref.org/funders/10.1109/escience65000.2025.00022');
+      expect(viewMetadataAction?.link).toContain(`https://api.crossref.org/funders/${DOI_examples.CROSSREF_JOURNAL_PAPER}`);
     });
 
     it('creates Resolve DOI action', async () => {
@@ -266,23 +248,23 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(workFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       const resolveDOIAction = type.actions.find(a => a.title === 'Resolve DOI');
       expect(resolveDOIAction).toBeDefined();
-      expect(resolveDOIAction?.link).toBe('https://doi.org/10.1109/escience65000.2025.00022');
+      expect(resolveDOIAction?.link).toBe(`https://doi.org/${DOI_examples.CROSSREF_JOURNAL_PAPER}`);
       expect(resolveDOIAction?.style).toBe('secondary');
     });
 
     it('initializes from serialized data', async () => {
       const info = {
-        doi: JSON.stringify({ doi: '10.1109/escience65000.2025.00022' }),
+        doi: JSON.stringify({ doi: DOI_examples.CROSSREF_JOURNAL_PAPER }),
         rawMetadata: workFixture,
         type: 'work',
       };
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.hasMeaningfulInformation();
       await type.init(JSON.stringify(info));
 
@@ -297,7 +279,7 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(workFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.hasMeaningfulInformation();
 
       expect(type.isResolvable()).toBe(true);
@@ -310,7 +292,7 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockRejectedValue(new Error('Not found')),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.hasMeaningfulInformation();
 
       expect(type.isResolvable()).toBe(false);
@@ -321,11 +303,11 @@ describe('CrossRefDOIType', () => {
         ok: true,
         json: vi.fn().mockResolvedValue({
           status: 'ok',
-          message: { DOI: '10.1109/escience65000.2025.00022', title: [] },
+          message: { DOI: DOI_examples.CROSSREF_JOURNAL_PAPER, title: [] },
         }),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.hasMeaningfulInformation();
 
       expect(type.isResolvable()).toBe(false);
@@ -339,7 +321,7 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(workFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       const preview = type.renderPreview();
@@ -357,7 +339,7 @@ describe('CrossRefDOIType', () => {
         return Promise.resolve({ ok: false, status: 404 });
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       const preview = type.renderPreview();
@@ -370,7 +352,7 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(workFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022', [
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER, [
         { name: 'darkMode', value: 'dark' },
       ]);
       await type.init();
@@ -385,7 +367,7 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(workFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022', [
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER, [
         { name: 'darkMode', value: 'light' },
       ]);
       await type.init();
@@ -399,7 +381,7 @@ describe('CrossRefDOIType', () => {
         status: 'ok',
         'message-type': 'work',
         message: {
-          DOI: '10.1109/escience65000.2025.00022',
+          DOI: DOI_examples.CROSSREF_JOURNAL_PAPER,
           title: ['Test Title'],
           published: { 'date-parts': [[2025]] },
         },
@@ -409,7 +391,7 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(noCreatorsFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       const preview = type.renderPreview();
@@ -419,7 +401,7 @@ describe('CrossRefDOIType', () => {
 
   describe('getSettingsKey()', () => {
     it('returns CrossRefDOIType', () => {
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       expect(type.getSettingsKey()).toBe('CrossRefDOIType');
     });
   });
@@ -431,7 +413,7 @@ describe('CrossRefDOIType', () => {
         json: vi.fn().mockResolvedValue(workFixture),
       });
 
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       await type.init();
 
       const data = type.data;
@@ -441,7 +423,7 @@ describe('CrossRefDOIType', () => {
     });
 
     it('returns empty object JSON when info is null', () => {
-      const type = new CrossRefDOIType('10.1109/escience65000.2025.00022');
+      const type = new CrossRefDOIType(DOI_examples.CROSSREF_JOURNAL_PAPER);
       const data = type.data;
       expect(data).toBe('{}');
     });

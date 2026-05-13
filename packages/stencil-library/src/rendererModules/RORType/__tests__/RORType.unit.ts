@@ -1,62 +1,58 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { RORType } from '../RORType';
-
-const VALID = 'https://ror.org/04t3en479';
-const INVALID_WRONG_DOMAIN = 'https://example.com/04t3en479';
-const INVALID_NO_SCHEME = 'ror.org/04t3en479';
-const INVALID_WRONG_LENGTH = 'https://ror.org/04t3en47';
-const INVALID_EMPTY = '';
+import { ROR_examples } from '../../../../../../examples';
+import rorFixture from '../../../../../../../examples/fixtures/ror-org.json';
 
 describe('RORType', () => {
   describe('quickCheck()', () => {
     it('returns true for a valid ROR ID with https', () => {
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       expect(rt.quickCheck()).toBe(true);
     });
 
     it('returns true for a valid ROR ID with http', () => {
-      const rt = new RORType('http://ror.org/04t3en479');
+      const rt = new RORType(ROR_examples.VALID.replace('https://', 'http://'));
       expect(rt.quickCheck()).toBe(true);
     });
 
     it('returns false for a non-ROR URL', () => {
-      const rt = new RORType(INVALID_WRONG_DOMAIN);
+      const rt = new RORType(ROR_examples.INVALID_WRONG_DOMAIN);
       expect(rt.quickCheck()).toBe(false);
     });
 
     it('returns false for ROR without scheme', () => {
-      const rt = new RORType(INVALID_NO_SCHEME);
+      const rt = new RORType(ROR_examples.INVALID_NO_SCHEME);
       expect(rt.quickCheck()).toBe(false);
     });
 
     it('returns false for empty string', () => {
-      const rt = new RORType(INVALID_EMPTY);
+      const rt = new RORType(ROR_examples.INVALID_EMPTY);
       expect(rt.quickCheck()).toBe(false);
     });
 
     it('returns false for ROR ID with wrong suffix length', () => {
-      const rt = new RORType(INVALID_WRONG_LENGTH);
+      const rt = new RORType(ROR_examples.INVALID_WRONG_LENGTH);
       expect(rt.quickCheck()).toBe(false);
     });
   });
 
   describe('getSettingsKey()', () => {
     it('returns "RORType"', () => {
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       expect(rt.getSettingsKey()).toBe('RORType');
     });
   });
 
   describe('constructor', () => {
     it('stores the value', () => {
-      const rt = new RORType(VALID);
-      expect(rt.value).toBe(VALID);
+      const rt = new RORType(ROR_examples.VALID);
+      expect(rt.value).toBe(ROR_examples.VALID);
     });
   });
 
   describe('init()', () => {
     const rorApiResponse = {
-      id: VALID,
+      id: ROR_examples.VALID,
       names: [
         { value: 'Karlsruhe Institute of Technology', types: ['ror_display'] },
         { value: 'KIT', types: ['acronym'] },
@@ -84,12 +80,12 @@ describe('RORType', () => {
     });
 
     it('hasMeaningfulInformation() matches quickCheck() result', async () => {
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       expect(await rt.hasMeaningfulInformation()).toBe(rt.quickCheck());
     });
 
     it('fetches ROR data and populates items', async () => {
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       // Should have Display Name, Acronym, Alias, ROR ID, Status, Type, Link, External ID, Relationship, Country, Coordinates
@@ -104,7 +100,7 @@ describe('RORType', () => {
     });
 
     it('adds View on ROR action', async () => {
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       const rorAction = rt.actions.find(a => a.title === 'View on ROR');
@@ -112,7 +108,7 @@ describe('RORType', () => {
     });
 
     it('adds country and coordinates items from locations', async () => {
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       const countryItem = rt.items.find(i => i.keyTitle === 'Country');
@@ -129,7 +125,7 @@ describe('RORType', () => {
         status: 404,
       });
 
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       const errorItem = rt.items.find(i => i.keyTitle === 'Error');
@@ -142,7 +138,7 @@ describe('RORType', () => {
         json: vi.fn().mockResolvedValue({ ...rorApiResponse, names: [] }),
       });
 
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       const nameItem = rt.items.find(i => i.keyTitle === 'Name');
@@ -156,7 +152,7 @@ describe('RORType', () => {
         json: vi.fn().mockResolvedValue({ ...rorApiResponse, locations: [] }),
       });
 
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       const countryItem = rt.items.find(i => i.keyTitle === 'Country');
@@ -169,7 +165,7 @@ describe('RORType', () => {
         json: vi.fn().mockResolvedValue({ ...rorApiResponse, links: [] }),
       });
 
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       const linkItem = rt.items.find(i => i.keyTitle === 'Website');
@@ -182,7 +178,7 @@ describe('RORType', () => {
         json: vi.fn().mockResolvedValue({ ...rorApiResponse, external_ids: [] }),
       });
 
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       const gridItem = rt.items.find(i => i.keyTitle === 'GRID ID');
@@ -195,7 +191,7 @@ describe('RORType', () => {
         json: vi.fn().mockResolvedValue({ ...rorApiResponse, relationships: [] }),
       });
 
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       // Should not have relationships items
@@ -218,7 +214,7 @@ describe('RORType', () => {
         }),
       });
 
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       const acronymItem = rt.items.find(i => i.keyTitle === 'Acronym');
@@ -231,7 +227,7 @@ describe('RORType', () => {
         json: vi.fn().mockResolvedValue({ ...rorApiResponse, status: 'deprecated' }),
       });
 
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       const statusItem = rt.items.find(i => i.keyTitle === 'Status');
@@ -242,7 +238,7 @@ describe('RORType', () => {
     it('handles network error', async () => {
       (global.fetch as any).mockRejectedValue(new Error('Network error'));
 
-      const rt = new RORType(VALID);
+      const rt = new RORType(ROR_examples.VALID);
       await rt.init();
 
       const errorItem = rt.items.find(i => i.keyTitle === 'Error');

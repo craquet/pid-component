@@ -1,31 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CrossRefInfo } from '../../CrossRef/CrossRefInfo';
 import { DOI } from '../../DOI';
-
-const crossRefFixture = {
-  status: 'ok',
-  'message-type': 'work',
-  message: {
-    DOI: '10.1109/escience65000.2025.00022',
-    title: ['FAIR Digital Objects in Practice'],
-    author: [
-      { given: 'Maximilian', family: 'Inckmann', ORCID: 'https://orcid.org/0009-0005-2800-4833' },
-      { given: 'Andreas', family: 'Pfeil' },
-    ],
-    publisher: 'IEEE',
-    type: 'journal-article',
-    abstract: '<jats:p>This paper presents FDO capabilities.</jats:p>',
-    URL: 'https://doi.org/10.1109/escience65000.2025.00022',
-    subject: ['Computer Science'],
-    published: { 'date-parts': [[2025, 1, 15]] },
-    'container-title': ['IEEE eScience'],
-  },
-};
+import { DOI_examples, ORCID_examples } from '../../../../../../examples';
+import crossRefFixture from '../../../../../../../examples/fixtures/doi-crossref.json';
 
 let originalFetch: typeof global.fetch;
 
 describe('CrossRefInfo', () => {
-  const testDOI = new DOI('10.1109/escience65000.2025.00022');
+  const testDOI = new DOI(DOI_examples.CROSSREF_JOURNAL_PAPER);
 
   describe('fetch()', () => {
 
@@ -49,7 +31,7 @@ describe('CrossRefInfo', () => {
       expect(info.title).toBe('FAIR Digital Objects in Practice');
       expect(info.publisher).toBe('IEEE');
       expect(info.resourceType).toBe('journal-article');
-      expect(info.url).toBe('https://doi.org/10.1109/escience65000.2025.00022');
+      expect(info.url).toBe(`https://doi.org/${DOI_examples.CROSSREF_JOURNAL_PAPER}`);
     });
 
     it('extracts creators correctly', async () => {
@@ -64,7 +46,7 @@ describe('CrossRefInfo', () => {
       expect(info.creators[0].name).toBe('Maximilian Inckmann');
       expect(info.creators[0].givenName).toBe('Maximilian');
       expect(info.creators[0].familyName).toBe('Inckmann');
-      expect(info.creators[0].orcid).toBe('0009-0005-2800-4833');
+      expect(info.creators[0].orcid).toBe(ORCID_examples.VALID_SECOND);
       expect(info.creators[1].name).toBe('Andreas Pfeil');
     });
 
