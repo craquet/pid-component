@@ -28,15 +28,6 @@ describe('color-highlight source', () => {
     expect(span?.className).toContain('font-bold');
   });
 
-  it('renders with hsl color from mock', async () => {
-    const { root } = await render(<color-highlight text="colored"></color-highlight>);
-    const span = root.querySelector('span');
-    expect(span).toBeTruthy();
-    // Check that color style is applied
-    const style = span?.getAttribute('style');
-    expect(style).toContain('color');
-  });
-
   it('applies inline color style', async () => {
     const { root } = await render(<color-highlight text="test"></color-highlight>);
     const span = root.querySelector('span');
