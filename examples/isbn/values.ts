@@ -1,0 +1,13 @@
+export const ISBN_examples = {
+  VALID_13_HYPHENATED: '978-1-4493-7332-0',
+  VALID_13_COMPACT: '9781449373320',
+  VALID_13_PREFIXED: 'ISBN 978-1-4493-7332-0',
+  VALID_10: '1449373321',
+  VALID_10_X_CHECKSUM: '048665088X',
+  INVALID_13_CHECKSUM: '978-1-4493-7332-1',
+  INVALID_10_CHECKSUM: '1449373322',
+  INVALID_NOT_ISBN: 'not-an-isbn',
+  INVALID_EMPTY: '',
+} as const;
+
+export type ISBN_example = typeof ISBN_examples[keyof typeof ISBN_examples];

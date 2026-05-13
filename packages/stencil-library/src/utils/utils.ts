@@ -14,6 +14,7 @@ import { URLType } from '../rendererModules/URLType/URLType';
 import { LocaleType } from '../rendererModules/LocaleType/LocaleType';
 import { JSONType } from '../rendererModules/JSONType/JSONType';
 import { FallbackType } from '../rendererModules/FallbackType/FallbackType';
+import { ISBNType } from '../rendererModules/ISBNType/ISBNType';
 
 /**
  * Array of all component objects that can be used to parse a given value, ordered by priority (lower is better).
@@ -73,6 +74,12 @@ export const renderers: {
     priority: 5,
     key: 'SPDXType',
     constructor: SPDXType,
+    autoDiscoverableByDefault: true,
+  },
+  {
+    priority: 5.5,
+    key: 'ISBNType',
+    constructor: ISBNType,
     autoDiscoverableByDefault: true,
   },
   {
