@@ -88,6 +88,7 @@ export class ISBNType extends GenericIdentifierType {
       if (!this.hasUsefulBookMetadata(book)) return false;
 
       this.bookData = book;
+
       return true;
     } catch {
       return false;
@@ -102,7 +103,7 @@ export class ISBNType extends GenericIdentifierType {
     if (!this.bookData) {
       const success = await this.hasMeaningfulInformation();
       if (!success) {
-        this.items.push(new FoldableItem(0, 'Error', 'No OpenLibrary metadata available for this ISBN'));
+        console.info(`ISBNType: No meaningful data found for ISBN ${this.normalizedIsbn}.`);
         return;
       }
     }
@@ -204,7 +205,7 @@ export class ISBNType extends GenericIdentifierType {
 
     if (this.bookData.title) this.items.push(new FoldableItem(2, 'Title', this.bookData.title, 'Title of the publication'));
     if (this.bookData.subtitle) this.items.push(new FoldableItem(3, 'Subtitle', this.bookData.subtitle, 'Subtitle of the publication'));
-    if (this.bookData.publish_date) this.items.push(new FoldableItem(4, 'Date', this.bookData.publish_date, 'Publication date'));
+    if (this.bookData.publish_date) this.items.push(new FoldableItem(4, 'Date', new Date(this.bookData.publish_date).toDateString(), 'Publication date'));
     if (this.bookData.number_of_pages) this.items.push(new FoldableItem(5, 'Pages', String(this.bookData.number_of_pages), 'Number of pages'));
 
     (this.bookData.authors || [])
@@ -214,7 +215,7 @@ export class ISBNType extends GenericIdentifierType {
       .forEach((item) => this.items.push(item));
 
     const publisherNames = (this.bookData.publishers || []).map(publisher => publisher.name).filter((name): name is string => Boolean(name));
-    if (publisherNames.length > 0) this.items.push(new FoldableItem(7, 'Publisher', publisherNames.join(', '), 'Publisher(s) of the publication', undefined, undefined, false));
+    if (publisherNames.length > 0) this.items.push(new FoldableItem(7, 'Publisher', publisherNames.join(', '), 'Publisher(s) of the publication'));
 
     const summary = this.extractSummary();
     if (summary) this.items.push(new FoldableItem(8, 'Abstract', summary, 'Brief description of the publication', undefined, undefined, false));
@@ -223,15 +224,11 @@ export class ISBNType extends GenericIdentifierType {
   private populateActions(): void {
     if (!this.bookData) return;
 
-    const openLibraryUrl = this.bookData.url ? `https://openlibrary.org${this.bookData.url}` : `https://openlibrary.org/isbn/${this.normalizedIsbn}`;
+    const openLibraryUrl = this.bookData.url ? this.bookData.url : `https://openlibrary.org/isbn/${this.normalizedIsbn}`;
     this.actions.push(new FoldableAction(0, 'View on OpenLibrary', openLibraryUrl, 'primary'));
-    this.actions.push(new FoldableAction(1, 'Resolve ISBN', `https://openlibrary.org/isbn/${this.normalizedIsbn}`, 'secondary'));
 
     if (this.bookData.preview_url) {
-      const previewUrl = this.bookData.preview_url.startsWith('http')
-        ? this.bookData.preview_url
-        : `https://openlibrary.org${this.bookData.preview_url}`;
-      this.actions.push(new FoldableAction(2, 'Open Preview', previewUrl, 'secondary'));
+      this.actions.push(new FoldableAction(2, 'Open Preview', this.bookData.preview_url, 'secondary'));
     }
   }
 
