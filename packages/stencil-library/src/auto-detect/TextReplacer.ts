@@ -71,7 +71,9 @@ export function replaceMatches(
     // which would prevent the shadow DOM from rendering in some browsers)
     const pidComponent = document.createElement('pid-component');
     pidComponent.setAttribute('value', match.value);
-    pidComponent.setAttribute('renderers', JSON.stringify([match.rendererKey]));
+    if (config.renderers && config.renderers.length > 0) {
+      pidComponent.setAttribute('renderers', JSON.stringify(config.renderers));
+    }
     pidComponent.setAttribute('fallback-to-all', String(config.fallbackToAll ?? true));
     // Use visibility/position to hide while allowing full rendering
     pidComponent.style.cssText = 'visibility:hidden;position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;';

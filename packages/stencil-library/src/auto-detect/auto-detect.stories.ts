@@ -734,7 +734,7 @@ const SHOWCASE_HTML = `
         </tr>
         <tr style="border-bottom: 1px solid #f0f0f0;">
           <td style="padding: 10px 12px; font-weight: 600; color: #555;">DOI</td>
-          <td style="padding: 10px 12px;">${DOI_examples.CROSSREF_JOURNAL_PAPER}</td>
+          <td style="padding: 10px 12px;">${DOI_examples.VALID_BARE}</td>
         </tr>
         <tr style="border-bottom: 1px solid #f0f0f0;">
           <td style="padding: 10px 12px; font-weight: 600; color: #555;">Created</td>
@@ -769,7 +769,6 @@ const SHOWCASE_HTML = `
       <div style="background: #f8fafc; border-radius: 8px; padding: 16px; border: 1px solid #e5e7eb;">
         <div style="font-weight: 600;">Author 2</div>
         <div style="margin-top: 4px;">ORCiD: ${ORCID_examples.VALID_SECOND}</div>
-        <div style="margin-top: 2px;">Email: ${EMAIL_examples.KIT_EMAIL_ALT}</div>
         <div style="margin-top: 2px;">Affiliation: ${ROR_examples.VALID}</div>
       </div>
     </div>
@@ -780,11 +779,7 @@ const SHOWCASE_HTML = `
     <h2 style="font-size: 1.25em; color: #2563eb; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px;">Related Publications</h2>
     <ul style="padding-left: 20px;">
       <li style="margin-bottom: 8px;">
-        M. Inckmann et al., "The PID Component," DOI: ${DOI_examples.DATACITE_JOURNAL_PAPER}
-      </li>
-      <li style="margin-bottom: 8px;">
-        A. Pfeil et al., "FAIR Digital Objects in Practice," DOI: ${DOI_examples.DATACITE_SLIDES}.
-        Published ${DATE_examples.DATETIME_SHORT}.
+        M. Inckmann et al., "The PID Component," DOI: ${DOI_examples.DATACITE_SLIDES}
       </li>
     </ul>
   </section>
@@ -797,7 +792,7 @@ const SHOWCASE_HTML = `
       a study conducted at the Karlsruhe Institute of Technology (${ROR_examples.VALID}).
       The corresponding software is available under the ${SPDX_examples.MIT} license
       and can be accessed at ${URL_examples.KIT_WEBSITE}. For questions, please contact ${EMAIL_examples.KIT_EMAIL} or visit the project page ${URL_examples.GITHUB}.
-    </p>please
+    </p>
   </section>
 
   <footer style="border-top: 1px solid #e5e7eb; padding-top: 12px; color: #888; font-size: 0.85em;">

@@ -34,7 +34,8 @@ export const PidComponentDemo: Story = {
         tag. Click it to expand and see the resolved metadata:
       </p>
       <div style="margin: 16px 0;">
-        <pid-component value="${DOI_examples.DATACITE_JOURNAL_PAPER}" dark-mode="light"
+        <pid-component value="${HANDLE_examples.FDO_TYPED}" dark-mode="light"
+        "
                        open-by-default="false"></pid-component>
       </div>
     </div>
@@ -60,16 +61,12 @@ export const AutoDetectionDemo: Story = {
       </p>
       <div id="intro-auto-detect" style="line-height: 1.8; padding: 16px; border: 1px solid #e0e0e0; border-radius: 6px; background: #fafafa;">
         <p>
-          This dataset is published as a FAIR Digital Object at
-          ${HANDLE_examples.FDO_TYPED} and was created by researcher
-          ${ORCID_examples.VALID}. The work was conducted at
-          ${ROR_examples.VALID} and is available under the
-          ${SPDX_examples.APACHE_2_0} license. The paper is available at
-          DOI ${DOI_examples.CROSSREF_JOURNAL_PAPER}.
+          This web component can visualize FAIR Digital Object such as ${HANDLE_examples.FDO_TYPED} and was created by ${ORCID_examples.VALID}.
+          The work was conducted at ${ROR_examples.VALID} and is available under the ${SPDX_examples.APACHE_2_0} license.
+          A paper is available at ${DOI_examples.VALID_BARE}.
         </p>
         <p style="margin-top: 8px;">
-          For questions, contact ${EMAIL_examples.VALID} or visit
-          ${URL_examples.KIT_WEBSITE}.
+          For questions, contact ${EMAIL_examples.KIT_EMAIL} or visit ${URL_examples.KIT_WEBSITE}.
         </p>
       </div>
     `;

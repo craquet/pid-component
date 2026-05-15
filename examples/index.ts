@@ -8,4 +8,5 @@ export { EMAIL_examples, email_texts } from './email';
 export { DATE_examples, date_texts } from './date';
 export { JSON_examples } from './json';
 export { LOCALE_examples } from './locale';
+export { ISBN_examples, isbn_texts } from './isbn';
 export { demo_datasets, demo_authors } from './data';
