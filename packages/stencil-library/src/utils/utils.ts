@@ -53,7 +53,7 @@ export const renderers: {
     autoDiscoverableByDefault: true,
   },
   {
-    priority: 2.1,
+    priority: 2,
     key: 'CrossRefDOIType',
     constructor: CrossRefDOIType,
     autoDiscoverableByDefault: true,
