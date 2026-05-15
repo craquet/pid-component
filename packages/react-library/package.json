@@ -1,6 +1,6 @@
 {
   "name": "@kit-data-manager/react-pid-component",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "React wrapper for the package @kit-data-manager/pid-component",
   "author": {
     "name": "Christopher Raquet",
@@ -46,27 +46,27 @@
     "access": "public"
   },
   "dependencies": {
-    "@kit-data-manager/pid-component": "^0.4.0",
+    "@kit-data-manager/pid-component": "^0.4.1",
     "@stencil/react-output-target": "^1.5.2"
   },
   "devDependencies": {
     "@codecov/vite-plugin": "^2.0.1",
-    "@mantine/core": "^9.2.0",
-    "@mantine/hooks": "^9.2.0",
-    "@storybook/addon-a11y": "^10.3.6",
-    "@storybook/addon-docs": "^10.3.6",
-    "@storybook/react-vite": "^10.3.6",
+    "@mantine/core": "^9.2.1",
+    "@mantine/hooks": "^9.2.1",
+    "@storybook/addon-a11y": "^10.4.0",
+    "@storybook/addon-docs": "^10.4.0",
+    "@storybook/react-vite": "^10.4.0",
     "@tabler/icons-react": "^3.44.0",
     "@tailwindcss/postcss": "^4.3.0",
     "@tailwindcss/vite": "^4.3.0",
-    "@vitejs/plugin-react": "^6.0.1",
+    "@vitejs/plugin-react": "^6.0.2",
     "postcss": "^8.5.14",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "storybook": "^10.3.6",
+    "storybook": "^10.4.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
-    "vite": "^8.0.12"
+    "vite": "^8.0.13"
   },
   "keywords": [
     "react",
