@@ -29,6 +29,8 @@ By default, it is set to 1, which means that it will only render the first level
 You can prohibit unfolding of the component by setting the `current-level-of-subcomponents` to the same value as
 the `level-of-subcomponents` property.
 
+![Example of a DOI component with a nested ORCID component](examples/autodetect-preview.png)
+
 ### Via CDN (no bundler)
 
 You can load the component directly from [unpkg](https://unpkg.com/) with a single script tag:
