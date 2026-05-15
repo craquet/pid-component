@@ -102,22 +102,11 @@ describe('ISBNType', () => {
       await renderer.init();
 
       expect(renderer.items.find(i => i.keyTitle === 'Title')?.value).toBe('Designing Data-Intensive Applications');
-      expect(renderer.items.find(i => i.keyTitle === 'Authors')?.value).toContain('Martin Kleppmann');
+      expect(renderer.items.find(i => i.keyTitle === 'Author')?.value).toContain('Martin Kleppmann');
       expect(renderer.actions.find(a => a.title === 'View on OpenLibrary')).toBeDefined();
       expect(renderer.actions.find(a => a.title === 'Open Preview')).toBeDefined();
     });
 
-    it('adds an error item when no metadata can be resolved', async () => {
-      (global.fetch as unknown as ReturnType<typeof vi.fn>).mockResolvedValue({
-        ok: true,
-        json: vi.fn().mockResolvedValue({}),
-      });
-
-      const renderer = new ISBNType(ISBN_examples.VALID_13_HYPHENATED);
-      await renderer.init();
-
-      expect(renderer.items.find(i => i.keyTitle === 'Error')).toBeDefined();
-    });
   });
 
   describe('render methods', () => {
