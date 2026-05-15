@@ -68,6 +68,7 @@ export const config: Config = {
   sourceMap: true,
   extras: {
     experimentalSlotFixes: true,
+    enableImportInjection: true,
   },
   preamble:
     '\n' +
