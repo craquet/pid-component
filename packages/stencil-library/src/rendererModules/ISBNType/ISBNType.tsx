@@ -207,8 +207,11 @@ export class ISBNType extends GenericIdentifierType {
     if (this.bookData.publish_date) this.items.push(new FoldableItem(4, 'Date', this.bookData.publish_date, 'Publication date'));
     if (this.bookData.number_of_pages) this.items.push(new FoldableItem(5, 'Pages', String(this.bookData.number_of_pages), 'Number of pages'));
 
-    const authorNames = (this.bookData.authors || []).map(author => author.name).filter((name): name is string => Boolean(name));
-    if (authorNames.length > 0) this.items.push(new FoldableItem(6, 'Authors', authorNames.join(', '), 'Authors of the publication', undefined, undefined, false));
+    (this.bookData.authors || [])
+      .map(author => author.name)
+      .filter((name): name is string => Boolean(name))
+      .map(name => new FoldableItem(6, 'Author', name))
+      .forEach((item) => this.items.push(item));
 
     const publisherNames = (this.bookData.publishers || []).map(publisher => publisher.name).filter((name): name is string => Boolean(name));
     if (publisherNames.length > 0) this.items.push(new FoldableItem(7, 'Publisher', publisherNames.join(', '), 'Publisher(s) of the publication', undefined, undefined, false));

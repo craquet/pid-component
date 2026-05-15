@@ -52,3 +52,17 @@ export const DarkMode: Story = {
     backgrounds: { value: 'dark' },
   },
 };
+
+export const ISBN_2: Story = {
+  name: 'ISBN 978-0-321-20068-6',
+  args: {
+    value: ISBN_examples.VALID_13_ISBN_2,
+  },
+};
+
+export const ISBN_3: Story = {
+  name: 'ISBN 978-0-521-18984-2',
+  args: {
+    value: ISBN_examples.VALID_13_ISBN_3,
+  },
+};
