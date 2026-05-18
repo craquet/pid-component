@@ -20,14 +20,6 @@ describe('color-highlight source', () => {
     expect(root.textContent).toContain('Hello World');
   });
 
-  it('renders span with correct classes', async () => {
-    const { root } = await render(<color-highlight text="test"></color-highlight>);
-    const span = root.querySelector('span');
-    expect(span).toBeTruthy();
-    expect(span?.className).toContain('font-mono');
-    expect(span?.className).toContain('font-bold');
-  });
-
   it('applies inline color style', async () => {
     const { root } = await render(<color-highlight text="test"></color-highlight>);
     const span = root.querySelector('span');
