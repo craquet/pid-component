@@ -8,6 +8,7 @@ playwright-report/
 .nx
 packages/examples
 packages/stencil-library/test-results.junit.xml
+packages/vue-library/.output
 
 *~
 *.sw[mnpcod]
