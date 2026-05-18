@@ -29,7 +29,7 @@ By default, it is set to 1, which means that it will only render the first level
 You can prohibit unfolding of the component by setting the `current-level-of-subcomponents` to the same value as
 the `level-of-subcomponents` property.
 
-![Example of a DOI component with a nested ORCID component](examples/autodetect-preview.png)
+![Example of a DOI component with a nested ORCID component](examples/autodetect-preview.jpg)
 
 ### Via CDN (no bundler)
 

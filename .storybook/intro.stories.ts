@@ -61,12 +61,12 @@ export const AutoDetectionDemo: Story = {
       </p>
       <div id="intro-auto-detect" style="line-height: 1.8; padding: 16px; border: 1px solid #e0e0e0; border-radius: 6px; background: #fafafa;">
         <p>
-          This web component can visualize FAIR Digital Object such as ${HANDLE_examples.FDO_TYPED} and was created by ${ORCID_examples.VALID}.
-          The work was conducted at ${ROR_examples.VALID} and is available under the ${SPDX_examples.APACHE_2_0} license.
-          A paper is available at ${DOI_examples.VALID_BARE}.
+          This web component can visualize FAIR Digital Objects such as ${HANDLE_examples.FDO_TYPED}.
+          It was created by ${ORCID_examples.VALID} at ${ROR_examples.VALID} and is available under the ${SPDX_examples.APACHE_2_0} license.
+          This work was presented at the 2nd FDO conference, you can read this paper ${DOI_examples.VALID_BARE}.
         </p>
         <p style="margin-top: 8px;">
-          For questions, contact ${EMAIL_examples.KIT_EMAIL} or visit ${URL_examples.KIT_WEBSITE}.
+          For questions, contact ${EMAIL_examples.KIT_EMAIL}.
         </p>
       </div>
     `;
